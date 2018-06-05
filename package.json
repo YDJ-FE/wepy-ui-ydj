@@ -2,7 +2,7 @@
   "name": "wepy-ui-ydj",
   "version": "0.0.3",
   "description": "wepy ui components",
-  "main": "packages/index",
+  "main": "src/components/index",
   "scripts": {
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
