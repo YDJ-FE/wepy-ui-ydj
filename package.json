@@ -2,7 +2,7 @@
   "name": "wepy-ui-ydj",
   "version": "0.0.5",
   "description": "wepy ui components",
-  "main": "src/components/index",
+  "main": "./src/packages/index",
   "scripts": {
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
@@ -11,7 +11,7 @@
   "author": "王世隆 <547463736@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "wepy": "^1.6.0"
+    "wepy": "^1.7.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",

@@ -5,11 +5,6 @@
 </template>
 
 <script>
-/**
- *
- *
- *
- */
 import wepy from 'wepy'
 
 const state = {
@@ -58,7 +53,7 @@ export default class Button extends wepy.component {
 </script>
 
 <style lang="scss">
-@import './var';
+@import '../styles/var';
 
 .YDJ-button {
   width: 690rpx;
