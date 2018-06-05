@@ -13,6 +13,10 @@
   "dependencies": {
     "wepy": "^1.7.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YDJ-FE/wepy-ui-ydj"
+  },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
