@@ -1,6 +1,6 @@
 {
   "name": "wepy-ui-ydj",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "wepy ui components",
   "main": "./src/packages/index",
   "scripts": {
