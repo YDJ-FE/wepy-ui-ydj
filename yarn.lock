@@ -2421,7 +2421,7 @@ wepy-eslint@^1.5.3:
   version "1.5.4"
   resolved "https://registry.npmjs.org/wepy-eslint/-/wepy-eslint-1.5.4.tgz#56a1315daf1f09334ad6a1e8237eb823b50f82b3"
 
-wepy@^1.6.0:
+wepy@^1.7.0:
   version "1.7.1"
   resolved "https://registry.npmjs.org/wepy/-/wepy-1.7.1.tgz#2b0870ef35eadcb515815fc49a1889566c7240b7"
 
