@@ -1,9 +1,9 @@
-<style lang="less">
+<style lang="scss">
 </style>
 <template>
   <view class="container">
-    Hello world
-    <button></button>
+    <buttonDefault @click.user="handleClickOne">default按钮</buttonDefault>
+    <buttonPlain @click.user="handleClickTwo" shape="plain">plain按钮</buttonPlain>
   </view>
 </template>
 
@@ -17,11 +17,21 @@ export default class Index extends wepy.page {
   }
 
   components = {
-    button: Button
+    buttonDefault: Button,
+    buttonPlain: Button
   }
 
   onLoad() {
     console.log('onLoad')
+  }
+
+  methods = {
+    handleClickOne() {
+      console.log('nihao')
+    },
+    handleClickTwo() {
+      console.log('wwwww')
+    }
   }
 }
 </script>
