@@ -3,6 +3,9 @@
   "version": "0.0.9",
   "description": "wepy ui components",
   "main": "./src/packages/index",
+  "wepy": {
+    "./Button": "./src/components/Button.wpy"
+  },
   "scripts": {
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",

@@ -4,7 +4,7 @@
 
 ```js
 // 引入所需组件
-import { Button } from 'wepy-ui-ydj';
+import Button from 'wepy-ui-ydj/Button';
 
 // 按照wepy文档分配组件别名
 components = {
