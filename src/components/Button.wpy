@@ -61,6 +61,7 @@ export default class Button extends wepy.component {
   line-height: 94rpx;
   border: none;
   outline: none;
+  box-sizing: border-box;
 }
 
 .#{$prefix}-button__default {
@@ -68,7 +69,7 @@ export default class Button extends wepy.component {
   color: #fff;
 }
 .#{$prefix}-button__default-is-active {
-  background-color: blue;
+  background-color: $ydj-primary-first;
   color: red;
 }
 .#{$prefix}-button__plain {

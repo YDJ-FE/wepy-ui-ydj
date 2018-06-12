@@ -1,0 +1,127 @@
+<template>
+  <!-- <button class="YDJ-button {{curState.className}}" hover-class="{{curState.hoverName}}" @tap="handleClick">
+    <slot></slot>
+  </button> -->
+  <view class="YDJ-input-wrap">
+    <view class="YDJ-input-item">
+      <label class="YDJ-label">单行输入</label>
+      <input class="YDJ-input" placeholder="输入提示" placeholder-class="YDJ-placeholder"/>
+    </view>
+    <view class="YDJ-input-item">
+      <label class="YDJ-label">标题最多六字</label>
+      <input class="YDJ-input" placeholder="输入提示" placeholder-class="YDJ-placeholder"/>
+    </view>
+    <view class="YDJ-input-item">
+      <label class="YDJ-label">标题最多六字</label>
+      <input class="YDJ-input" placeholder="输入提示" placeholder-class="YDJ-placeholder"/>
+      <button class="YDJ-button">发送验证码</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+const state = {
+  plain: {
+    isActive: false,
+    className: 'YDJ-button__plain',
+    hoverName: 'YDJ-button__plain-is-active'
+  },
+  default: {
+    isActive: false,
+    className: 'YDJ-button__default',
+    hoverName: 'YDJ-button__default-is-active'
+  }
+}
+
+export default class Input extends wepy.component {
+  data = {
+    curState: {
+      className: '',
+      hoverName: ''
+    }
+  }
+
+  props = {
+    shape: {
+      type: String,
+      default: 'default'
+    }
+  }
+
+  onLoad() {
+    state[this.shape].isActive = true
+    this.curState = {
+      className: state[this.shape].className,
+      hoverName: state[this.shape].hoverName
+    }
+    console.log(this.curState)
+  }
+
+  methods = {
+    handleClick() {}
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+.#{$prefix}-input-wrap {
+  padding-left: 28rpx;
+  background: rgb(249, 250, 232);
+}
+
+.#{$prefix}-input-item {
+  font-size: 32rpx;
+  height: 93rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid $ydj-line;
+  padding-right: 25rpx;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.#{$prefix}-label {
+  min-width: 170rpx;
+  padding-right: 10rpx;
+  color: $ydj-text-first;
+}
+
+.#{$prefix}-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  height: 93rpx;
+  line-height: 93rpx;
+}
+
+.#{$prefix}-placeholder {
+  color: $ydj-text-fifth;
+}
+
+.#{$prefix}-button {
+  color: #4a90e2;
+  font-size: 34rpx;
+  width: 170rpx;
+}
+
+.#{$prefix}-button__default {
+  background-color: $ydj-primary-second;
+  color: #fff;
+}
+.#{$prefix}-button__default-is-active {
+  background-color: $ydj-primary-first;
+  color: red;
+}
+.#{$prefix}-button__plain {
+  background-color: #fff;
+  color: $ydj-text-first;
+}
+.#{$prefix}-button__plain-is-active {
+  background-color: $ydj-text-fifth;
+}
+</style>

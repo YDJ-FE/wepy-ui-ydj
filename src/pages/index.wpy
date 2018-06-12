@@ -6,6 +6,7 @@
     <buttonPlain @click.user="handleClickTwo" shape="plain">Toast显示</buttonPlain>
     <toast :show.sync="showToast" :content.sync="contentToast" type="main" showAnimationName="fadeInDown"
       hiddenAnimationName="hinge"></toast>
+    <inputone />
   </view>
 </template>
 
@@ -13,6 +14,7 @@
 import wepy from 'wepy'
 import Button from '../components/Button'
 import Toast from '../components/Toast'
+import Input from '../components/Input'
 
 export default class Index extends wepy.page {
   config = {
@@ -27,7 +29,8 @@ export default class Index extends wepy.page {
   components = {
     buttonDefault: Button,
     buttonPlain: Button,
-    toast: Toast
+    toast: Toast,
+    inputone: Input
   }
 
   onLoad() {
@@ -45,3 +48,8 @@ export default class Index extends wepy.page {
   }
 }
 </script>
+<style lang="scss">
+@import '../styles/var';
+.container {
+}
+</style>
