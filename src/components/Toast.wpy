@@ -1,10 +1,10 @@
 <!-- 消息弹出框提示 -->
 <template>
-  <cover-view class="YDJ-toast animated {{animationName}}" @animationend="handleAnimationEnd" wx:if="{{show}}">
-    <cover-view class="bg {{classMap[type]}}">
-      <cover-view class="content">{{content}}</cover-view>
-    </cover-view>
-  </cover-view>
+  <view class="YDJ-toast animated {{animationName}}" @animationend="handleAnimationEnd" wx:if="{{show}}">
+    <view class="bg {{classMap[type]}}">
+      <view class="content">{{content}}</view>
+    </view>
+  </view>
 </template>
 <script>
 import wepy from 'wepy'
@@ -41,13 +41,22 @@ export default class Toast extends wepy.component {
     },
     type: {
       type: String,
-      default: 'error'
+      default: 'info'
     }
   }
   data = {
     timer: 0,
     animationName: '',
     classMap
+  }
+  watch = {
+    showAnimationName(n, o) {
+      this.animationName = n
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = 0
+      }
+    }
   }
   onLoad() {
     this.animationName = this.showAnimationName
@@ -77,6 +86,7 @@ export default class Toast extends wepy.component {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
@@ -84,6 +94,7 @@ export default class Toast extends wepy.component {
   pointer-events: none;
   height: 72rpx;
   font-size: 26rpx;
+  z-index: 9999;
 
   .bg {
     box-sizing: border-box;
