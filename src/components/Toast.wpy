@@ -1,0 +1,120 @@
+<!-- 消息弹出框提示 -->
+<template>
+  <cover-view class="YDJ-toast animated {{animationName}}" @animationend="handleAnimationEnd" wx:if="{{show}}">
+    <cover-view class="bg {{classMap[type]}}">
+      <cover-view class="content">{{content}}</cover-view>
+    </cover-view>
+  </cover-view>
+</template>
+<script>
+import wepy from 'wepy'
+
+const classMap = {
+  error: 'error',
+  info: 'info',
+  main: 'main'
+}
+
+export default class Toast extends wepy.component {
+  config = {}
+  props = {
+    show: {
+      type: Boolean,
+      default: false,
+      twoWay: true
+    },
+    content: {
+      type: String,
+      default: '提示消息'
+    },
+    duration: {
+      type: Number,
+      default: 2000
+    },
+    showAnimationName: {
+      type: String,
+      default: 'flipInX'
+    },
+    hiddenAnimationName: {
+      type: String,
+      default: 'flipOutX'
+    },
+    type: {
+      type: String,
+      default: 'error'
+    }
+  }
+  data = {
+    timer: 0,
+    animationName: '',
+    classMap
+  }
+  onLoad() {
+    this.animationName = this.showAnimationName
+  }
+  methods = {
+    handleAnimationEnd(e) {
+      const { animationName } = e.detail
+      if (animationName === this.showAnimationName) {
+        this.timer = setTimeout(() => {
+          this.animationName = this.hiddenAnimationName
+          this.$apply()
+        }, this.duration)
+      } else if (animationName === this.hiddenAnimationName) {
+        this.animationName = this.showAnimationName
+        this.show = false
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+@import '../styles/animates';
+
+.#{$prefix}-toast {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  height: 72rpx;
+  font-size: 26rpx;
+
+  .bg {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10rpx 10rpx 10rpx 15rpx;
+    border-radius: 15rpx;
+
+    &.bg.main {
+      background: $ydj-primary-first;
+    }
+    &.bg.info {
+      background: $ydj-text-first;
+    }
+    &.bg.error {
+      background: $ydj-secondary-fifth;
+    }
+
+    .content {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      color: $ydj-text-first;
+      height: 100%;
+      padding: 0 20rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 690rpx;
+    }
+  }
+}
+</style>

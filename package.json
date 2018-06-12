@@ -1,8 +1,11 @@
 {
   "name": "wepy-ui-ydj",
-  "version": "0.0.7",
+  "version": "0.1.1",
   "description": "wepy ui components",
   "main": "./src/packages/index",
+  "wepy": {
+    "./Button": "./src/components/Button.wpy"
+  },
   "scripts": {
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
@@ -12,6 +15,10 @@
   "license": "MIT",
   "dependencies": {
     "wepy": "^1.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YDJ-FE/wepy-ui-ydj"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
