@@ -2,26 +2,32 @@
 </style>
 <template>
   <view class="container">
-    <buttonDefault @click.user="handleClickOne">default按钮</buttonDefault>
-    <buttonPlain @click.user="handleClickTwo" shape="plain">plain按钮</buttonPlain>
+    <buttonDefault @click.user="handleClickOne">defaultaklsdjfklajsdklfjaskldfkl按钮</buttonDefault>
+    <buttonPlain @click.user="handleClickTwo" shape="plain">Toast显示</buttonPlain>
+    <toast :show.sync="showToast" :content.sync="contentToast" type="main" showAnimationName="fadeInDown"
+      hiddenAnimationName="hinge"></toast>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
-// import Button from '../components/Button'
-import { Button } from '../packages'
-
-console.log(Button)
+import Button from '../components/Button'
+import Toast from '../components/Toast'
 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: 'test'
   }
 
+  data = {
+    showToast: false,
+    contentToast: ''
+  }
+
   components = {
     buttonDefault: Button,
-    buttonPlain: Button
+    buttonPlain: Button,
+    toast: Toast
   }
 
   onLoad() {
@@ -30,10 +36,11 @@ export default class Index extends wepy.page {
 
   methods = {
     handleClickOne() {
-      console.log('nihao')
+      console.log('wwwww')
     },
     handleClickTwo() {
-      console.log('wwwww')
+      this.contentToast = this.contentToast + 'ceeshi'
+      this.showToast = true
     }
   }
 }

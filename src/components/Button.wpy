@@ -36,12 +36,12 @@ export default class Button extends wepy.component {
   }
 
   onLoad() {
-    console.log(this.shape)
     state[this.shape].isActive = true
     this.curState = {
       className: state[this.shape].className,
       hoverName: state[this.shape].hoverName
     }
+    console.log(this.curState)
   }
 
   methods = {
@@ -55,7 +55,7 @@ export default class Button extends wepy.component {
 <style lang="scss">
 @import '../styles/var';
 
-.YDJ-button {
+.#{$prefix}-button {
   width: 690rpx;
   height: 94rpx;
   line-height: 94rpx;
@@ -63,18 +63,19 @@ export default class Button extends wepy.component {
   outline: none;
 }
 
-.YDJ-button__default {
-  background-color: map-get($ydjMainPrimary, second);
+.#{$prefix}-button__default {
+  background-color: $ydj-primary-second;
   color: #fff;
 }
-.YDJ-button__default-is-active {
-  background-color: map-get($ydjMainPrimary, first);
+.#{$prefix}-button__default-is-active {
+  background-color: $ydj-primary-first;
+  color: red;
 }
-.YDJ-button__plain {
+.#{$prefix}-button__plain {
   background-color: #fff;
-  color: map-get($ydjText, first);
+  color: $ydj-text-first;
 }
-.YDJ-button__plain-is-active {
-  background-color: map-get($ydjText, fifth);
+.#{$prefix}-button__plain-is-active {
+  background-color: $ydj-text-fifth;
 }
 </style>
