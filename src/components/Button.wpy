@@ -16,7 +16,7 @@ const state = {
   default: {
     isActive: false,
     className: 'YDJ-button__default',
-    hoverName: 'YDJ-button__default-is-avtive'
+    hoverName: 'YDJ-button__default-is-active'
   }
 }
 
@@ -68,7 +68,7 @@ export default class Button extends wepy.component {
   color: #fff;
 }
 .#{$prefix}-button__default-is-active {
-  background-color: $ydj-primary-first;
+  background-color: blue;
   color: red;
 }
 .#{$prefix}-button__plain {
