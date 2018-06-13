@@ -1,5 +1,6 @@
 <template>
-  <button class="YDJ-button {{curState.className}}" hover-class="{{curState.hoverName}}" @tap="handleClick">
+  <button class="YDJ-button {{curState.className}}" hover-class="{{curState.hoverName}}" @tap="handleClick"
+    disable="{{disable}}" loading="{{loading}}">
     <slot></slot>
   </button>
 </template>
@@ -32,6 +33,14 @@ export default class Button extends wepy.component {
     shape: {
       type: String,
       default: 'default'
+    },
+    disable: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   }
 
@@ -45,8 +54,8 @@ export default class Button extends wepy.component {
   }
 
   methods = {
-    handleClick() {
-      this.$emit('click')
+    handleClick(e) {
+      this.$emit('tap')
     }
   }
 }
@@ -65,12 +74,11 @@ export default class Button extends wepy.component {
 }
 
 .#{$prefix}-button__default {
-  background-color: $ydj-primary-second;
+  background-color: $ydj-primary-first;
   color: #fff;
 }
 .#{$prefix}-button__default-is-active {
-  background-color: $ydj-primary-first;
-  color: red;
+  background-color: $ydj-primary-second;
 }
 .#{$prefix}-button__plain {
   background-color: #fff;

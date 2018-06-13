@@ -1,0 +1,66 @@
+<!-- Toast页面 -->
+<template>
+  <view class="toast">
+    <Toast :show.sync="showToast" :content.sync="contentToast" :type.sync="typeToast" :showAnimationName.sync="showAnimationName"
+      :hiddenAnimationName.sync="hiddenAnimationName"></Toast>
+
+    <DefaultButton class="btn" @tap.user="handleDefault" shape="plain">通用Toast</DefaultButton>
+    <MainButton class="btn" @tap.user="handleMain" shape="plain">主题色Toast</MainButton>
+    <ErrorButton class="btn" @tap.user="handleError" shape="plain">错误Toast</ErrorButton>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Toast from '../components/Toast'
+import Button from '../components/Button'
+
+export default class ToastPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Toast'
+  }
+  components = {
+    Toast: Toast,
+    DefaultButton: Button,
+    MainButton: Button,
+    ErrorButton: Button
+  }
+  props = {}
+  data = {
+    showToast: false,
+    contentToast: '业务错误或者提示消息!!!',
+    typeToast: '',
+    showAnimationName: '',
+    hiddenAnimationName: ''
+  }
+  onLoad() {}
+  methods = {
+    handleDefault() {
+      this.typeToast = 'info'
+      this.showAnimationName = 'flipInX'
+      this.hiddenAnimationName = 'flipOutX'
+      this.showToast = true
+    },
+    handleMain() {
+      this.typeToast = 'main'
+      this.showAnimationName = 'jackInTheBox'
+      this.hiddenAnimationName = 'hinge'
+      this.showToast = true
+    },
+    handleError() {
+      this.typeToast = 'error'
+      this.showAnimationName = 'fadeInDown'
+      this.hiddenAnimationName = 'fadeOutUp'
+      this.showToast = true
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.toast {
+  padding-top: 200rpx;
+}
+.btn {
+  margin-bottom: 20rpx;
+}
+</style>
