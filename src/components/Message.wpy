@@ -1,21 +1,28 @@
 <!-- 消息弹出框提示 -->
 <template>
-  <view class="YDJ-toast animated {{animationName}}" @animationend="handleAnimationEnd" wx:if="{{show}}">
-    <view class="YDJ-toast__bg {{classMap[type]}}">
-      <view class="YDJ-toast__content">{{content}}</view>
+  <view class="YDJ-message animated {{animationName}} {{positionMap[position]}}" @animationend="handleAnimationEnd"
+    wx:if="{{show}}">
+    <view class="YDJ-message__bg {{themeMap[type]}}">
+      <view class="YDJ-message__content">{{content}}</view>
     </view>
   </view>
 </template>
 <script>
 import wepy from 'wepy'
 
-const classMap = {
+const themeMap = {
   error: 'error',
   info: 'info',
   main: 'main'
 }
 
-export default class Toast extends wepy.component {
+const positionMap = {
+  top: 'top',
+  bottom: 'bottom',
+  middle: 'middle'
+}
+
+export default class Message extends wepy.component {
   config = {}
   props = {
     show: {
@@ -42,12 +49,17 @@ export default class Toast extends wepy.component {
     type: {
       type: String,
       default: 'info'
+    },
+    position: {
+      type: String,
+      default: 'top'
     }
   }
   data = {
     timer: 0,
     animationName: '',
-    classMap
+    themeMap,
+    positionMap
   }
   watch = {
     showAnimationName(n, o) {
@@ -82,21 +94,34 @@ export default class Toast extends wepy.component {
 @import '../styles/var';
 @import '../styles/animates';
 
-.#{$prefix}-toast {
+.#{$prefix}-message {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   background-color: transparent;
   position: fixed;
-  top: 0;
-  left: 0;
+
   width: 100%;
   pointer-events: none;
   height: 72rpx;
   font-size: 26rpx;
   z-index: 9999;
+  &.top {
+    top: 0;
+    left: 0;
+  }
 
-  .#{$prefix}-toast__bg {
+  &.middle {
+    top: 50%;
+    margin-top: -36rpx;
+  }
+
+  &.bottom {
+    bottom: 50rpx;
+    left: 0;
+  }
+
+  .#{$prefix}-message__bg {
     box-sizing: border-box;
     height: 100%;
     padding: 10rpx 10rpx 10rpx 15rpx;
@@ -112,7 +137,7 @@ export default class Toast extends wepy.component {
       background: $ydj-secondary-fifth;
     }
 
-    .#{$prefix}-toast__content {
+    .#{$prefix}-message__content {
       box-sizing: border-box;
       display: flex;
       align-items: center;

@@ -4,7 +4,9 @@
   "description": "wepy ui components",
   "main": "./src/packages/index",
   "wepy": {
-    "./Button": "./src/components/Button.wpy"
+    "./Button": "./src/components/Button.wpy",
+    "./Message": "./src/components/Message.wpy",
+    "./Input": "./src/components/Input.wpy"
   },
   "scripts": {
     "dev": "wepy build --watch",

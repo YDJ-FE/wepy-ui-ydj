@@ -2,7 +2,7 @@
 
 - [ ] Button 组件
 - [ ] Dialog 组件
-- [x] ~~_[Toast 组件](./docs/toast.md)_~~ [2018-06-12]
+- [x] ~~_[Message 组件](./docs/message.md)_~~ [2018-06-12]
 - [x] ~~_[Input 组件](./docs/input.md)_~~ [2018-06-13]
 
 #### 使用方法
