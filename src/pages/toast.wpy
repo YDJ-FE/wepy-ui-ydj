@@ -16,7 +16,7 @@ import Button from '../components/Button'
 
 export default class ToastPage extends wepy.page {
   config = {
-    navigationBarTitleText: 'Toast'
+    navigationBarTitleText: '信息弹出框'
   }
   components = {
     Toast: Toast,

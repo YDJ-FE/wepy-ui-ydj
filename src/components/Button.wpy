@@ -70,6 +70,7 @@ export default class Button extends wepy.component {
   line-height: 94rpx;
   border: none;
   outline: none;
+  box-sizing: border-box;
 }
 
 .#{$prefix}-button__default {

@@ -1,0 +1,178 @@
+<template>
+  <view class="YDJ-input-wrap">
+    <textarea
+      wx:if="{{type === 'textarea'}}"
+      value="{{value}}"
+      placeholder="{{placeholder}}"
+      maxlength="{{maxlength}}"
+      disabled="{{disabled}}"
+      focus="{{focus}}"
+      auto-focus="{{autoFocus}}"
+      bindinput="handleInput"
+      bindfocus="handleFocus"
+      bindblur="handleBlur"
+      class="YDJ-textrea"
+      placeholder-class="YDJ-placeholder"
+    />
+    <view wx:else class="YDJ-input-item {{borderBottom ? 'YDJ-border-bottom' : ''}} ">
+      <label class="YDJ-label {{disabled ? 'YDJ-color-fifth' : ''}}">{{title}}</label>
+      <input
+        type="{{type}}"
+        password="{{password}}"
+        value="{{value}}"
+        placeholder="{{placeholder}}"
+        maxlength="{{maxlength}}"
+        disabled="{{disabled}}"
+        focus="{{focus}}"
+        bindinput="handleInput"
+        bindfocus="handleFocus"
+        bindblur="handleBlur"
+        class="YDJ-input"
+        placeholder-class="YDJ-placeholder"
+      />
+      <button wx:if="{{sendCode}}" class="YDJ-button" @tap="handleSendCode">发送验证码</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Input extends wepy.component {
+  props = {
+    type: {
+      type: String,
+      default: 'text'
+    },
+    sendCode: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: '输入标题'
+    },
+    value: {
+      type: String
+    },
+    placeholder: {
+      type: String,
+      default: '输入提示'
+    },
+    maxlength: {
+      type: [Number, String],
+      default: 140
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    focus: {
+      type: Boolean,
+      default: false
+    },
+    autoFocus: {
+      type: Boolean,
+      default: false
+    },
+    password: {
+      type: Boolean,
+      default: false
+    },
+    borderBottom: {
+      type: Boolean,
+      default: false
+    }
+  }
+
+  methods = {
+    handleSendCode(e) {
+      this.$emit('sendCode')
+    },
+
+    handleInput(e) {
+      const detail = e.detail
+      this.$emit('input', detail)
+    },
+
+    handleFocus(e) {
+      const detail = e.detail
+      this.$emit('focus', detail)
+    },
+
+    handleBlur(e) {
+      const detail = e.detail
+      this.$emit('blur', detail)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+.#{$prefix}-input-wrap {
+  padding-left: 28rpx;
+  background: #fff;
+  color: $ydj-text-first;
+}
+
+.#{$prefix}-input-item {
+  font-size: 32rpx;
+  height: 93rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.#{$prefix}-label {
+  min-width: 170rpx;
+  padding-right: 10rpx;
+}
+
+.#{$prefix}-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  height: 93rpx;
+  line-height: 93rpx;
+  padding-right: 25rpx;
+}
+
+.#{$prefix}-placeholder {
+  color: $ydj-text-fifth;
+}
+
+.#{$prefix}-button {
+  color: #4a90e2;
+  font-size: 34rpx;
+  width: 212rpx;
+  padding: 0;
+  border: 0;
+  height: 48rpx;
+  padding-left: 16rpx;
+  padding-right: 25rpx;
+  line-height: unset;
+  background: #fff;
+  border-left: 2rpx solid $ydj-line;
+
+  &::after {
+    border: 0;
+  }
+}
+
+.#{$prefix}-textrea {
+  width: 100%;
+  height: 151rpx;
+  padding: 20rpx 25rpx 20rpx 0;
+  font-size: 32rpx;
+  box-sizing: border-box;
+}
+
+.#{$prefix}-border-bottom {
+  border-bottom: 1rpx solid $ydj-line;
+}
+
+.#{$prefix}-color-fifth {
+  color: $ydj-text-fifth;
+}
+</style>

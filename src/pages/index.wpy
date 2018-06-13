@@ -3,12 +3,16 @@
 <template>
   <view class="container">
 
-    <navigator url="/pages/button" hover-class="none">
+    <navigator class="page-btn" url="/pages/button" hover-class="none">
       <ButtonPlain shape="plain">Button</ButtonPlain>
     </navigator>
 
-    <navigator url="/pages/toast" hover-class="none">
+    <navigator class="page-btn" url="/pages/toast" hover-class="none">
       <ButtonPlain shape="plain">Toast弹出框</ButtonPlain>
+    </navigator>
+
+    <navigator class="page-btn" url="/pages/input" hover-class="none">
+      <ButtonPlain shape="plain">input输入框</ButtonPlain>
     </navigator>
 
   </view>
@@ -20,7 +24,7 @@ import Button from '../components/Button'
 
 export default class IndexPage extends wepy.page {
   config = {
-    navigationBarTitleText: 'test'
+    navigationBarTitleText: '首页'
   }
 
   data = {
@@ -39,3 +43,12 @@ export default class IndexPage extends wepy.page {
   methods = {}
 }
 </script>
+<style lang="scss">
+@import '../styles/var';
+.container {
+  padding: 50rpx 0;
+  .page-btn {
+    margin-bottom: 20rpx;
+  }
+}
+</style>
