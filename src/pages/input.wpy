@@ -21,7 +21,7 @@ import Input from '../components/Input'
 
 export default class InputPage extends wepy.page {
   config = {
-    navigationBarTitleText: 'Input'
+    navigationBarTitleText: '输入框'
   }
 
   components = {

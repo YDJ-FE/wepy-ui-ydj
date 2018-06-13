@@ -1,8 +1,8 @@
 <!-- 消息弹出框提示 -->
 <template>
   <view class="YDJ-toast animated {{animationName}}" @animationend="handleAnimationEnd" wx:if="{{show}}">
-    <view class="bg {{classMap[type]}}">
-      <view class="content">{{content}}</view>
+    <view class="YDJ-toast__bg {{classMap[type]}}">
+      <view class="YDJ-toast__content">{{content}}</view>
     </view>
   </view>
 </template>
@@ -96,23 +96,23 @@ export default class Toast extends wepy.component {
   font-size: 26rpx;
   z-index: 9999;
 
-  .bg {
+  .#{$prefix}-toast__bg {
     box-sizing: border-box;
     height: 100%;
     padding: 10rpx 10rpx 10rpx 15rpx;
     border-radius: 15rpx;
 
-    &.bg.main {
+    &.main {
       background: $ydj-primary-first;
     }
-    &.bg.info {
+    &.info {
       background: $ydj-text-first;
     }
-    &.bg.error {
+    &.error {
       background: $ydj-secondary-fifth;
     }
 
-    .content {
+    .#{$prefix}-toast__content {
       box-sizing: border-box;
       display: flex;
       align-items: center;
