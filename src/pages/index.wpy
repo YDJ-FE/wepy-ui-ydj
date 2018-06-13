@@ -7,8 +7,8 @@
       <ButtonPlain shape="plain">Button</ButtonPlain>
     </navigator>
 
-    <navigator class="page-btn" url="/pages/toast" hover-class="none">
-      <ButtonPlain shape="plain">Toast弹出框</ButtonPlain>
+    <navigator class="page-btn" url="/pages/message" hover-class="none">
+      <ButtonPlain shape="plain">Message弹出框</ButtonPlain>
     </navigator>
 
     <navigator class="page-btn" url="/pages/input" hover-class="none">
@@ -28,8 +28,6 @@ export default class IndexPage extends wepy.page {
   }
 
   data = {
-    showToast: false,
-    contentToast: ''
   }
 
   components = {

@@ -1,0 +1,66 @@
+<!-- Message页面 -->
+<template>
+  <view class="message">
+    <Message :show.sync="showMessage" :content.sync="contentMessage" :type.sync="typeMessage" :showAnimationName.sync="showAnimationName"
+      :hiddenAnimationName.sync="hiddenAnimationName"></Message>
+
+    <DefaultButton class="btn" @tap.user="handleDefault" shape="plain">通用Message</DefaultButton>
+    <MainButton class="btn" @tap.user="handleMain" shape="plain">主题色Message</MainButton>
+    <ErrorButton class="btn" @tap.user="handleError" shape="plain">错误Message</ErrorButton>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Message from '../components/Message'
+import Button from '../components/Button'
+
+export default class MessagePage extends wepy.page {
+  config = {
+    navigationBarTitleText: '信息弹出框'
+  }
+  components = {
+    Message: Message,
+    DefaultButton: Button,
+    MainButton: Button,
+    ErrorButton: Button
+  }
+  props = {}
+  data = {
+    showMessage: false,
+    contentMessage: '业务错误或者提示消息!!!',
+    typeMessage: '',
+    showAnimationName: '',
+    hiddenAnimationName: ''
+  }
+  onLoad() {}
+  methods = {
+    handleDefault() {
+      this.typeMessage = 'info'
+      this.showAnimationName = 'flipInX'
+      this.hiddenAnimationName = 'flipOutX'
+      this.showMessage = true
+    },
+    handleMain() {
+      this.typeMessage = 'main'
+      this.showAnimationName = 'jackInTheBox'
+      this.hiddenAnimationName = 'hinge'
+      this.showMessage = true
+    },
+    handleError() {
+      this.typeMessage = 'error'
+      this.showAnimationName = 'fadeInDown'
+      this.hiddenAnimationName = 'fadeOutUp'
+      this.showMessage = true
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.message {
+  padding-top: 200rpx;
+}
+.btn {
+  margin-bottom: 20rpx;
+}
+</style>
