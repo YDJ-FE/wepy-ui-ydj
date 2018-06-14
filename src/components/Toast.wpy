@@ -114,8 +114,6 @@ export default class Toast extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-@import '../styles/animates';
-@import '../iconfont/iconfont';
 
 .#{$prefix}-toast {
   position: fixed;

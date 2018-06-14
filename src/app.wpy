@@ -1,5 +1,6 @@
 <style lang="scss">
-@import './styles/var';
+@import './styles/all';
+
 page {
   background-color: $ydj-bg;
 }

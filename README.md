@@ -8,12 +8,19 @@
 #### 使用方法
 
 - 基于 `wepy` 框架
+- 使用 `scss` 预处理语言
 
-安装 wepy 编译脚本
+1.  全局安装 wepy 编译脚本
 
 ```
 // 自己选择包的地址源
 npm i wepy-cli@alpha -g
+```
+
+2.  app.wpy 引入组件公共样式
+
+```scss
+@import '../node_modules/wepy-ui-ydj/src/styles/all';
 ```
 
 ```js

@@ -92,7 +92,6 @@ export default class Message extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-@import '../styles/animates';
 
 .#{$prefix}-message {
   box-sizing: border-box;
