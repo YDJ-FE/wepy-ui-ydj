@@ -1,0 +1,72 @@
+<!--  -->
+<template>
+  <view class="toast-page">
+    <Toast :show.sync="showToast" :content.sync="contentToast" :position.sync="positionToast" :type.sync="typeToast"></Toast>
+    <ButtonDefault class="btn" @tap.user="handleDefaultToast" shape="plain">默认Toast</ButtonDefault>
+    <ButtonSuccess class="btn" @tap.user="handleSuccessToast" shape="plain">成功Toast</ButtonSuccess>
+    <ButtonError class="btn" @tap.user="handleErrorToast" shape="plain">失败Toast</ButtonError>
+    <ButtonWarning class="btn" @tap.user="handleWarningToast" shape="plain">警告Toast</ButtonWarning>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Toast from '../components/Toast'
+import Button from '../components/Button'
+
+export default class ToastPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '轻弹出框'
+  }
+  components = {
+    Toast,
+    ButtonDefault: Button,
+    ButtonSuccess: Button,
+    ButtonError: Button,
+    ButtonWarning: Button
+  }
+  data = {
+    showToast: false,
+    contentToast: '你是谁!!!',
+    positionToast: 'top',
+    typeToast: 'none'
+  }
+  onLoad() {}
+  methods = {
+    handleDefaultToast() {
+      this.positionToast = 'top'
+      this.typeToast = 'none'
+      this.showToast = true
+      this.contentToast = `${this.contentToast}nihao`
+    },
+    handleSuccessToast() {
+      this.positionToast = 'middle'
+      this.typeToast = 'success'
+      this.showToast = true
+      this.contentToast = `${this.contentToast}nihao`
+    },
+    handleErrorToast() {
+      this.positionToast = 'bottom'
+      this.typeToast = 'error'
+      this.showToast = true
+      this.contentToast = `${this.contentToast}nihao`
+    },
+    handleWarningToast() {
+      this.positionToast = 'top'
+      this.typeToast = 'warning'
+      this.showToast = true
+      this.contentToast = `${this.contentToast}nihao`
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+
+.toast-page {
+  padding-top: 200rpx;
+}
+.btn {
+  margin-bottom: 20rpx;
+}
+</style>

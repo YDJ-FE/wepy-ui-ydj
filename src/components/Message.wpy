@@ -105,7 +105,7 @@ export default class Message extends wepy.component {
   pointer-events: none;
   height: 72rpx;
   font-size: 26rpx;
-  z-index: 9999;
+  z-index: $z-index;
   &.top {
     top: 0;
     left: 0;
