@@ -1,7 +1,7 @@
 <!-- 消息弹出框提示 -->
 <template>
-  <view class="YDJ-message animated {{animationName}} {{positionMap[position]}}" @animationend="handleAnimationEnd"
-    wx:if="{{show}}">
+  <view class="YDJ-message animated {{animationStatus ? hiddenAnimationName : showAnimationName}} {{positionMap[position]}}"
+    @animationend="handleAnimationEnd" wx:if="{{show}}">
     <view class="YDJ-message__bg {{themeMap[type]}}">
       <view class="YDJ-message__content">{{content}}</view>
     </view>
@@ -57,32 +57,23 @@ export default class Message extends wepy.component {
   }
   data = {
     timer: 0,
-    animationName: '',
     themeMap,
-    positionMap
+    positionMap,
+    animationStatus: 0
   }
-  watch = {
-    showAnimationName(n, o) {
-      this.animationName = n
-      if (this.timer) {
-        clearTimeout(this.timer)
-        this.timer = 0
-      }
-    }
-  }
-  onLoad() {
-    this.animationName = this.showAnimationName
-  }
+
+  watch = {}
+
   methods = {
     handleAnimationEnd(e) {
       const { animationName } = e.detail
       if (animationName === this.showAnimationName) {
         this.timer = setTimeout(() => {
-          this.animationName = this.hiddenAnimationName
+          this.animationStatus = 1
           this.$apply()
         }, this.duration)
       } else if (animationName === this.hiddenAnimationName) {
-        this.animationName = this.showAnimationName
+        this.animationStatus = 0
         this.show = false
       }
     }
@@ -92,7 +83,6 @@ export default class Message extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-@import '../styles/animates';
 
 .#{$prefix}-message {
   box-sizing: border-box;
@@ -105,7 +95,7 @@ export default class Message extends wepy.component {
   pointer-events: none;
   height: 72rpx;
   font-size: 26rpx;
-  z-index: 9999;
+  z-index: $z-index;
   &.top {
     top: 0;
     left: 0;

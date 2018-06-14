@@ -1,0 +1,169 @@
+<!-- Toast轻弹出框 -->
+<template>
+  <view class="YDJ-toast {{positionMap[position]}}" wx:if="{{show}}">
+    <view class="YDJ-toast__content animated {{animationName}} {{typeMap[type]}}">
+      <i class="ydj-iconfont ydj-iconfont-oksignlarge" wx:if="{{type === 'success'}}"></i>
+      <i class="ydj-iconfont ydj-iconfont-warning" wx:if="{{type === 'warning'}}"></i>
+      <i class="ydj-iconfont ydj-iconfont-iccancel" wx:if="{{type === 'error'}}"></i>
+      <view class="YDJ-toast__content__text">
+        {{content}}
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import { todoFn } from '../babel-utils/index'
+
+const positionMap = {
+  top: 'top',
+  bottom: 'bottom',
+  middle: 'middle'
+}
+
+const typeMap = {
+  none: 'none',
+  success: 'success',
+  warning: 'warning',
+  error: 'error'
+}
+
+let timer
+
+const showAnimationName = 'flipInX'
+const hiddenAnimationName = 'flipOutX'
+
+export default class Toast extends wepy.component {
+  config = {}
+  props = {
+    show: {
+      type: Boolean,
+      default: false,
+      twoWay: true
+    },
+    content: {
+      type: String,
+      default: '温馨提示!'
+    },
+    position: {
+      type: String,
+      default: 'middle'
+    },
+    type: {
+      type: String,
+      default: 'error'
+    }
+  }
+
+  data = {
+    positionMap,
+    typeMap,
+    animationName: ''
+  }
+  watch = {
+    show(n, o) {
+      if (n) {
+        this.animationName = showAnimationName
+        this.showToast()
+      } else {
+        timer && timer.clearTime && timer.clearTime()
+      }
+    }
+  }
+  onLoad() {}
+  methods = {}
+
+  showToast() {
+    const self = this
+    timer = todoFn([
+      {
+        delay: 0,
+        cb() {
+          self.show = true
+          self.$apply()
+        }
+      },
+      {
+        delay: 3000,
+        cb() {
+          self.animationName = hiddenAnimationName
+          self.$apply()
+        }
+      },
+      {
+        delay: 1000,
+        cb() {
+          self.show = false
+          self.$apply()
+        }
+      }
+    ])
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+
+.#{$prefix}-toast {
+  position: fixed;
+  pointer-events: none;
+  z-index: $z-index + 1;
+
+  &.top {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &.middle {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &.bottom {
+    bottom: 50rpx;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .#{$prefix}-toast__content {
+    box-sizing: border-box;
+    background-color: $ydj-text-first;
+    color: #fff;
+    border-radius: 20rpx;
+    font-size: 26rpx;
+
+    &.success,
+    &.error,
+    &.warning {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 180rpx;
+      padding: 20rpx;
+      min-height: 180rpx;
+      word-break: break-word;
+
+      .ydj-iconfont {
+        font-size: 50rpx;
+        margin-bottom: 20rpx;
+      }
+    }
+    &.none {
+      box-sizing: border-box;
+      height: 72rpx;
+      line-height: 72rpx;
+      padding: 0 81rpx;
+      max-width: 690rpx;
+
+      .#{$prefix}-toast__content__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+</style>

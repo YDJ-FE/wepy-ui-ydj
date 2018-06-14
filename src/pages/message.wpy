@@ -1,6 +1,6 @@
 <!-- Message页面 -->
 <template>
-  <view class="message">
+  <view class="message-page">
     <Message :show.sync="showMessage" :content.sync="contentMessage" :type.sync="typeMessage" :showAnimationName.sync="showAnimationName"
       :hiddenAnimationName.sync="hiddenAnimationName"></Message>
 
@@ -57,7 +57,7 @@ export default class MessagePage extends wepy.page {
 </script>
 
 <style lang="scss">
-.message {
+.message-page {
   padding-top: 200rpx;
 }
 .btn {
