@@ -5,7 +5,7 @@
       <i class="ydj-iconfont ydj-iconfont-oksignlarge" wx:if="{{type === 'success'}}"></i>
       <i class="ydj-iconfont ydj-iconfont-warning" wx:if="{{type === 'warning'}}"></i>
       <i class="ydj-iconfont ydj-iconfont-iccancel" wx:if="{{type === 'error'}}"></i>
-      <view>
+      <view class="YDJ-toast__content__text">
         {{content}}
       </view>
     </view>
@@ -52,14 +52,6 @@ export default class Toast extends wepy.component {
     type: {
       type: String,
       default: 'error'
-    },
-    showAnimationName: {
-      type: String,
-      default: 'flipInX'
-    },
-    hiddenAnimationName: {
-      type: String,
-      default: 'flipOutX'
     }
   }
 
@@ -72,7 +64,6 @@ export default class Toast extends wepy.component {
     show(n, o) {
       if (n) {
         this.animationName = showAnimationName
-        // this.animationName = this.showAnimationName
         this.showToast()
       } else {
         timer && timer.clearTime && timer.clearTime()
@@ -95,7 +86,6 @@ export default class Toast extends wepy.component {
       {
         delay: 3000,
         cb() {
-          // self.animationName = self.hiddenAnimationName
           self.animationName = hiddenAnimationName
           self.$apply()
         }
@@ -162,13 +152,17 @@ export default class Toast extends wepy.component {
       }
     }
     &.none {
+      box-sizing: border-box;
       height: 72rpx;
       line-height: 72rpx;
       padding: 0 81rpx;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       max-width: 690rpx;
+
+      .#{$prefix}-toast__content__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
 }
