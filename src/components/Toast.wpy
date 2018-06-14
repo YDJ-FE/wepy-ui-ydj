@@ -13,7 +13,7 @@
 </template>
 <script>
 import wepy from 'wepy'
-import { todoFn } from '../utils/index'
+import { todoFn } from '../babel-utils/index'
 
 const positionMap = {
   top: 'top',

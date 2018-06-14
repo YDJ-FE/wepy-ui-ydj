@@ -38,3 +38,11 @@ components = {
   <buttonPlain shape="plain">中空默认</buttonPlain>
 </template>;
 ```
+
+#### 注意
+
+- 由于被引用的 utils 等其它资源不会被 babel 编译，所以需要我们自己预先编译
+
+```node
+npm run babel
+```
