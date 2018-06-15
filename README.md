@@ -6,6 +6,10 @@
 - [x] ~~_[Input 组件](./docs/input.md)_~~ [2018-06-13]
 - [x] ~~[_Toast 组件_](./docs/toast.md)~~ [2018-06-14]
 
+#### 线上二维码
+
+![aklsjdl](./docs/code.jpg)
+
 #### 使用方法
 
 - 基于 `wepy` 框架
@@ -40,9 +44,9 @@ components = {
 </template>;
 ```
 
-#### 注意
+#### 开发注意
 
-- 由于被引用的 utils 等其它资源不会被 babel 编译，所以需要我们自己预先编译
+- utils 文件夹 等其它 js 资源在被 wepb-cli 追踪依赖时不会被 babel 编译，所以需要我们自己预先编译
 
 ```node
 npm run babel

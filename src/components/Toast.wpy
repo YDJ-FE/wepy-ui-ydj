@@ -75,14 +75,8 @@ export default class Toast extends wepy.component {
 
   showToast() {
     const self = this
+    this.show = true
     timer = todoFn([
-      {
-        delay: 0,
-        cb() {
-          self.show = true
-          self.$apply()
-        }
-      },
       {
         delay: 3000,
         cb() {
