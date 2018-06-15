@@ -19,6 +19,10 @@
       <ButtonPlain shape="plain">input输入框</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/swiper" hover-class="none">
+      <ButtonPlain shape="plain">swiper图片轮播</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 

@@ -11,7 +11,7 @@
     <InputPassword title="密码" placeholder="请输入密码" :password="isTrue" :borderBottom="isTrue"/>
     <InputCode title="验证码" :sendCode="isTrue" placeholder="请输入验证码"  maxlength="6" @sendCode.user="handleSendCode" />
     <view class="YDJ-title">文本域</view>
-    <Textarea type="textarea" placeholder="请输入内容" :autoFocus="isTrue" @input.user="handleInput" @focus.user="handleFocus" @blur.user="handleBlur" />
+    <Textarea type="textarea" placeholder="请输入内容" @input.user="handleInput" @focus.user="handleFocus" @blur.user="handleBlur" />
   </view>
 </template>
 
