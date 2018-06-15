@@ -1,3 +1,4 @@
+<!-- 输入框 -->
 <template>
   <view class="YDJ-input-wrap">
     <textarea
@@ -30,7 +31,7 @@
         class="YDJ-input"
         placeholder-class="YDJ-placeholder"
       />
-      <button wx:if="{{sendCode}}" class="YDJ-button" @tap="handleSendCode">发送验证码</button>
+      <button wx:if="{{sendCode}}" class="YDJ-button" @tap="handleSendCode">{{btnCodeTitle}}</button>
     </view>
   </view>
 </template>
@@ -78,6 +79,10 @@ export default class Input extends wepy.component {
     password: {
       type: Boolean,
       default: false
+    },
+    btnCodeTitle: {
+      type: String,
+      default: '发送验证码'
     },
     borderBottom: {
       type: Boolean,
