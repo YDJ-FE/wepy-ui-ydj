@@ -1,0 +1,108 @@
+<!-- 列表组件 -->
+<template>
+  <view>
+    <view class="YDJ-item">
+      <view class="ydj-wrap">
+        <image wx:if="{{imgUrl}}" src="{{imgUrl}}" class="YDJ-img {{desc ? 'YDJ-img-big' : ''}}" />
+        <view class="{{imgUrl ? 'YDJ-lineheight-52' : 'YDJ-lineheight-44'}}">
+          <view class="YDJ-title">{{title}}</view>
+          <view wx:if="{{desc}}" class="YDJ-desc">{{desc}}</view>
+        </view>
+      </view>
+      <view class="YDJ-expand">
+        <text wx:if="{{info}}" class="YDJ-expand-info">{{info}}</text>
+        <i class="ydj-iconfont ydj-iconfont-arrowRight YDJ-icon"></i>
+      </view>
+    </view>
+
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class Lists extends wepy.component {
+  config = {}
+  props = {
+    imgUrl: {
+      type: String,
+      default: 'ff'
+    },
+    title: {
+      type: String,
+      default: '标题文字标题'
+    },
+    desc: {
+      type: String,
+      default: '文字描述'
+    },
+    info: {
+      type: String,
+      default: '详细信息'
+    }
+  }
+  data = {}
+  onLoad() {}
+  methods = {}
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+@import '../styles/all';
+.#{$prefix}-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 16rpx 28rpx;
+  line-height: 58rpx;
+  position: relative;
+}
+.ydj-wrap {
+  display: flex;
+}
+.#{$prefix}-info {
+  display: flex;
+}
+.#{$prefix}-img {
+  width: 58rpx;
+  height: 58rpx;
+  background: pink;
+  margin-right: 24rpx;
+}
+.#{$prefix}-img-big {
+  width: 120rpx;
+  height: 120rpx;
+}
+.#{$prefix}-title {
+  font-size: 32rpx;
+  background: pink;
+}
+.#{$prefix}-desc {
+  font-size: 28rpx;
+  color: $ydj-text-third;
+}
+
+.#{$prefix}-expand {
+  position: absolute;
+  right: 28rpx;
+}
+
+.#{$prefix}-expand-info {
+  display: inline-block;
+  padding-right: 24rpx;
+  font-size: 30rpx;
+  color: $ydj-text-third;
+}
+
+.#{$prefix}-icon {
+  color: $ydj-text-third;
+  font-size: 28rpx;
+}
+
+.#{$prefix}-lineheight-44 {
+  line-height: 44rpx;
+}
+.#{$prefix}-lineheight-52 {
+  line-height: 52rpx;
+}
+</style>

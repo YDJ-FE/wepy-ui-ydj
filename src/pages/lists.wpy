@@ -1,0 +1,29 @@
+<!-- Lists页面 -->
+<template>
+  <view class="lists">
+    <Lists />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Lists from '../components/Lists'
+
+export default class ListsPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '列表'
+  }
+
+  components = {
+    Lists: Lists
+  }
+
+  props = {}
+  data = {}
+  onLoad() {}
+  methods = {}
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+</style>
