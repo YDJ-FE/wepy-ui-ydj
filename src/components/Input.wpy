@@ -149,7 +149,7 @@ export default class Input extends wepy.component {
 
 .#{$prefix}-button {
   color: #4a90e2;
-  font-size: 34rpx;
+  font-size: 32rpx;
   width: 212rpx;
   padding: 0;
   border: 0;
