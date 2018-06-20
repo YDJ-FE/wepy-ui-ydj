@@ -103,7 +103,7 @@ export default class Lists extends wepy.component {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 @import '../styles/all';
 
