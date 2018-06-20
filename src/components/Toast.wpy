@@ -119,7 +119,7 @@ export default class Toast extends wepy.component {
     left: 50%;
     transform: translateX(-50%);
   }
-  .ydj-toast__content {
+  &__content {
     box-sizing: border-box;
     background-color: $ydj-text-first;
     color: #fff;
