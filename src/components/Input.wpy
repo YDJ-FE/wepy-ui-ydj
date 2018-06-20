@@ -1,6 +1,6 @@
 <!-- Input 输入框 -->
 <template>
-  <view class="ydj-input-wrap">
+  <view class="ydj-input">
     <textarea
       wx:if="{{type === 'textarea'}}"
       value="{{value}}"
@@ -12,11 +12,11 @@
       bindinput="handleInput"
       bindfocus="handleFocus"
       bindblur="handleBlur"
-      class="ydj-textrea"
-      placeholder-class="ydj-placeholder"
+      class="ydj-input__textrea"
+      placeholder-class="ydj-input__placeholder"
     />
-    <view wx:else class="ydj-input-item {{borderBottom ? 'ydj-border-bottom' : ''}} ">
-      <label class="ydj-label {{disabled ? 'ydj-color-fifth' : ''}}">{{title}}</label>
+    <view wx:else class="ydj-input__item {{borderBottom ? 'ydj-input__border-bottom' : ''}} ">
+      <label class="ydj-input__label {{disabled ? 'ydj-input__color-fifth' : ''}}">{{title}}</label>
       <input
         type="{{type}}"
         password="{{password}}"
@@ -28,10 +28,10 @@
         bindinput="handleInput"
         bindfocus="handleFocus"
         bindblur="handleBlur"
-        class="ydj-input"
-        placeholder-class="ydj-placeholder"
+        class="ydj-input__input"
+        placeholder-class="ydj-input__placeholder"
       />
-      <button wx:if="{{sendCode}}" class="ydj-button" @tap="handleSendCode">{{btnCodeTitle}}</button>
+      <button wx:if="{{sendCode}}" class="ydj-input__button" @tap="handleSendCode">{{btnCodeTitle}}</button>
     </view>
   </view>
 </template>
@@ -115,69 +115,66 @@ export default class Input extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-.ydj-input-wrap {
+.ydj-input {
   padding-left: 28rpx;
   background: #fff;
   color: $ydj-text-first;
-}
 
-.ydj-input-item {
-  font-size: 32rpx;
-  height: 93rpx;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.ydj-label {
-  min-width: 170rpx;
-  padding-right: 10rpx;
-}
-
-.ydj-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  height: 93rpx;
-  line-height: 93rpx;
-  padding-right: 25rpx;
-}
-
-.ydj-placeholder {
-  color: $ydj-text-fifth;
-}
-
-.ydj-button {
-  color: #4a90e2;
-  font-size: 32rpx;
-  width: 212rpx;
-  padding: 0;
-  border: 0;
-  height: 48rpx;
-  padding-left: 16rpx;
-  padding-right: 25rpx;
-  line-height: unset;
-  background: #fff;
-  border-left: 2rpx solid $ydj-line;
-
-  &::after {
-    border: 0;
+  &__item {
+    display: flex;
+    box-sizing: border-box;
+    height: 93rpx;
+    font-size: 32rpx;
+    align-items: center;
   }
-}
 
-.ydj-textrea {
-  width: 100%;
-  height: 151rpx;
-  padding: 20rpx 25rpx 20rpx 0;
-  font-size: 32rpx;
-  box-sizing: border-box;
-}
+  &__label {
+    min-width: 170rpx;
+    padding-right: 10rpx;
+  }
 
-.ydj-border-bottom {
-  border-bottom: 1rpx solid $ydj-line;
-}
+  &__input {
+    flex: 1;
+    height: 93rpx;
+    line-height: 93rpx;
+    border: none;
+    outline: none;
+    padding-right: 25rpx;
+  }
 
-.ydj-color-fifth {
-  color: $ydj-text-fifth;
+  &__placeholder {
+    color: $ydj-text-fifth;
+  }
+
+  &__button {
+    width: 212rpx;
+    height: 48rpx;
+    padding: 0 25rpx 0 16rpx;
+    border: 0;
+    background: #fff;
+    font-size: 32rpx;
+    color: #4a90e2;
+    line-height: unset;
+    border-left: 2rpx solid $ydj-line;
+    &::after {
+      border: 0;
+    }
+  }
+
+  &__textrea {
+    width: 100%;
+    height: 151rpx;
+    padding: 20rpx 25rpx 20rpx 0;
+    font-size: 32rpx;
+    box-sizing: border-box;
+  }
+
+  &__border-bottom {
+    border-bottom: 1rpx solid $ydj-line;
+  }
+
+  &__color-fifth {
+    color: $ydj-text-fifth;
+  }
 }
 </style>
