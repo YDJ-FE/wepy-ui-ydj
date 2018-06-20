@@ -3,7 +3,7 @@
   <view class="ydj-message animated {{animationStatus ? hiddenAnimationName : showAnimationName}} {{positionMap[position]}}"
     @animationend="handleAnimationEnd" wx:if="{{show}}">
     <view class="ydj-message__bg {{themeMap[type]}}">
-      <view class="ydj-message__content">{{content}}</view>
+      <view class="ydj-message__bg__content">{{content}}</view>
     </view>
   </view>
 </template>
@@ -111,7 +111,7 @@ export default class Message extends wepy.component {
     left: 0;
   }
 
-  .ydj-message__bg {
+  &__bg {
     box-sizing: border-box;
     height: 100%;
     padding: 10rpx 10rpx 10rpx 15rpx;
@@ -127,7 +127,7 @@ export default class Message extends wepy.component {
       background: $ydj-secondary-fifth;
     }
 
-    .ydj-message__content {
+    &__content {
       box-sizing: border-box;
       display: flex;
       align-items: center;
