@@ -1,6 +1,6 @@
 <!-- Input 输入框 -->
 <template>
-  <view class="YDJ-input-wrap">
+  <view class="ydj-input-wrap">
     <textarea
       wx:if="{{type === 'textarea'}}"
       value="{{value}}"
@@ -12,11 +12,11 @@
       bindinput="handleInput"
       bindfocus="handleFocus"
       bindblur="handleBlur"
-      class="YDJ-textrea"
-      placeholder-class="YDJ-placeholder"
+      class="ydj-textrea"
+      placeholder-class="ydj-placeholder"
     />
-    <view wx:else class="YDJ-input-item {{borderBottom ? 'YDJ-border-bottom' : ''}} ">
-      <label class="YDJ-label {{disabled ? 'YDJ-color-fifth' : ''}}">{{title}}</label>
+    <view wx:else class="ydj-input-item {{borderBottom ? 'ydj-border-bottom' : ''}} ">
+      <label class="ydj-label {{disabled ? 'ydj-color-fifth' : ''}}">{{title}}</label>
       <input
         type="{{type}}"
         password="{{password}}"
@@ -28,10 +28,10 @@
         bindinput="handleInput"
         bindfocus="handleFocus"
         bindblur="handleBlur"
-        class="YDJ-input"
-        placeholder-class="YDJ-placeholder"
+        class="ydj-input"
+        placeholder-class="ydj-placeholder"
       />
-      <button wx:if="{{sendCode}}" class="YDJ-button" @tap="handleSendCode">{{btnCodeTitle}}</button>
+      <button wx:if="{{sendCode}}" class="ydj-button" @tap="handleSendCode">{{btnCodeTitle}}</button>
     </view>
   </view>
 </template>
@@ -115,13 +115,13 @@ export default class Input extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-.#{$prefix}-input-wrap {
+.ydj-input-wrap {
   padding-left: 28rpx;
   background: #fff;
   color: $ydj-text-first;
 }
 
-.#{$prefix}-input-item {
+.ydj-input-item {
   font-size: 32rpx;
   height: 93rpx;
   display: flex;
@@ -129,12 +129,12 @@ export default class Input extends wepy.component {
   box-sizing: border-box;
 }
 
-.#{$prefix}-label {
+.ydj-label {
   min-width: 170rpx;
   padding-right: 10rpx;
 }
 
-.#{$prefix}-input {
+.ydj-input {
   flex: 1;
   border: none;
   outline: none;
@@ -143,11 +143,11 @@ export default class Input extends wepy.component {
   padding-right: 25rpx;
 }
 
-.#{$prefix}-placeholder {
+.ydj-placeholder {
   color: $ydj-text-fifth;
 }
 
-.#{$prefix}-button {
+.ydj-button {
   color: #4a90e2;
   font-size: 32rpx;
   width: 212rpx;
@@ -165,7 +165,7 @@ export default class Input extends wepy.component {
   }
 }
 
-.#{$prefix}-textrea {
+.ydj-textrea {
   width: 100%;
   height: 151rpx;
   padding: 20rpx 25rpx 20rpx 0;
@@ -173,11 +173,11 @@ export default class Input extends wepy.component {
   box-sizing: border-box;
 }
 
-.#{$prefix}-border-bottom {
+.ydj-border-bottom {
   border-bottom: 1rpx solid $ydj-line;
 }
 
-.#{$prefix}-color-fifth {
+.ydj-color-fifth {
   color: $ydj-text-fifth;
 }
 </style>

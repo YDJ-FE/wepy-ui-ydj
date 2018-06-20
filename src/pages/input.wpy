@@ -57,6 +57,6 @@ export default class InputPage extends wepy.page {
 @import '../styles/var';
 
 .title {
-  @include YDJ-title;
+  @include ydj-title;
 }
 </style>

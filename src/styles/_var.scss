@@ -14,15 +14,15 @@ $ydj-text-forth: #aa9aa8;
 $ydj-text-fifth: #ccc;
 $ydj-line: #e8e8e8;
 $ydj-bg: #f5f5f5;
-$prefix: 'YDJ';
+
 $z-index: 9999;
-@mixin YDJ-title {
-  font-size: 32rpx;
-  color: #888;
+@mixin ydj-title {
   padding: 40rpx 28rpx 20rpx;
+  color: #888;
+  font-size: 32rpx;
 }
 
-@mixin YDJ-overflow-ellipsis {
+@mixin ydj-overflow-ellipsis {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

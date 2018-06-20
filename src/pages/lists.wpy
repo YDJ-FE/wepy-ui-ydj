@@ -83,7 +83,7 @@ export default class ListsPage extends wepy.page {
 @import '../styles/var';
 
 .title {
-  @include YDJ-title;
+  @include ydj-title;
 }
 
 .line {
