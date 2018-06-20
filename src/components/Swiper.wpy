@@ -1,29 +1,27 @@
 <!-- 图片轮播组件 -->
 <template>
-  <view>
-    <swiper
-      autoplay="{{autoplay}}"
-      interval="{{interval}}"
-      duration="{{duration}}"
-      circular="{{circular}}"
-      indicator-dots="{{indicator}}"
-      indicator-color="{{indicatorColor}}"
-      indicator-active-color="{{indicatorActiveColor}}"
-      previous-margin="{{marginPrev}}"
-      next-margin="{{marginNext}}"
-      style="width: {{width}}; height: {{height}};"
-      bindchange="handleChange"
-      bindanimationfinish="handleAnimationFinish"
-    >
-      <block wx:for="{{dataList}}" wx:key="{{index}}">
-        <swiper-item >
-          <view @tap="handleClick({{item}})" style="padding: {{itemPadding}}">
-            <image src="{{item}}" style="width: 100%; height: {{height}};"/>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
+  <swiper
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    circular="{{circular}}"
+    indicator-dots="{{indicator}}"
+    indicator-color="{{indicatorColor}}"
+    indicator-active-color="{{indicatorActiveColor}}"
+    previous-margin="{{marginPrev}}"
+    next-margin="{{marginNext}}"
+    style="width: {{width}}; height: {{height}};"
+    bindchange="handleChange"
+    bindanimationfinish="handleAnimationFinish"
+  >
+    <block wx:for="{{dataList}}" wx:key="{{index}}">
+      <swiper-item >
+        <view @tap="handleClick({{item}})" style="padding: {{itemPadding}}">
+          <image src="{{item}}" style="width: 100%; height: {{height}};"/>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
 </template>
 
 <script>
@@ -104,6 +102,6 @@ export default class Swiper extends wepy.component {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 </style>

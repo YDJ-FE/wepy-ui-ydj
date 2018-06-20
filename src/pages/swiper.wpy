@@ -1,9 +1,9 @@
 <!-- Swiper页面 -->
 <template>
   <view class="swiper">
-    <view class="YDJ-title">基本用法</view>
+    <view class="title">基本用法</view>
     <SwiperDefault :dataList="dataList" :autoplay="isTrue" :indicator="isTrue" @click.user="handleClick"/>
-    <view class="YDJ-title">图片居中</view>
+    <view class="title">图片居中</view>
     <SwiperCenter :dataList="dataList" :autoplay="isTrue" marginPrev="100rpx" marginNext="100rpx" itemPadding="0 20rpx;"/>
   </view>
 </template>
@@ -41,10 +41,10 @@ export default class swiperPage extends wepy.page {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 
-.#{$prefix}-title {
+.title {
   @include YDJ-title;
 }
 </style>
