@@ -1,4 +1,4 @@
-<!-- Swiper页面 -->
+<!-- Swiper 页面 -->
 <template>
   <view class="swiper">
     <view class="title">基本用法</view>

@@ -1,4 +1,4 @@
-<!-- Lists页面 -->
+<!-- List 页面 -->
 <template>
   <view class="lists">
     <view class="title">基本用法</view>
@@ -23,7 +23,7 @@
 </template>
 <script>
 import wepy from 'wepy'
-import Lists from '../components/Lists'
+import List from '../components/Lists'
 
 export default class ListsPage extends wepy.page {
   config = {
@@ -31,15 +31,15 @@ export default class ListsPage extends wepy.page {
   }
 
   components = {
-    ListDefault: Lists,
-    ListExpandImg: Lists,
-    ListImage: Lists,
-    ListDesc: Lists,
-    ListImageDesc: Lists,
-    listDescMulti: Lists,
-    listCustomize: Lists,
-    listGraphicRight: Lists,
-    listGraphicLeft: Lists
+    ListDefault: List,
+    ListExpandImg: List,
+    ListImage: List,
+    ListDesc: List,
+    ListImageDesc: List,
+    listDescMulti: List,
+    listCustomize: List,
+    listGraphicRight: List,
+    listGraphicLeft: List
   }
 
   data = {

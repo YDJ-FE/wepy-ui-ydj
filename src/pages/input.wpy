@@ -1,4 +1,4 @@
-<!-- Input页面 -->
+<!-- Input 页面 -->
 <template>
   <view class="input">
     <view class="title">基础用法</view>
