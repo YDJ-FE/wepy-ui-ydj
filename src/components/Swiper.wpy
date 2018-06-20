@@ -1,6 +1,6 @@
 <!-- 图片轮播组件 -->
 <template>
-  <view class="swiper">
+  <view>
     <swiper
       autoplay="{{autoplay}}"
       interval="{{interval}}"

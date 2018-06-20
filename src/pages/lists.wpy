@@ -2,26 +2,20 @@
 <template>
   <view class="lists">
     <view class="YDJ-title">基本用法</view>
-    <ListDefault title="标题文字" :isExpand="isTrue" expandText="详细信息" class="YDJ-line"/>
+    <ListDefault title="标题文字" :isExpand="isTrue" expandText="详细信息" class="YDJ-line" @click.user="handleClick"/>
     <ListExpandImg title="标题文字" :isExpand="isTrue" :expandImgUrl="imgUrl" class="YDJ-line"/>
     <ListImage title="标题文字" :imgUrl="imgUrl" :isExpand="isTrue" class="YDJ-line"/>
     <ListDesc title="标题文字" desc="描述信息" :isExpand="isTrue" class="YDJ-line" />
     <ListImageDesc title="标题文字" desc="描述信息" :imgUrl="imgUrl" :isExpand="isTrue" class="YDJ-line" />
     <listDescMulti title="标题文字" :desc="desc" :isMulti="isTrue" />
     <view class="YDJ-title">自定义右侧内容</view>
-    <listCustomize title="2018新春互动活动" desc="2018-02-15">
-      <view slot="customize" class="YDJ-num">
-        +20
-      </view>
-    </listCustomize>
-    <!-- 属性传变量不生效 -->
-    <!-- <block wx:for="{{list}}" wx:key="{{index}}">
+    <repeat for="{{list}}" key="index" index="index" item="item">
       <listCustomize :title="item.title" :desc="item.desc" :borderBottom="item.borderBottom">
-        <view slot="customize">
-          + {{item.num}}
+        <view slot="customize" class="YDJ-num">
+          +{{item.num}}
         </view>
       </listCustomize>
-    </block> -->
+    </repeat>
     <view class="YDJ-title">商品列表</view>
     <listGraphicRight type="shop" :title="title" desc="补充说明" :imgUrl="imgUrl" :borderBottom="isTrue"  price="900.00" shopType="text"/>
     <listGraphicLeft type="shop" :title="title" :imgUrl="imgUrl" price="900.00" shopType="button" shopBtnTitle="立即抢购" :isShopImgLeft="isTrue" @buy.user="handleBuy"/>
@@ -48,7 +42,6 @@ export default class ListsPage extends wepy.page {
     listGraphicLeft: Lists
   }
 
-  props = {}
   data = {
     isTrue: true,
     imgUrl: 'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg',
@@ -67,18 +60,20 @@ export default class ListsPage extends wepy.page {
         title: '2018新春互动活动',
         desc: '2018-02-15',
         num: 20,
-        borderBottom: true
+        borderBottom: false
       }
     ]
   }
+
   onLoad() {}
+
   methods = {
     handleClick(e) {
-      console.log('CLICK')
+      // 点击事件
     },
 
     handleBuy(e) {
-      console.log('BUY')
+      // 购买事件
     }
   }
 }
@@ -88,9 +83,7 @@ export default class ListsPage extends wepy.page {
 @import '../styles/var';
 
 .#{$prefix}-title {
-  font-size: 32rpx;
-  color: #888;
-  padding: 40rpx 28rpx 20rpx;
+  @include YDJ-title;
 }
 
 .#{$prefix}-line {

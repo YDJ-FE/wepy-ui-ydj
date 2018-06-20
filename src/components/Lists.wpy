@@ -85,8 +85,6 @@ export default class Lists extends wepy.component {
     }
   }
 
-  data = {}
-
   onLoad() {}
 
   methods = {
@@ -138,7 +136,7 @@ export default class Lists extends wepy.component {
 .#{$prefix}-title {
   font-size: 32rpx;
   line-height: 48rpx;
-  @include overflow-ellipsis;
+  @include YDJ-overflow-ellipsis;
 }
 
 .#{$prefix}-desc {
@@ -198,7 +196,7 @@ export default class Lists extends wepy.component {
   color: $ydj-secondary-fifth;
   line-height: 1;
   margin-top: 10rpx;
-  @include overflow-ellipsis;
+  @include YDJ-overflow-ellipsis;
 }
 
 .#{$prefix}-desc-shop {
@@ -208,7 +206,7 @@ export default class Lists extends wepy.component {
   font-size: 26rpx;
   color: $ydj-text-third;
   line-height: 1;
-  @include overflow-ellipsis;
+  @include YDJ-overflow-ellipsis;
 }
 
 .#{$prefix}-button {
@@ -243,6 +241,6 @@ export default class Lists extends wepy.component {
 }
 
 .#{$prefix}-textoverflow {
-  @include overflow-ellipsis;
+  @include YDJ-overflow-ellipsis;
 }
 </style>
