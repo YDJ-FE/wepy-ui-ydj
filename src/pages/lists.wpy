@@ -1,0 +1,97 @@
+<!-- Lists页面 -->
+<template>
+  <view class="lists">
+    <view class="YDJ-title">基本用法</view>
+    <ListDefault title="标题文字" :isExpand="isTrue" expandText="详细信息" class="YDJ-line" @click.user="handleClick"/>
+    <ListExpandImg title="标题文字" :isExpand="isTrue" :expandImgUrl="imgUrl" class="YDJ-line"/>
+    <ListImage title="标题文字" :imgUrl="imgUrl" :isExpand="isTrue" class="YDJ-line"/>
+    <ListDesc title="标题文字" desc="描述信息" :isExpand="isTrue" class="YDJ-line" />
+    <ListImageDesc title="标题文字" desc="描述信息" :imgUrl="imgUrl" :isExpand="isTrue" class="YDJ-line" />
+    <listDescMulti title="标题文字" :desc="desc" :isMulti="isTrue" />
+    <view class="YDJ-title">自定义右侧内容</view>
+    <repeat for="{{list}}" key="index" index="index" item="item">
+      <listCustomize :title="item.title" :desc="item.desc" :borderBottom="item.borderBottom">
+        <view slot="customize" class="YDJ-num">
+          +{{item.num}}
+        </view>
+      </listCustomize>
+    </repeat>
+    <view class="YDJ-title">商品列表</view>
+    <listGraphicRight type="shop" :title="title" desc="补充说明" :imgUrl="imgUrl" :borderBottom="isTrue"  price="900.00" shopType="text"/>
+    <listGraphicLeft type="shop" :title="title" :imgUrl="imgUrl" price="900.00" shopType="button" shopBtnTitle="立即抢购" :isShopImgLeft="isTrue" @buy.user="handleBuy"/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Lists from '../components/Lists'
+
+export default class ListsPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '列表'
+  }
+
+  components = {
+    ListDefault: Lists,
+    ListExpandImg: Lists,
+    ListImage: Lists,
+    ListDesc: Lists,
+    ListImageDesc: Lists,
+    listDescMulti: Lists,
+    listCustomize: Lists,
+    listGraphicRight: Lists,
+    listGraphicLeft: Lists
+  }
+
+  data = {
+    isTrue: true,
+    imgUrl: 'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg',
+    title:
+      '文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题',
+    desc:
+      '文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明',
+    list: [
+      {
+        title: '2018新春互动活动',
+        desc: '2018-02-15',
+        num: 20,
+        borderBottom: true
+      },
+      {
+        title: '2018新春互动活动',
+        desc: '2018-02-15',
+        num: 20,
+        borderBottom: false
+      }
+    ]
+  }
+
+  onLoad() {}
+
+  methods = {
+    handleClick(e) {
+      // 点击事件
+    },
+
+    handleBuy(e) {
+      // 购买事件
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+
+.#{$prefix}-title {
+  @include YDJ-title;
+}
+
+.#{$prefix}-line {
+  margin-bottom: 20rpx;
+}
+
+.#{$prefix}-num {
+  font-size: 36rpx;
+  color: #ff1515;
+}
+</style>

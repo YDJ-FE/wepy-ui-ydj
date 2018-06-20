@@ -23,6 +23,10 @@
       <ButtonPlain shape="plain">swiper图片轮播</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/lists" hover-class="none">
+      <ButtonPlain shape="plain">lists列表</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 

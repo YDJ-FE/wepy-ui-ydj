@@ -1,0 +1,246 @@
+<!-- 列表组件 -->
+<template>
+  <view class="YDJ-list-wrap" @tap="handleClick">
+    <view wx:if="{{type === 'shop'}}" class="YDJ-item-shop {{borderBottom ? 'YDJ-border-bottom' : ''}}">
+      <image src="{{imgUrl}}" class="YDJ-img-shop" />
+      <view class="YDJ-info-shop {{isShopImgLeft ? '' : 'YDJ-left'}}">
+        <view class="YDJ-title-shop">{{title}}</view>
+        <view class="YDJ-price">￥{{price}}</view>
+        <view wx:if="{{shopType === 'text'}}" class="YDJ-desc-shop">{{desc}}</view>
+        <button wx:elif="{{shopType === 'button'}}" class="YDJ-button" @tap="handleBuy">{{shopBtnTitle}}</button>
+      </view>
+    </view>
+    <view wx:else class="YDJ-item {{borderBottom ? 'YDJ-border-bottom' : ''}}">
+      <image wx:if="{{imgUrl}}" src="{{imgUrl}}" class="YDJ-img {{desc ? 'YDJ-img-big' : ''}}" />
+      <view class=" YDJ-info">
+        <view class="YDJ-title YDJ-textoverflow {{imgUrl || isMulti ? 'YDJ-lineheight-60' : ''}}">{{title}}</view>
+        <view wx:if="{{desc}}" class="YDJ-desc {{isMulti ? '' : 'YDJ-textoverflow'}}">{{desc}}</view>
+      </view>
+      <view wx:if="{{isExpand}}" class="YDJ-expand" @tap="handleGo">
+        <image wx:if="{{expandImgUrl}}" src="{{expandImgUrl}}" class="YDJ-expand-img" />
+        <text wx:if="{{expandText}}" class="YDJ-expand-info">{{expandText}}</text>
+        <i class="ydj-iconfont ydj-iconfont-arrowRight YDJ-icon"></i>
+      </view>
+      <slot name="customize"></slot>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Lists extends wepy.component {
+  props = {
+    type: {
+      type: String,
+      defafult: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    desc: {
+      type: String,
+      default: ''
+    },
+    imgUrl: {
+      type: String,
+      default: ''
+    },
+    borderBottom: {
+      type: Boolean,
+      default: false
+    },
+    isMulti: {
+      type: Boolean,
+      defaultL: false
+    },
+    isExpand: {
+      type: Boolean,
+      default: false
+    },
+    expandText: {
+      type: String,
+      default: ''
+    },
+    expandImgUrl: {
+      type: String,
+      default: ''
+    },
+    price: {
+      type: String,
+      default: ''
+    },
+    shopType: {
+      type: String,
+      default: ''
+    },
+    shopBtnTitle: {
+      type: String,
+      default: ''
+    },
+    isShopImgLeft: {
+      type: Boolean,
+      default: false
+    }
+  }
+
+  onLoad() {}
+
+  methods = {
+    handleClick(e) {
+      this.$emit('click', e)
+    },
+
+    handleGo(e) {
+      this.$emit('go', e)
+    },
+
+    handleBuy(e) {
+      this.$emit('buy', e)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+@import '../styles/all';
+
+.#{$prefix}-list-wrap {
+  background: #fff;
+  padding-left: 28rpx;
+}
+
+.#{$prefix}-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 28rpx 16rpx 0;
+}
+
+.#{$prefix}-img {
+  width: 58rpx;
+  height: 58rpx;
+  margin-right: 24rpx;
+}
+
+.#{$prefix}-img-big {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.#{$prefix}-info {
+  flex: 1;
+}
+
+.#{$prefix}-title {
+  font-size: 32rpx;
+  line-height: 48rpx;
+  @include YDJ-overflow-ellipsis;
+}
+
+.#{$prefix}-desc {
+  font-size: 28rpx;
+  color: $ydj-text-third;
+  line-height: 44rpx;
+}
+
+.#{$prefix}-expand-info {
+  display: inline-block;
+  font-size: 30rpx;
+  color: $ydj-text-third;
+  padding-right: 20rpx;
+}
+
+.#{$prefix}-expand-img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 44rpx;
+  height: 44rpx;
+  padding-right: 20rpx;
+}
+
+.#{$prefix}-icon {
+  color: $ydj-text-third;
+  font-size: 28rpx;
+}
+
+.#{$prefix}-item-shop {
+  padding: 30rpx 28rpx 32rpx 0;
+}
+
+.#{$prefix}-img-shop {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.#{$prefix}-info-shop {
+  position: relative;
+  width: 450rpx;
+  height: 200rpx;
+  float: right;
+}
+
+.#{$prefix}-title-shop {
+  font-size: 32rpx;
+  color: #222;
+  line-height: 46rpx;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.#{$prefix}-price {
+  font-size: 32rpx;
+  color: $ydj-secondary-fifth;
+  line-height: 1;
+  margin-top: 10rpx;
+  @include YDJ-overflow-ellipsis;
+}
+
+.#{$prefix}-desc-shop {
+  position: absolute;
+  left: 0;
+  bottom: 10rpx;
+  font-size: 26rpx;
+  color: $ydj-text-third;
+  line-height: 1;
+  @include YDJ-overflow-ellipsis;
+}
+
+.#{$prefix}-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 172rpx;
+  height: 56rpx;
+  font-size: 30rpx;
+  color: #fff;
+  line-height: 56rpx;
+  text-align: center;
+  background: $ydj-primary-first;
+  padding: 0;
+  margin: 13rpx 0 0 0;
+  &::after {
+    border: none;
+  }
+}
+
+.#{$prefix}-left {
+  float: left;
+  margin-right: 40rpx;
+}
+
+.#{$prefix}-lineheight-60 {
+  line-height: 60rpx;
+}
+
+.#{$prefix}-border-bottom {
+  border-bottom: 1rpx solid $ydj-line;
+}
+
+.#{$prefix}-textoverflow {
+  @include YDJ-overflow-ellipsis;
+}
+</style>

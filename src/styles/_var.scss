@@ -1,26 +1,29 @@
 // 全局变量
-
 $ydj-primary-first: #fd7598;
 $ydj-primary-second: #ff9cb6;
 $ydj-primary-third: #ffd0dc;
-
 $ydj-secondary-first: #ff838f;
 $ydj-secondary-second: #ffd300;
 $ydj-secondary-third: #df8af0;
 $ydj-secondary-forth: #ffab6b;
 $ydj-secondary-fifth: #ff1515;
-
 $ydj-text-first: #202133;
 $ydj-text-second: #666;
 $ydj-text-third: #9a9a9a;
 $ydj-text-forth: #aa9aa8;
 $ydj-text-fifth: #ccc;
-
 $ydj-line: #e8e8e8;
-
 $ydj-bg: #f5f5f5;
-
 $prefix: 'YDJ';
+$z-index: 9999;
+@mixin YDJ-title {
+  font-size: 32rpx;
+  color: #888;
+  padding: 40rpx 28rpx 20rpx;
+}
 
-$z-index: 9999
-
+@mixin YDJ-overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

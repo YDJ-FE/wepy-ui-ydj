@@ -45,7 +45,6 @@ export default class swiperPage extends wepy.page {
 @import '../styles/var';
 
 .#{$prefix}-title {
-  font-size: 34rpx;
-  padding: 40rpx 28rpx 20rpx;
+  @include YDJ-title;
 }
 </style>
