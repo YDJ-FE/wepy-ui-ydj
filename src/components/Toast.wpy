@@ -1,11 +1,11 @@
 <!-- Toast轻弹出框 -->
 <template>
-  <view class="YDJ-toast {{positionMap[position]}}" wx:if="{{show}}">
-    <view class="YDJ-toast__content animated {{animationName}} {{typeMap[type]}}">
+  <view class="ydj-toast {{positionMap[position]}}" wx:if="{{show}}">
+    <view class="ydj-toast__content animated {{animationName}} {{typeMap[type]}}">
       <i class="ydj-iconfont ydj-iconfont-oksignlarge" wx:if="{{type === 'success'}}"></i>
       <i class="ydj-iconfont ydj-iconfont-warning" wx:if="{{type === 'warning'}}"></i>
       <i class="ydj-iconfont ydj-iconfont-iccancel" wx:if="{{type === 'error'}}"></i>
-      <view class="YDJ-toast__content__text">
+      <view class="ydj-toast__content__text">
         {{content}}
       </view>
     </view>
@@ -99,7 +99,7 @@ export default class Toast extends wepy.component {
 <style lang="scss">
 @import '../styles/var';
 
-.#{$prefix}-toast {
+.ydj-toast {
   position: fixed;
   pointer-events: none;
   z-index: $z-index + 1;
@@ -119,7 +119,7 @@ export default class Toast extends wepy.component {
     left: 50%;
     transform: translateX(-50%);
   }
-  .#{$prefix}-toast__content {
+  .ydj-toast__content {
     box-sizing: border-box;
     background-color: $ydj-text-first;
     color: #fff;
@@ -152,7 +152,7 @@ export default class Toast extends wepy.component {
       padding: 0 81rpx;
       max-width: 690rpx;
 
-      .#{$prefix}-toast__content__text {
+      .ydj-toast__content__text {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

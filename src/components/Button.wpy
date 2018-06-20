@@ -1,5 +1,5 @@
 <template>
-  <button class="YDJ-button {{curState.className}}" hover-class="{{curState.hoverName}}" @tap="handleClick"
+  <button class="ydj-button {{curState.className}}" hover-class="{{curState.hoverName}}" @tap="handleClick"
     disable="{{disable}}" loading="{{loading}}">
     <slot></slot>
   </button>
@@ -11,13 +11,13 @@ import wepy from 'wepy'
 const state = {
   plain: {
     isActive: false,
-    className: 'YDJ-button__plain',
-    hoverName: 'YDJ-button__plain-is-active'
+    className: 'ydj-button__plain',
+    hoverName: 'ydj-button__plain-is-active'
   },
   default: {
     isActive: false,
-    className: 'YDJ-button__default',
-    hoverName: 'YDJ-button__default-is-active'
+    className: 'ydj-button__default',
+    hoverName: 'ydj-button__default-is-active'
   }
 }
 
@@ -64,7 +64,7 @@ export default class Button extends wepy.component {
 <style lang="scss">
 @import '../styles/var';
 
-.#{$prefix}-button {
+.ydj-button {
   width: 690rpx;
   height: 94rpx;
   line-height: 94rpx;
@@ -73,18 +73,18 @@ export default class Button extends wepy.component {
   box-sizing: border-box;
 }
 
-.#{$prefix}-button__default {
+.ydj-button__default {
   background-color: $ydj-primary-first;
   color: #fff;
 }
-.#{$prefix}-button__default-is-active {
+.ydj-button__default-is-active {
   background-color: $ydj-primary-second;
 }
-.#{$prefix}-button__plain {
+.ydj-button__plain {
   background-color: #fff;
   color: $ydj-text-first;
 }
-.#{$prefix}-button__plain-is-active {
+.ydj-button__plain-is-active {
   background-color: $ydj-text-fifth;
 }
 </style>
