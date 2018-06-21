@@ -27,6 +27,9 @@
       <ButtonPlain shape="plain">lists列表</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/select" hover-class="none">
+      <ButtonPlain shape="plain">select选择框</ButtonPlain>
+
     <navigator class="page-btn" url="/pages/messageBox" hover-class="none">
       <ButtonPlain shape="plain">messageBox信息弹框</ButtonPlain>
     </navigator>
