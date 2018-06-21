@@ -4,27 +4,45 @@
     <view class="title">单项选择</view>
     <SelectRadio :dataList="dataList" :checkedValue.sync="checkedValue" @radioChange.user="handleRadioChange"></SelectRadio>
     <view class="title">多项选择</view>
-    <SelectCheck type="checkbox" :dataList="dataList" :checkedArray.sync="checkedArray" @checkboxChange.user="handleCheckboxChange"></SelectCheck>
+    <SelectCheck type="checkbox" :dataList="dataList" @checkboxChange.user="handleCheckboxChange"></SelectCheck>
+    <view class="title">开关</view>
+    <ListSwitchOpen title="开启" :borderBottom="isTrue">
+      <view slot="customize">
+        <switch checked/>
+      </view>
+    </ListSwitchOpen>
+    <ListSwitchClose title="关闭">
+      <view slot="customize">
+        <switch />
+      </view>
+    </ListSwitchClose>
   </view>
 </template>
+
 <script>
 import wepy from 'wepy'
 import Select from '../components/Select'
+import List from '../components/Lists'
 
 export default class SelectPage extends wepy.page {
   config = {
     navigationBarTitleText: '选择框'
   }
-  props = {}
+
   components = {
     SelectRadio: Select,
-    SelectCheck: Select
+    SelectCheck: Select,
+    ListSwitchOpen: List,
+    ListSwitchClose: List
   }
+
   data = {
+    isTrue: true,
     dataList: [
       {
         value: '苹果',
-        title: '苹果'
+        title: '苹果',
+        checked: true
       },
       {
         value: '杨桃',
@@ -35,26 +53,25 @@ export default class SelectPage extends wepy.page {
         title: '荔枝'
       }
     ],
-    checkedValue: '苹果',
-    checkedArray: []
+    checkedValue: '苹果'
   }
+
   onLoad() {}
+
   methods = {
     handleRadioChange(arg) {
-      console.log(arg)
       this.checkedValue = arg.value
       this.$apply()
     },
 
     handleCheckboxChange(arg) {
-      this.checkedArray = arg.value
-      this.$apply()
+      // 获取{value:[选中的checkbox的value的数组]}
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 
 .title {

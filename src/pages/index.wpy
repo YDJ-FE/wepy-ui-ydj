@@ -27,6 +27,10 @@
       <ButtonPlain shape="plain">lists列表</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/select" hover-class="none">
+      <ButtonPlain shape="plain">select选择框</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 

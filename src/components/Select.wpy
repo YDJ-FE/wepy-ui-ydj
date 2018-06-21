@@ -1,15 +1,12 @@
 <!-- Select 选择框组件 -->
 <template>
   <view class="ydj-select">
-    <view wx:if="{{type === 'checkbox'}}">
-    <checkbox-group @change="handleCheckboxChange">
+    <checkbox-group wx:if="{{type === 'checkbox'}}" @change="handleCheckboxChange">
       <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
-        <checkbox value="{{item.value}}" checked="{{checkedArray.indexOf(item.value) === -1}}" class="ydj-select__check"/>
-        <radio value="{{item.value}}" checked="{{checkedArray.indexOf(item.value) === -1}}" color="#FD7598" class="ydj-select__radio-check"/>
+        <checkbox value="{{item.value}}" checked="{{item.checked}}" class="ydj-select__check" />
         <view class="ydj-select__title">{{item.title}}</view>
       </label>
     </checkbox-group>
-    </view>
     <radio-group wx:else @change="handleRadioChange">
       <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
         <radio value="{{item.value}}" checked="{{item.value === checkedValue}}" class="ydj-select__radio"/>
@@ -31,26 +28,15 @@ export default class Select extends wepy.component {
     dataList: {
       type: Array
     },
-    checkedArray: {
-      type: Array,
-      default: []
-    },
     checkedValue: {
       type: [String],
       default: ''
     }
   }
 
-  data = {}
-
-  onLoad() {
-    console.log(this.checkedArray.indexOf('苹果'))
-  }
-
   methods = {
     handleCheckboxChange(e) {
       const detail = e.detail
-      console.log(detail)
       this.$emit('checkboxChange', detail)
     },
 
@@ -62,7 +48,7 @@ export default class Select extends wepy.component {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 
 .ydj-select {
@@ -91,13 +77,23 @@ export default class Select extends wepy.component {
     @include ydj-overflow-ellipsis;
   }
 
-  &__check {
+  .wx-checkbox-input {
     display: none;
   }
 
-  &__radio-check {
-    display: inline-flex;
+  &__check {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
     margin-right: 30rpx;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+  }
+
+  &__check[checked] {
+    border-color: #fd7598;
+    background: #fd7598 url('http://onx3fp6gi.bkt.clouddn.com/success.png');
+    background-size: 100% 100%;
   }
 
   &__radio {
