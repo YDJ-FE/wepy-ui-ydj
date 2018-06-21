@@ -1,0 +1,254 @@
+<!-- 消息弹出框 -->
+<template>
+  <view class="ydj-messageBox" wx:if="{{show}}">
+    <view class="ydj-messageBox_wrap animated {{animated?animated:''}}">
+        <view class="ydj-messageBox_title" wx:if="{{title!=''}}">{{title}}</view>
+        <view class="ydj-messageBox_img">
+          <image src="{{image}}" wx:if="{{image!=''}}" />
+        </view>
+        <view class="ydj-messageBox_input" wx:if="{{inputShow}}">
+          <input
+            value="{{inputValue}}"
+            password="{{inputPassword}}" 
+            type="{{inputType}}"
+            placeholder="{{inputPlaceholder}}"
+            bindconfirm="bindconfirm"
+            @blur="handleInput"
+          />
+        </view>
+        <view class="ydj-messageBox_content {{title!=''?'ydj-font-color':'ydj-sfont-color'}}" wx:if="{{content!=''}}">{{content}}</view>
+        <view class="ydj-messageBox_btns">
+          <view class="ydj-box_btn ydj-cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
+          <view class="ydj-box_btn ydj-sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
+        </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Input from './Input'
+
+export default class MessageBox extends wepy.component {
+  config = {}
+  props = {
+    show: {
+      // 是否显示弹框
+      type: Boolean,
+      default: false,
+      twoWay: true
+    },
+    animated: {
+      type: String,
+      defualt: ''
+    },
+    title: {
+      // 弹框标题
+      type: String,
+      default: ''
+    },
+    content: {
+      // 弹框内容
+      type: String,
+      default: ''
+    },
+    image: {
+      // 图片
+      type: String,
+      default: ''
+    },
+    cancelColor: {
+      // 取消按钮颜色
+      type: String,
+      default: '#666666'
+    },
+    cancelTxt: {
+      // 取消按钮文本
+      type: String,
+      default: '取消'
+    },
+    cancelShow: {
+      // 取消按钮显隐
+      type: Boolean,
+      default: true
+    },
+    cancelCallback: {
+      // 取消按钮回调
+      type: Boolean,
+      default: true,
+      twoWay: true
+    },
+    successColor: {
+      // 确定按钮颜色
+      type: Boolean,
+      default: '#fd7598'
+    },
+    successTxt: {
+      // 确定按钮文本
+      type: Boolean,
+      default: '确定'
+    },
+    successCallback: {
+      // 成功回调
+      type: Boolean,
+      default: true,
+      twoWay: true
+    },
+    inputShow: {
+      // 是否显示输入框
+      type: Boolean,
+      default: false
+    },
+    inputValue: {
+      // 输入框的值
+      type: [Number, String],
+      default: '',
+      twoWay: true
+    },
+    inputType: {
+      // 输入框类型
+      type: String,
+      default: 'text'
+    },
+    inputPassword: {
+      // 是否密码格式
+      type: Boolean,
+      default: false
+    },
+    inputPlaceholder: {
+      // 输入框提示
+      type: String,
+      default: '请输入内容'
+    },
+    inputBindconfirm: {
+      // 是否回车确定发送
+      type: Boolean,
+      default: false
+    }
+  }
+  data = {}
+
+  watch = {}
+
+  methods = {
+    handleClick(callback) {
+      this.show = false
+      this[callback] = true
+      setTimeout(() => {
+        this[callback] = false
+      }, 300)
+    },
+    bindconfirm(e) {
+      if (this.inputBindconfirm) {
+        const detail = e.detail.value
+        this.inputValue = detail
+      }
+    },
+    handleInput(e) {
+      const detail = e.detail.value
+      this.inputValue = detail
+    }
+  }
+  onLoad() {
+    if (this.animated) {
+      this.fadeIn = this.animatedName
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+.ydj-messageBox {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  &_wrap {
+    width: 70%;
+    padding-top: 30rpx;
+    background-color: #fff;
+    border-radius: 12rpx;
+    overflow: hidden;
+    position: relative;
+  }
+  &_title {
+    font-family: PingFangSC-Regular;
+    font-size: 36rpx;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 20rpx;
+    padding: 0 30rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  &_content {
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    color: $ydj-text-third;
+    letter-spacing: 0;
+    text-align: center;
+    padding: 0 30rpx;
+  }
+  &_img {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20rpx;
+    image {
+      width: 200rpx;
+      height: 200rpx;
+      border-radius: 8rpx;
+    }
+  }
+  &_input {
+    border: 1px solid $ydj-text-fifth;
+    margin: 0 30rpx 20rpx 30rpx;
+    padding: 0 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 8rpx;
+    input {
+      width: 100%;
+      height: 100%;
+      font-size: 30rpx;
+      text-align: center;
+    }
+  }
+  &_btns {
+    margin-top: 30rpx;
+    border-top: 1px solid $ydj-line;
+    display: flex;
+    font-family: PingFangSC-Regular;
+    letter-spacing: 0;
+    text-align: center;
+    .ydj-box_btn {
+      flex: 1;
+      font-size: 32rpx;
+      height: 100rpx;
+      line-height: 100rpx;
+    }
+    .ydj-cancel {
+      letter-spacing: 0;
+      border-right: 1px solid $ydj-line;
+    }
+    .ydj-sure {
+      letter-spacing: 0;
+    }
+  }
+}
+.ydj-font-color {
+  color: $ydj-text-third;
+}
+.ydj-sfont-color {
+  color: #333;
+}
+</style>
