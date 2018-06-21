@@ -1,16 +1,16 @@
 <!-- Message页面 -->
 <template>
-  <view class="message-page">
-    <MessageBox
-       :show.sync="showMessageBox"
-       :title.sync="messageBoxTitle"
-       :content.sync="messageBoxContent"
-       :image.sync="messageImage"
+  <view class="dialog-page">
+    <Dialog
+       :show.sync="showDialog"
+       :title.sync="dialogTitle"
+       :content.sync="dialogContent"
+       :image.sync="dialogImage"
        :inputShow.sync="inputShow"
        :cancelCallback.sync="cancelCallback"
        :successCallback.sync="successCallback"
        :animated="animated"
-    ></MessageBox>
+    ></Dialog>
     <DefaultButton1 class="btn" @tap.user="handleDefault" shape="plain">有标题</DefaultButton1>
     <DefaultButton2 class="btn" @tap.user="handleMain" shape="plain">没有标题提示</DefaultButton2>
     <DefaultButton3 class="btn" @tap.user="handleNoContent" shape="plain">没有内容</DefaultButton3>
@@ -21,15 +21,15 @@
 </template>
 <script>
 import wepy from 'wepy'
-import MessageBox from '../components/MessageBox'
+import Dialog from '../components/Dialog'
 import Button from '../components/Button'
 
-export default class MessageBoxPage extends wepy.page {
+export default class DialogPage extends wepy.page {
   config = {
     navigationBarTitleText: '信息弹框'
   }
   components = {
-    MessageBox,
+    Dialog,
     DefaultButton1: Button,
     DefaultButton2: Button,
     DefaultButton3: Button,
@@ -39,9 +39,9 @@ export default class MessageBoxPage extends wepy.page {
   }
   props = {}
   data = {
-    showMessageBox: false,
-    messageBoxTitle: '测试信息弹框标题',
-    messageBoxContent: '测试信息弹框内容',
+    showDialog: false,
+    dialogTitle: '测试信息弹框标题',
+    dialogContent: '测试信息弹框内容',
     cancelShow: true,
     // cancelBtn: {
     //   show: true,
@@ -53,7 +53,7 @@ export default class MessageBoxPage extends wepy.page {
     //   text: '可以哦',
     //   callback: false
     // },
-    messageImage: '',
+    dialogImage: '',
     cancel: false,
     success: false,
     animated: 'flipInX',
@@ -64,53 +64,52 @@ export default class MessageBoxPage extends wepy.page {
   onLoad() {}
   methods = {
     handleDefault() {
-      this.messageBoxTitle = '弹框测试'
-      this.messageBoxContent = '测试信息弹框内容'
-      this.messageImage = ''
+      this.dialogTitle = '弹框测试'
+      this.dialogContent = '测试信息弹框内容'
+      this.dialogImage = ''
       this.inputShow = false
       this.cancelShow = true
-      this.showMessageBox = true
+      this.showDialog = true
     },
     handleMain() {
-      this.messageBoxTitle = ''
-      this.messageBoxContent = '测试信息弹框内容'
+      this.dialogTitle = ''
+      this.dialogContent = '测试信息弹框内容'
       this.inputShow = false
-      this.showMessageBox = true
+      this.showDialog = true
     },
     handleNoContent() {
-      this.messageBoxTitle = '弹框测试'
+      this.dialogTitle = '弹框测试'
       this.cancelShow = true
-      this.messageBoxContent = ''
-      this.messageImage = ''
+      this.dialogContent = ''
+      this.dialogImage = ''
       this.inputShow = false
-      this.showMessageBox = true
+      this.showDialog = true
     },
     handleInput() {
-      this.messageImage = ''
+      this.dialogImage = ''
       this.cancelShow = true
-      this.messageBoxTitle = '带输入框信息弹框'
-      this.messageBoxContent = '测试信息弹框内容'
+      this.dialogTitle = '带输入框信息弹框'
+      this.dialogContent = '测试信息弹框内容'
       this.inputShow = true
-      this.showMessageBox = true
+      this.showDialog = true
     },
     handleImage() {
-      this.messageBoxTitle = '弹框测试'
+      this.dialogTitle = '弹框测试'
       this.cancelShow = true
-      this.messageBoxContent = '测试信息弹框内容'
+      this.dialogContent = '测试信息弹框内容'
       this.inputShow = false
       this.cancelShow = true
-      this.messageImage =
+      this.dialogImage =
         'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg'
-      this.showMessageBox = true
+      this.showDialog = true
     },
     handleNoCancel() {
-      this.messageBoxTitle = '弹框测试'
+      this.dialogTitle = '弹框测试'
       this.cancelShow = false
-      this.showMessageBox = true
+      this.showDialog = true
     }
   }
   watch = {
-    showMessageBox() {},
     cancelCallback() {
       console.log('cancelBtn', this.cancelCallback)
     },
@@ -122,7 +121,7 @@ export default class MessageBoxPage extends wepy.page {
 </script>
 
 <style lang="scss">
-.message-page {
+.dialog-page {
   padding-top: 200rpx;
 }
 .btn {

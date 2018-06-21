@@ -1,12 +1,12 @@
 <!-- 消息弹出框 -->
 <template>
-  <view class="ydj-messageBox" wx:if="{{show}}">
-    <view class="ydj-messageBox_wrap animated {{animated?animated:''}}">
-        <view class="ydj-messageBox_title" wx:if="{{title!=''}}">{{title}}</view>
-        <view class="ydj-messageBox_img">
+  <view class="ydj-dialog" wx:if="{{show}}">
+    <view class="ydj-dialog_wrap animated {{animated?animated:''}}">
+        <view class="ydj-dialog_title" wx:if="{{title!=''}}">{{title}}</view>
+        <view class="ydj-dialog_img">
           <image src="{{image}}" wx:if="{{image!=''}}" />
         </view>
-        <view class="ydj-messageBox_input" wx:if="{{inputShow}}">
+        <view class="ydj-dialog_input" wx:if="{{inputShow}}">
           <input
             value="{{inputValue}}"
             password="{{inputPassword}}" 
@@ -16,8 +16,8 @@
             @blur="handleInput"
           />
         </view>
-        <view class="ydj-messageBox_content {{title!=''?'ydj-font-color':'ydj-sfont-color'}}" wx:if="{{content!=''}}">{{content}}</view>
-        <view class="ydj-messageBox_btns">
+        <view class="ydj-dialog_content {{title!=''?'ydj-font-color':'ydj-sfont-color'}}" wx:if="{{content!=''}}">{{content}}</view>
+        <view class="ydj-dialog_btns">
           <view class="ydj-box_btn ydj-cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
           <view class="ydj-box_btn ydj-sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
         </view>
@@ -26,9 +26,8 @@
 </template>
 <script>
 import wepy from 'wepy'
-import Input from './Input'
 
-export default class MessageBox extends wepy.component {
+export default class dialog extends wepy.component {
   config = {}
   props = {
     show: {
@@ -158,7 +157,7 @@ export default class MessageBox extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-.ydj-messageBox {
+.ydj-dialog {
   width: 100%;
   height: 100%;
   position: fixed;
