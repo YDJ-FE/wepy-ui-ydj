@@ -16,7 +16,7 @@
       placeholder-class="ydj-input__placeholder"
     />
     <view wx:else class="ydj-input__item {{borderBottom ? 'ydj-input__border-bottom' : ''}} ">
-      <label class="ydj-input__label {{disabled ? 'ydj-input__color-fifth' : ''}}">{{title}}</label>
+      <label wx:if="{{title}}" class="ydj-input__label {{disabled ? 'ydj-input__color-fifth' : ''}}">{{title}}</label>
       <input
         type="{{type}}"
         password="{{password}}"
@@ -51,7 +51,7 @@ export default class Input extends wepy.component {
     },
     title: {
       type: String,
-      default: '输入标题'
+      default: ''
     },
     value: {
       type: String
