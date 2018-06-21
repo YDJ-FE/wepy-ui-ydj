@@ -4,7 +4,7 @@
 | ------------ | --------------------------------------- | -------------- | ---------------------------------------- | ------------ | ------------------- |
 | type         | 控制 输入框类型 的变量                  | string         | 'textarea' 文本域, 'number' 数字输入键盘 | 'text'       | -                   |
 | sendCode     | 控制 验证码按钮显隐 的变量              | boolean        | -                                        | false        | type 值非'textarea' |
-| title        | 输入框前面的标题                        | string         | -                                        | '输入标题'   | type 值非'textarea' |
+| title        | 输入框前面的标题                        | string         | -                                        | -            | type 值非'textarea' |
 | value        | 输入框的初始内容                        | string         | -                                        | -            | -                   |
 | placeholder  | 输入框为空时占位符                      | string         | -                                        | '输入提示'   | -                   |
 | maxlength    | 最大输入长度                            | number, string | -                                        | 140          | -                   |
