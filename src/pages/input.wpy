@@ -5,7 +5,8 @@
     <InputName title="姓名" placeholder="请输入姓名" focus="{{true}}" :borderBottom="isTrue" />
     <InputProvince title="所在地区" value="广东番禺" placeholder="请输入所在地区" :borderBottom="isTrue"/>
     <InputAdd title="详细地址" placeholder="请输入详细地址" :borderBottom="isTrue" />
-    <InputInfo title="用户信息更改" placeholder="不支持更改" :disabled="isTrue" />
+    <InputInfo title="用户信息更改" placeholder="不支持更改" :disabled="isTrue" :borderBottom="isTrue" />
+    <InputDefault placeholder="请输入备注" />
     <view class="title">手机号码验证框</view>
     <InputPhone title="手机号码" type="number" placeholder="请输入手机号码"  maxlength="11" :borderBottom="isTrue" />
     <InputPassword title="密码" placeholder="请输入密码" :password="isTrue" :borderBottom="isTrue"/>
@@ -25,6 +26,7 @@ export default class InputPage extends wepy.page {
   }
 
   components = {
+    InputDefault: Input,
     InputName: Input,
     InputProvince: Input,
     InputAdd: Input,
