@@ -1,0 +1,63 @@
+<!-- Select 页面 -->
+<template>
+  <view>
+    <view class="title">单项选择</view>
+    <SelectRadio :dataList="dataList" :checkedValue.sync="checkedValue" @radioChange.user="handleRadioChange"></SelectRadio>
+    <view class="title">多项选择</view>
+    <SelectCheck type="checkbox" :dataList="dataList" :checkedArray.sync="checkedArray" @checkboxChange.user="handleCheckboxChange"></SelectCheck>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Select from '../components/Select'
+
+export default class SelectPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '选择框'
+  }
+  props = {}
+  components = {
+    SelectRadio: Select,
+    SelectCheck: Select
+  }
+  data = {
+    dataList: [
+      {
+        value: '苹果',
+        title: '苹果'
+      },
+      {
+        value: '杨桃',
+        title: '杨桃'
+      },
+      {
+        value: '荔枝',
+        title: '荔枝'
+      }
+    ],
+    checkedValue: '苹果',
+    checkedArray: []
+  }
+  onLoad() {}
+  methods = {
+    handleRadioChange(arg) {
+      console.log(arg)
+      this.checkedValue = arg.value
+      this.$apply()
+    },
+
+    handleCheckboxChange(arg) {
+      this.checkedArray = arg.value
+      this.$apply()
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+
+.title {
+  @include ydj-title;
+}
+</style>

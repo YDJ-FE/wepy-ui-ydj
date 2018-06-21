@@ -1,0 +1,111 @@
+<!-- Select 选择框组件 -->
+<template>
+  <view class="ydj-select">
+    <view wx:if="{{type === 'checkbox'}}">
+    <checkbox-group @change="handleCheckboxChange">
+      <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
+        <checkbox value="{{item.value}}" checked="{{checkedArray.indexOf(item.value) === -1}}" class="ydj-select__check"/>
+        <radio value="{{item.value}}" checked="{{checkedArray.indexOf(item.value) === -1}}" color="#FD7598" class="ydj-select__radio-check"/>
+        <view class="ydj-select__title">{{item.title}}</view>
+      </label>
+    </checkbox-group>
+    </view>
+    <radio-group wx:else @change="handleRadioChange">
+      <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
+        <radio value="{{item.value}}" checked="{{item.value === checkedValue}}" class="ydj-select__radio"/>
+        <view class="ydj-select__title">{{item.title}}</view>
+        <i wx:if="{{item.value === checkedValue}}" class="ydj-iconfont ydj-iconfont-checkmark ydj-select__icon"></i>
+      </label>
+    </radio-group>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Select extends wepy.component {
+  props = {
+    type: {
+      type: String
+    },
+    dataList: {
+      type: Array
+    },
+    checkedArray: {
+      type: Array,
+      default: []
+    },
+    checkedValue: {
+      type: [String],
+      default: ''
+    }
+  }
+
+  data = {}
+
+  onLoad() {
+    console.log(this.checkedArray.indexOf('苹果'))
+  }
+
+  methods = {
+    handleCheckboxChange(e) {
+      const detail = e.detail
+      console.log(detail)
+      this.$emit('checkboxChange', detail)
+    },
+
+    handleRadioChange(e) {
+      const detail = e.detail
+      this.$emit('radioChange', detail)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+
+.ydj-select {
+  box-sizing: border-box;
+  padding-left: 28rpx;
+  background: #fff;
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 93rpx;
+    padding-right: 28rpx;
+    border-bottom: 1px solid $ydj-line;
+    box-sizing: border-box;
+    &:last-child {
+      border: none;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    font-size: 32rpx;
+    color: $ydj-text-first;
+    @include ydj-overflow-ellipsis;
+  }
+
+  &__check {
+    display: none;
+  }
+
+  &__radio-check {
+    display: inline-flex;
+    margin-right: 30rpx;
+  }
+
+  &__radio {
+    display: none;
+  }
+
+  &__icon {
+    color: #4a90e2;
+  }
+}
+</style>
