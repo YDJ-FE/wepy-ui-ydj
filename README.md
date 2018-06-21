@@ -1,7 +1,7 @@
 ### 伊的家公用组件库
 
 - [ ] Button 组件
-- [ ] Dialog 组件
+- [x] ~~_[Dialog 组件](./docs/dialog.md)_~ [2018-06-21]
 - [x] ~~_[Message 组件](./docs/message.md)_~~ [2018-06-12]
 - [x] ~~_[Input 组件](./docs/input.md)_~~ [2018-06-13]
 - [x] ~~[_Toast 组件_](./docs/toast.md)~~ [2018-06-14]
