@@ -5,6 +5,8 @@
 - [x] ~~_[Message 组件](./docs/message.md)_~~ [2018-06-12]
 - [x] ~~_[Input 组件](./docs/input.md)_~~ [2018-06-13]
 - [x] ~~[_Toast 组件_](./docs/toast.md)~~ [2018-06-14]
+- [x] ~~[_Swiper 组件_](./docs/swiper.md)~~ [2018-06-16]
+- [x] ~~[_List 组件_](./docs/list.md)~~ [2018-06-20]
 
 #### 线上二维码
 

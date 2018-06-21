@@ -1,4 +1,4 @@
-<!-- 图片轮播组件 -->
+<!-- Swiper 图片轮播组件 -->
 <template>
   <swiper
     autoplay="{{autoplay}}"
