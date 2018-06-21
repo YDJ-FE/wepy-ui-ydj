@@ -8,7 +8,7 @@
     </navigator>
 
     <navigator class="page-btn" url="/pages/message" hover-class="none">
-      <ButtonPlain shape="plain">Message弹出框</ButtonPlain>
+      <ButtonPlain shape="plain">Message信息提示</ButtonPlain>
     </navigator>
 
     <navigator class="page-btn" url="/pages/toast" hover-class="none">
@@ -29,6 +29,9 @@
 
     <navigator class="page-btn" url="/pages/select" hover-class="none">
       <ButtonPlain shape="plain">select选择框</ButtonPlain>
+
+    <navigator class="page-btn" url="/pages/messageBox" hover-class="none">
+      <ButtonPlain shape="plain">messageBox信息弹框</ButtonPlain>
     </navigator>
 
   </view>

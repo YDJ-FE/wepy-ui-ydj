@@ -1,0 +1,130 @@
+<!-- Message页面 -->
+<template>
+  <view class="dialog-page">
+    <Dialog
+       :show.sync="showDialog"
+       :title.sync="dialogTitle"
+       :content.sync="dialogContent"
+       :image.sync="dialogImage"
+       :inputShow.sync="inputShow"
+       :cancelCallback.sync="cancelCallback"
+       :successCallback.sync="successCallback"
+       :animated="animated"
+    ></Dialog>
+    <DefaultButton1 class="btn" @tap.user="handleDefault" shape="plain">有标题</DefaultButton1>
+    <DefaultButton2 class="btn" @tap.user="handleMain" shape="plain">没有标题提示</DefaultButton2>
+    <DefaultButton3 class="btn" @tap.user="handleNoContent" shape="plain">没有内容</DefaultButton3>
+    <DefaultButton4 class="btn" @tap.user="handleInput" shape="plain">有输入框</DefaultButton4>
+    <DefaultButton5 class="btn" @tap.user="handleImage" shape="plain">有图片</DefaultButton5>
+    <DefaultButton6 class="btn" @tap.user="handleNoCancel" shape="plain">没取消按钮</DefaultButton6>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Dialog from '../components/Dialog'
+import Button from '../components/Button'
+
+export default class DialogPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '信息弹框'
+  }
+  components = {
+    Dialog,
+    DefaultButton1: Button,
+    DefaultButton2: Button,
+    DefaultButton3: Button,
+    DefaultButton4: Button,
+    DefaultButton5: Button,
+    DefaultButton6: Button
+  }
+  props = {}
+  data = {
+    showDialog: false,
+    dialogTitle: '测试信息弹框标题',
+    dialogContent: '测试信息弹框内容',
+    cancelShow: true,
+    // cancelBtn: {
+    //   show: true,
+    //   color: '',
+    //   text: '关闭',
+    //   callback: false
+    // },
+    // successBtn: {
+    //   text: '可以哦',
+    //   callback: false
+    // },
+    dialogImage: '',
+    cancel: false,
+    success: false,
+    animated: 'flipInX',
+    cancelCallback: false,
+    successCallback: false,
+    inputShow: false
+  }
+  onLoad() {}
+  methods = {
+    handleDefault() {
+      this.dialogTitle = '弹框测试'
+      this.dialogContent = '测试信息弹框内容'
+      this.dialogImage = ''
+      this.inputShow = false
+      this.cancelShow = true
+      this.showDialog = true
+    },
+    handleMain() {
+      this.dialogTitle = ''
+      this.dialogContent = '测试信息弹框内容'
+      this.inputShow = false
+      this.showDialog = true
+    },
+    handleNoContent() {
+      this.dialogTitle = '弹框测试'
+      this.cancelShow = true
+      this.dialogContent = ''
+      this.dialogImage = ''
+      this.inputShow = false
+      this.showDialog = true
+    },
+    handleInput() {
+      this.dialogImage = ''
+      this.cancelShow = true
+      this.dialogTitle = '带输入框信息弹框'
+      this.dialogContent = '测试信息弹框内容'
+      this.inputShow = true
+      this.showDialog = true
+    },
+    handleImage() {
+      this.dialogTitle = '弹框测试'
+      this.cancelShow = true
+      this.dialogContent = '测试信息弹框内容'
+      this.inputShow = false
+      this.cancelShow = true
+      this.dialogImage =
+        'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg'
+      this.showDialog = true
+    },
+    handleNoCancel() {
+      this.dialogTitle = '弹框测试'
+      this.cancelShow = false
+      this.showDialog = true
+    }
+  }
+  watch = {
+    cancelCallback() {
+      console.log('cancelBtn', this.cancelCallback)
+    },
+    successCallback() {
+      console.log('successBtn', this.successCallback)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.dialog-page {
+  padding-top: 200rpx;
+}
+.btn {
+  margin-bottom: 20rpx;
+}
+</style>
