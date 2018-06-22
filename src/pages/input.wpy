@@ -3,7 +3,7 @@
   <view class="input">
     <view class="title">基础用法</view>
     <InputName title="姓名" placeholder="请输入姓名" focus="{{true}}" :borderBottom="isTrue" />
-    <InputProvince title="所在地区" value="广东番禺" placeholder="请输入所在地区" :borderBottom="isTrue"/>
+    <InputProvince title="所在地区" :value.sync="val" placeholder="请输入所在地区" :isCancelBtnShow="isTrue" :borderBottom="isTrue"/>
     <InputAdd title="详细地址" placeholder="请输入详细地址" :borderBottom="isTrue" />
     <InputInfo title="用户信息更改" placeholder="不支持更改" :disabled="isTrue" :borderBottom="isTrue" />
     <InputDefault placeholder="请输入备注" />
@@ -38,7 +38,8 @@ export default class InputPage extends wepy.page {
   }
 
   data = {
-    isTrue: true
+    isTrue: true,
+    val: '广东番禺'
   }
 
   onLoad() {}
