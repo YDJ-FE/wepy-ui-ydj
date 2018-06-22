@@ -6,6 +6,7 @@
        :title.sync="dialogTitle"
        :content.sync="dialogContent"
        :image.sync="dialogImage"
+       :cancelShow.sync="cancelShow"
        :inputShow.sync="inputShow"
        :cancelCallback.sync="cancelCallback"
        :successCallback.sync="successCallback"
