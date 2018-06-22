@@ -19,7 +19,7 @@
       <view wx:if="{{isExpand}}" class="ydj-expand" @tap="handleGo">
         <image wx:if="{{expandImgUrl}}" src="{{expandImgUrl}}" class="ydj-list__expand-img" />
         <text wx:if="{{expandText}}" class="ydj-list__expand-info">{{expandText}}</text>
-        <i class="ydj-iconfont ydj-iconfont-arrowRight ydj-list__icon"></i>
+        <i class="ydj-iconfont ydj-iconfont-arrow-right"></i>
       </view>
       <slot name="customize"></slot>
     </view>
@@ -159,11 +159,6 @@ export default class List extends wepy.component {
     padding-right: 20rpx;
   }
 
-  &__icon {
-    color: $ydj-text-third;
-    font-size: 28rpx;
-  }
-
   &__item-shop {
     padding: 30rpx 28rpx 32rpx 0;
   }
@@ -242,6 +237,11 @@ export default class List extends wepy.component {
 
   &__textoverflow {
     @include ydj-overflow-ellipsis;
+  }
+
+  .ydj-iconfont {
+    color: $ydj-text-third;
+    font-size: 28rpx;
   }
 }
 </style>

@@ -11,7 +11,7 @@
       <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
         <radio value="{{item.value}}" checked="{{item.value === checkedValue}}" class="ydj-select__radio"/>
         <view class="ydj-select__title">{{item.title}}</view>
-        <i wx:if="{{item.value === checkedValue}}" class="ydj-iconfont ydj-iconfont-checkmark ydj-select__icon"></i>
+        <i wx:if="{{item.value === checkedValue}}" class="ydj-iconfont ydj-iconfont-check"></i>
       </label>
     </radio-group>
   </view>
@@ -100,7 +100,7 @@ export default class Select extends wepy.component {
     display: none;
   }
 
-  &__icon {
+  .ydj-iconfont {
     color: #4a90e2;
   }
 }

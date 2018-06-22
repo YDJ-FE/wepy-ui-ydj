@@ -39,6 +39,10 @@
       <ButtonPlain shape="plain">card卡片</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/icon" hover-class="none">
+      <ButtonPlain shape="plain">Icon图标</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 

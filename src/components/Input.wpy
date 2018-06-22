@@ -31,7 +31,7 @@
         class="ydj-input__input"
         placeholder-class="ydj-input__placeholder"
       />
-      <i wx:if="{{ isCancelBtnShow && value.length > 0}}" class="ydj-iconfont ydj-iconfont-cancel ydj-input__icon" @tap="handleCancel"></i>
+      <i wx:if="{{ isCancelBtnShow && value.length > 0}}" class="ydj-iconfont ydj-iconfont-cancel" @tap="handleCancel"></i>
       <button wx:if="{{sendCode}}" class="ydj-input__button" @tap="handleSendCode">{{btnCodeTitle}}</button>
     </view>
   </view>
@@ -185,18 +185,18 @@ export default class Input extends wepy.component {
     box-sizing: border-box;
   }
 
-  &__icon {
-    display: inline-block;
-    color: $ydj-text-fifth;
-    padding-right: 28rpx;
-  }
-
   &__border-bottom {
     border-bottom: 1rpx solid $ydj-line;
   }
 
   &__color-fifth {
     color: $ydj-text-fifth;
+  }
+
+  .ydj-iconfont {
+    display: inline-block;
+    color: $ydj-text-fifth;
+    padding-right: 28rpx;
   }
 }
 </style>
