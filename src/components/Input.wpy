@@ -31,6 +31,7 @@
         class="ydj-input__input"
         placeholder-class="ydj-input__placeholder"
       />
+      <i wx:if="{{ isCancelBtnShow && value.length > 0}}" class="ydj-iconfont ydj-iconfont-cancel ydj-input__icon" @tap="handleCancel"></i>
       <button wx:if="{{sendCode}}" class="ydj-input__button" @tap="handleSendCode">{{btnCodeTitle}}</button>
     </view>
   </view>
@@ -54,11 +55,13 @@ export default class Input extends wepy.component {
       default: ''
     },
     value: {
-      type: String
+      type: String,
+      default: '',
+      twoWay: true
     },
     placeholder: {
       type: String,
-      default: '输入提示'
+      default: ''
     },
     maxlength: {
       type: [Number, String],
@@ -67,6 +70,10 @@ export default class Input extends wepy.component {
     disabled: {
       type: Boolean,
       default: false
+    },
+    isCancelBtnShow: {
+      type: Boolean,
+      deafult: false
     },
     focus: {
       type: Boolean,
@@ -90,6 +97,10 @@ export default class Input extends wepy.component {
     }
   }
 
+  watch = {
+    value(o, n) {}
+  }
+
   methods = {
     handleSendCode(e) {
       this.$emit('sendCode')
@@ -97,6 +108,7 @@ export default class Input extends wepy.component {
 
     handleInput(e) {
       const detail = e.detail
+      this.value = detail.value
       this.$emit('input', detail)
     },
 
@@ -108,6 +120,10 @@ export default class Input extends wepy.component {
     handleBlur(e) {
       const detail = e.detail
       this.$emit('blur', detail)
+    },
+
+    handleCancel() {
+      this.value = ''
     }
   }
 }
@@ -167,6 +183,12 @@ export default class Input extends wepy.component {
     padding: 20rpx 25rpx 20rpx 0;
     font-size: 32rpx;
     box-sizing: border-box;
+  }
+
+  &__icon {
+    display: inline-block;
+    color: $ydj-text-fifth;
+    padding-right: 28rpx;
   }
 
   &__border-bottom {
