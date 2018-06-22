@@ -1,0 +1,35 @@
+<!-- Icon 图标 -->
+<template>
+  <i class="ydj-iconfont ydj-iconfont-{{type}}" style="font-size: {{fontSize}}; color: {{color}}" @tap="handleClick"></i>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class Icon extends wepy.component {
+  props = {
+    type: {
+      type: String
+    },
+    fontSize: {
+      type: String
+    },
+    color: {
+      type: String
+    }
+  }
+
+  methods = {
+    handleClick() {
+      this.$emit('click')
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+
+.ydj-iconfont {
+  display: inline-block;
+}
+</style>

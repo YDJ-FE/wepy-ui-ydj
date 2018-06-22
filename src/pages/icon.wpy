@@ -1,0 +1,72 @@
+<!-- Icon 页面 -->
+<template>
+  <view class="container">
+    <repeat wx:for="{{dataList}}" key="index" index="index" item="item">
+      <view class="wrap">
+        <Icon :type="item" fontSize="60rpx" color="#fd7598">
+        <view class="title">{{item}}</view>
+      </view>
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Icon from '../components/Icon'
+
+export default class IconPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '图标'
+  }
+
+  components = {
+    Icon: Icon
+  }
+
+  data = {
+    dataList: [
+      'dot',
+      'user',
+      'user-o',
+      'search',
+      'search-o',
+      'search-om',
+      'shop',
+      'shop-o',
+      'check',
+      'shopbag',
+      'shopbag-o',
+      'arrow-right',
+      'cancel',
+      'cancel-o',
+      'check-circle',
+      'warn'
+    ]
+  }
+
+  onLoad() {}
+
+  methods = {}
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+
+.container {
+  overflow: hidden;
+  background: #fff;
+}
+
+.wrap {
+  float: left;
+  width: 33.33%;
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 26rpx;
+  color: $ydj-text-second;
+  line-height: 2;
+}
+</style>

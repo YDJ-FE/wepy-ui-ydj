@@ -2,9 +2,9 @@
 <template>
   <view class="ydj-toast {{positionMap[position]}}" wx:if="{{show}}">
     <view class="ydj-toast__content animated {{animationName}} {{typeMap[type]}}">
-      <i class="ydj-iconfont ydj-iconfont-oksignlarge" wx:if="{{type === 'success'}}"></i>
-      <i class="ydj-iconfont ydj-iconfont-warning" wx:if="{{type === 'warning'}}"></i>
-      <i class="ydj-iconfont ydj-iconfont-iccancel" wx:if="{{type === 'error'}}"></i>
+      <i class="ydj-iconfont ydj-iconfont-check-circle" wx:if="{{type === 'success'}}"></i>
+      <i class="ydj-iconfont ydj-iconfont-warn" wx:if="{{type === 'warning'}}"></i>
+      <i class="ydj-iconfont ydj-iconfont-cancel-o" wx:if="{{type === 'error'}}"></i>
       <view class="ydj-toast__content__text">
         {{content}}
       </view>
