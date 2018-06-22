@@ -34,6 +34,10 @@
       <ButtonPlain shape="plain">messageBox信息弹框</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/card" hover-class="none">
+      <ButtonPlain shape="plain">card卡片</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 
