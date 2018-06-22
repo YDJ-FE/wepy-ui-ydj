@@ -29,9 +29,14 @@
 
     <navigator class="page-btn" url="/pages/select" hover-class="none">
       <ButtonPlain shape="plain">select选择框</ButtonPlain>
+    </navigator>
 
-    <navigator class="page-btn" url="/pages/messageBox" hover-class="none">
-      <ButtonPlain shape="plain">messageBox信息弹框</ButtonPlain>
+    <navigator class="page-btn" url="/pages/dialog" hover-class="none">
+      <ButtonPlain shape="plain">dialog信息弹框</ButtonPlain>
+    </navigator>
+
+    <navigator class="page-btn" url="/pages/card" hover-class="none">
+      <ButtonPlain shape="plain">card卡片</ButtonPlain>
     </navigator>
 
   </view>

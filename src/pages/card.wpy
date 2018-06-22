@@ -1,0 +1,36 @@
+<!-- Card 页面 -->
+<template>
+  <view>
+    <view class="title">基本用法</view>
+    <Card imgUrl="http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg" title="标题标题标题标题标题标题标题标题标题标题标题标题" price="600.00" desc="文字描述"/>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import Card from '../components/Card'
+
+export default class CardPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '卡片'
+  }
+
+  components = {
+    Card: Card
+  }
+
+  data = {}
+
+  onLoad() {}
+
+  methods = {}
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/var';
+
+.title {
+  @include ydj-title;
+}
+</style>

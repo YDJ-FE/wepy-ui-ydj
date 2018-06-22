@@ -9,7 +9,7 @@
     <ListImageDesc title="标题文字" desc="描述信息" :imgUrl="imgUrl" :isExpand="isTrue" class="line" />
     <listDescMulti title="标题文字" :desc="desc" :isMulti="isTrue" />
     <view class="title">自定义右侧内容</view>
-    <repeat for="{{list}}" key="index" index="index" item="item">
+    <repeat for="{{dataList}}" key="index" index="index" item="item">
       <listCustomize :title="item.title" :desc="item.desc" :borderBottom="item.borderBottom">
         <view slot="customize" class="num">
           +{{item.num}}
@@ -49,7 +49,7 @@ export default class ListsPage extends wepy.page {
       '文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题',
     desc:
       '文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明',
-    list: [
+    dataList: [
       {
         title: '2018新春互动活动',
         desc: '2018-02-15',
