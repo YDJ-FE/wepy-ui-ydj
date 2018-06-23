@@ -7,9 +7,9 @@
 - [x] ~~[_Toast 组件_](./docs/toast.md)~~ [2018-06-14]
 - [x] ~~[_Swiper 组件_](./docs/swiper.md)~~ [2018-06-16]
 - [x] ~~[_List 组件_](./docs/list.md)~~ [2018-06-20]
-- [x] ~~[_Select 组件_](./docs/list.md)~~ [2018-06-21]
-- [x] ~~[_Card 组件_](./docs/list.md)~~ [2018-06-22]
-- [x] ~~[Icon 组件\_](./docs/list.md)~~ [2018-06-22]
+- [x] ~~[_Select 组件_](./docs/select.md)~~ [2018-06-21]
+- [x] ~~[_Card 组件_](./docs/card.md)~~ [2018-06-22]
+- [x] ~~[Icon 组件\_](./docs/icon.md)~~ [2018-06-22]
 
 #### 线上二维码
 
