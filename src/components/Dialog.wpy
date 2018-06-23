@@ -1,10 +1,10 @@
 <!-- 消息弹出框 -->
 <template>
   <view class="ydj-dialog" wx:if="{{show}}">
-    <view class="ydj-dialog__wrap animated {{animated ? animated: ''}}">
-        <view class="ydj-dialog__title" wx:if="{{title!=''}}">{{title}}</view>
+    <view class="ydj-dialog__wrap animated {{animated ? animated : ''}}">
+        <view class="ydj-dialog__title" wx:if="{{title !=''}}">{{title}}</view>
         <view class="ydj-dialog__img">
-          <image src="{{image}}" wx:if="{{image!=''}}" />
+          <image src="{{image}}" wx:if="{{image != ''}}" />
         </view>
         <view class="ydj-dialog__input" wx:if="{{inputShow}}">
           <input
@@ -16,7 +16,7 @@
             @blur="handleInput"
           />
         </view>
-        <view class="ydj-dialog__content {{title!=''?'ydj-font-color':'ydj-sfont-color'}}" wx:if="{{content!=''}}">{{content}}</view>
+        <view class="ydj-dialog__content {{title != '' ? 'ydj-font-color' : 'ydj-sfont-color'}}" wx:if="{{content != ''}}">{{content}}</view>
         <view class="ydj-dialog__btns">
           <view class="ydj-box__btn ydj-cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
           <view class="ydj-box__btn ydj-sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
