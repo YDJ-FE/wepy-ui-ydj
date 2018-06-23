@@ -16,10 +16,10 @@
             @blur="handleInput"
           />
         </view>
-        <view class="ydj-dialog__content {{title != '' ? 'ydj-font-color' : 'ydj-sfont-color'}}" wx:if="{{content != ''}}">{{content}}</view>
+        <view class="ydj-dialog__content {{title != '' ? 'ydj-dialog__font' : 'ydj-dialog__sfont'}}" wx:if="{{content != ''}}">{{content}}</view>
         <view class="ydj-dialog__btns">
-          <view class="ydj-box__btn ydj-cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
-          <view class="ydj-box__btn ydj-sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
+          <view class="ydj-dialog__btn ydj-dialog__cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
+          <view class="ydj-dialog__btn ydj-dialog__sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
         </view>
     </view>
   </view>
@@ -229,25 +229,25 @@ export default class dialog extends wepy.component {
     font-family: PingFangSC-Regular;
     letter-spacing: 0;
     text-align: center;
-    .ydj-box__btn {
+    .ydj-dialog__btn {
       flex: 1;
       font-size: 32rpx;
       height: 100rpx;
       line-height: 100rpx;
     }
-    .ydj-cancel {
+    .ydj-dialog__cancel {
       letter-spacing: 0;
       border-right: 1px solid $ydj-line;
     }
-    .ydj-sure {
+    .ydj-dialog__sure {
       letter-spacing: 0;
     }
   }
-}
-.ydj-font-color {
-  color: $ydj-text-third;
-}
-.ydj-sfont-color {
-  color: #333;
+  .ydj-dialog__font {
+    color: $ydj-text-third;
+  }
+  .ydj-dialog__sfont {
+    color: #333;
+  }
 }
 </style>
