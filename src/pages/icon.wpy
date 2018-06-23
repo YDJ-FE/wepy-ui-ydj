@@ -3,7 +3,7 @@
   <view class="container">
     <repeat wx:for="{{dataList}}" key="index" index="index" item="item">
       <view class="wrap">
-        <Icon :type="item" fontSize="60rpx" color="#fd7598">
+        <Icon :type="item" fontSize="60rpx" color="#fd7598" />
         <view class="title">{{item}}</view>
       </view>
     </repeat>
