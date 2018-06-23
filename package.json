@@ -6,7 +6,13 @@
   "wepy": {
     "./Button": "./src/components/Button.wpy",
     "./Message": "./src/components/Message.wpy",
-    "./Input": "./src/components/Input.wpy"
+    "./Card": "./src/components/Card.wpy",
+    "./Dialog": "./src/components/Dialog.wpy",
+    "./Icon": "./src/components/Icon.wpy",
+    "./Input": "./src/components/Input.wpy",
+    "./Select": "./src/components/Select.wpy",
+    "./Swiper": "./src/components/Swiper.wpy",
+    "./Toast": "./src/components/Toast.wpy"
   },
   "scripts": {
     "dev": "wepy build --watch",

@@ -35,7 +35,7 @@ npm i wepy-cli@alpha -g
 
 ```js
 // 直接引入组件内部库
-import Button from 'wepy-ui-ydj/src/components/Button';
+import Button from 'wepy-ui-ydj/Button';
 
 // 按照wepy文档分配组件别名
 components = {
