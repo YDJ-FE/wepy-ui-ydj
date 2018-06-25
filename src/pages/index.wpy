@@ -43,6 +43,10 @@
       <ButtonPlain shape="plain">Icon图标</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/tab" hover-class="none">
+      <ButtonPlain shape="plain">tab选项卡</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 
