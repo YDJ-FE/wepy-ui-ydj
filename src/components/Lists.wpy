@@ -2,23 +2,23 @@
 <template>
   <view class="ydj-list" @tap="handleClick">
     <view wx:if="{{type === 'shop'}}" class="ydj-list__item-shop {{borderBottom ? 'ydj-list__border-bottom' : ''}}">
-      <image src="{{imgUrl}}" class="ydj-list__img-shop" />
-      <view class="ydj-list__info-shop {{isShopImgLeft ? '' : 'ydj-list__left'}}">
-        <view class="ydj-list__title-shop">{{title}}</view>
-        <view class="ydj-list__price">￥{{price}}</view>
-        <view wx:if="{{shopType === 'text'}}" class="ydj-list__desc-shop">{{desc}}</view>
-        <button wx:elif="{{shopType === 'button'}}" class="ydj-list__button" @tap="handleBuy">{{shopBtnTitle}}</button>
+      <image src="{{imgUrl}}" class="ydj-list__item-shop__img" />
+      <view class="ydj-list__item-shop__info {{isShopImgLeft ? '' : 'ydj-list__left'}}">
+        <view class="ydj-list__item-shop__info__title">{{title}}</view>
+        <view class="ydj-list__item-shop__info__price">￥{{price}}</view>
+        <view wx:if="{{shopType === 'text'}}" class="ydj-list__item-shop__info__desc">{{desc}}</view>
+        <button wx:elif="{{shopType === 'button'}}" class="ydj-list__item-shop__info__button" @tap="handleBuy">{{shopBtnTitle}}</button>
       </view>
     </view>
     <view wx:else class="ydj-list__item {{borderBottom ? 'ydj-list__border-bottom' : ''}}">
-      <image wx:if="{{imgUrl}}" src="{{imgUrl}}" class="ydj-list__img {{desc ? 'ydj-list__img-big' : ''}}" />
-      <view class=" ydj-list__info">
-        <view class="ydj-list__title ydj-list__textoverflow {{imgUrl || isMulti ? 'ydj-list__lineheight-60' : ''}}">{{title}}</view>
-        <view wx:if="{{desc}}" class="ydj-list__desc {{isMulti ? '' : 'ydj-list__textoverflow'}}">{{desc}}</view>
+      <image wx:if="{{imgUrl}}" src="{{imgUrl}}" class="ydj-list__item__img {{desc ? 'ydj-list__item__img-big' : ''}}" />
+      <view class="ydj-list__item__info">
+        <view class="ydj-list__item__info__title ydj-list__textoverflow {{imgUrl || isMulti ? 'ydj-list__lineheight-60' : ''}}">{{title}}</view>
+        <view wx:if="{{desc}}" class="ydj-list__item__info__desc {{isMulti ? '' : 'ydj-list__textoverflow'}}">{{desc}}</view>
       </view>
-      <view wx:if="{{isExpand}}" class="ydj-expand" @tap="handleGo">
-        <image wx:if="{{expandImgUrl}}" src="{{expandImgUrl}}" class="ydj-list__expand-img" />
-        <text wx:if="{{expandText}}" class="ydj-list__expand-info">{{expandText}}</text>
+      <view wx:if="{{isExpand}}" class="ydj-list__item__expand" @tap="handleGo">
+        <image wx:if="{{expandImgUrl}}" src="{{expandImgUrl}}" class="ydj-list__item__expand__img" />
+        <text wx:if="{{expandText}}" class="ydj-list__item__expand__info">{{expandText}}</text>
         <i class="ydj-iconfont ydj-iconfont-arrow-right"></i>
       </view>
       <slot name="customize"></slot>
@@ -115,110 +115,112 @@ export default class List extends wepy.component {
     display: flex;
     align-items: center;
     padding: 16rpx 28rpx 16rpx 0;
-  }
 
-  &__img {
-    width: 58rpx;
-    height: 58rpx;
-    margin-right: 24rpx;
-  }
+    &__img {
+      width: 58rpx;
+      height: 58rpx;
+      margin-right: 24rpx;
+    }
 
-  &__img-big {
-    width: 120rpx;
-    height: 120rpx;
-  }
+    &__img-big {
+      width: 120rpx;
+      height: 120rpx;
+    }
 
-  &__info {
-    flex: 1;
-  }
+    &__info {
+      flex: 1;
 
-  &__title {
-    font-size: 32rpx;
-    line-height: 48rpx;
-    @include ydj-overflow-ellipsis;
-  }
+      &__title {
+        font-size: 32rpx;
+        line-height: 48rpx;
+        @include ydj-overflow-ellipsis;
+      }
 
-  &__desc {
-    font-size: 28rpx;
-    color: $ydj-text-third;
-    line-height: 44rpx;
-  }
+      &__desc {
+        font-size: 28rpx;
+        color: $ydj-text-third;
+        line-height: 44rpx;
+      }
+    }
 
-  &__expand-info {
-    display: inline-block;
-    font-size: 30rpx;
-    color: $ydj-text-third;
-    padding-right: 20rpx;
-  }
+    &__expand {
+      &__img {
+        display: inline-block;
+        vertical-align: middle;
+        width: 44rpx;
+        height: 44rpx;
+        padding-right: 20rpx;
+      }
 
-  &__expand-img {
-    display: inline-block;
-    vertical-align: middle;
-    width: 44rpx;
-    height: 44rpx;
-    padding-right: 20rpx;
+      &__info {
+        display: inline-block;
+        font-size: 30rpx;
+        color: $ydj-text-third;
+        padding-right: 20rpx;
+      }
+    }
   }
 
   &__item-shop {
     padding: 30rpx 28rpx 32rpx 0;
-  }
 
-  &__img-shop {
-    width: 200rpx;
-    height: 200rpx;
-  }
+    &__img {
+      width: 200rpx;
+      height: 200rpx;
+    }
 
-  &__info-shop {
-    float: right;
-    position: relative;
-    width: 450rpx;
-    height: 200rpx;
-  }
+    &__info {
+      float: right;
+      position: relative;
+      width: 450rpx;
+      height: 200rpx;
 
-  &__title-shop {
-    font-size: 32rpx;
-    line-height: 46rpx;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    color: #222;
-  }
+      &__title {
+        font-size: 32rpx;
+        line-height: 46rpx;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        color: #222;
+      }
 
-  &__price {
-    font-size: 32rpx;
-    color: $ydj-secondary-fifth;
-    line-height: 1;
-    margin-top: 10rpx;
-    @include ydj-overflow-ellipsis;
-  }
+      &__price {
+        font-size: 32rpx;
+        color: $ydj-secondary-fifth;
+        line-height: 1;
+        margin-top: 10rpx;
+        @include ydj-overflow-ellipsis;
+      }
 
-  &__desc-shop {
-    position: absolute;
-    left: 0;
-    bottom: 10rpx;
-    font-size: 26rpx;
-    color: $ydj-text-third;
-    line-height: 1;
-    @include ydj-overflow-ellipsis;
-  }
+      &__desc {
+        position: absolute;
+        left: 0;
+        bottom: 10rpx;
+        font-size: 26rpx;
+        color: $ydj-text-third;
+        line-height: 1;
+        @include ydj-overflow-ellipsis;
+      }
 
-  &__button {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 172rpx;
-    height: 56rpx;
-    font-size: 30rpx;
-    padding: 0;
-    margin: 13rpx 0 0;
-    background: $ydj-primary-first;
-    color: #fff;
-    line-height: 56rpx;
-    text-align: center;
+      &__button {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 172rpx;
+        height: 56rpx;
+        font-size: 30rpx;
+        padding: 0;
+        margin: 13rpx 0 0;
+        background: $ydj-primary-first;
+        color: #fff;
+        line-height: 56rpx;
+        text-align: center;
 
-    &::after {
-      border: none;
+        &::after {
+          border: none;
+        }
+      }
     }
   }
 

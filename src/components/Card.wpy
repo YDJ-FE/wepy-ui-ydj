@@ -3,9 +3,9 @@
   <view class="ydj-card" style="width: {{imgWidth}};" @tap="handleClickCard">
     <image src="{{imgUrl}}" mode="scaleToFill	" class="ydj-card__img" style="width: {{imgWidth}}; height: {{imgHeight}};" @tap="handleClickImg"/>
     <view class="ydj-card__info">
-      <view wx:if="{{title}}" class="ydj-card__title">{{title}}</view>
-      <view wx:if="{{price}}" class="ydj-card__price">{{price}}</view>
-      <view wx:if="{{desc}}" class="ydj-card__desc">{{desc}}</view>
+      <view wx:if="{{title}}" class="ydj-card__info__title">{{title}}</view>
+      <view wx:if="{{price}}" class="ydj-card__info__price">{{price}}</view>
+      <view wx:if="{{desc}}" class="ydj-card__info__desc">{{desc}}</view>
     </view>
   </view>
 </template>
@@ -71,35 +71,35 @@ export default class Card extends wepy.component {
   &__info {
     padding: 14rpx 16rpx 22rpx;
     box-sizing: border-box;
-  }
 
-  &__title {
-    font-size: 28rpx;
-    line-height: 36rpx;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    color: $ydj-text-first;
-    margin-bottom: 16rpx;
-  }
-
-  &__price {
-    font-size: 36rpx;
-    color: $ydj-secondary-fifth;
-    line-height: 1;
-    margin-bottom: 16rpx;
-    @include ydj-overflow-ellipsis;
-    &::before {
-      content: '\00A5';
+    &__title {
+      font-size: 28rpx;
+      line-height: 36rpx;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      color: $ydj-text-first;
+      margin-bottom: 16rpx;
     }
-  }
 
-  &__desc {
-    font-size: 24rpx;
-    color: #9b9aaa;
-    line-height: 1;
-    @include ydj-overflow-ellipsis;
+    &__price {
+      font-size: 36rpx;
+      color: $ydj-secondary-fifth;
+      line-height: 1;
+      margin-bottom: 16rpx;
+      @include ydj-overflow-ellipsis;
+      &::before {
+        content: '\00A5';
+      }
+    }
+
+    &__desc {
+      font-size: 24rpx;
+      color: #9b9aaa;
+      line-height: 1;
+      @include ydj-overflow-ellipsis;
+    }
   }
 }
 </style>

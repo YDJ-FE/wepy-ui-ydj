@@ -3,14 +3,14 @@
   <view class="ydj-select">
     <checkbox-group wx:if="{{type === 'checkbox'}}" @change="handleCheckboxChange">
       <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
-        <checkbox value="{{item.value}}" checked="{{item.checked}}" class="ydj-select__check" />
-        <view class="ydj-select__title">{{item.title}}</view>
+        <checkbox value="{{item.value}}" checked="{{item.checked}}" class="ydj-select__label__check" />
+        <view class="ydj-select__label__title">{{item.title}}</view>
       </label>
     </checkbox-group>
     <radio-group wx:else @change="handleRadioChange">
       <label wx:for="{{dataList}}" wx:key="{{index}}" class="ydj-select__label">
-        <radio value="{{item.value}}" checked="{{item.value === checkedValue}}" class="ydj-select__radio"/>
-        <view class="ydj-select__title">{{item.title}}</view>
+        <radio value="{{item.value}}" checked="{{item.value === checkedValue}}" class="ydj-select__label__radio"/>
+        <view class="ydj-select__label__title">{{item.title}}</view>
         <i wx:if="{{item.value === checkedValue}}" class="ydj-iconfont ydj-iconfont-check"></i>
       </label>
     </radio-group>
@@ -68,35 +68,35 @@ export default class Select extends wepy.component {
     &:last-child {
       border: none;
     }
-  }
 
-  &__title {
-    flex: 1;
-    font-size: 32rpx;
-    color: $ydj-text-first;
-    @include ydj-overflow-ellipsis;
+    &__check {
+      display: inline-block;
+      width: 40rpx;
+      height: 40rpx;
+      margin-right: 30rpx;
+      border-radius: 100%;
+      border: 1px solid #ccc;
+    }
+
+    &__check[checked] {
+      border-color: #fd7598;
+      background: #fd7598 url('http://onx3fp6gi.bkt.clouddn.com/success.png');
+      background-size: 100% 100%;
+    }
+
+    &__title {
+      flex: 1;
+      font-size: 32rpx;
+      color: $ydj-text-first;
+      @include ydj-overflow-ellipsis;
+    }
+
+    &__radio {
+      display: none;
+    }
   }
 
   .wx-checkbox-input {
-    display: none;
-  }
-
-  &__check {
-    display: inline-block;
-    width: 40rpx;
-    height: 40rpx;
-    margin-right: 30rpx;
-    border-radius: 100%;
-    border: 1px solid #ccc;
-  }
-
-  &__check[checked] {
-    border-color: #fd7598;
-    background: #fd7598 url('http://onx3fp6gi.bkt.clouddn.com/success.png');
-    background-size: 100% 100%;
-  }
-
-  &__radio {
     display: none;
   }
 
