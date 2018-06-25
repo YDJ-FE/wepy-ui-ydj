@@ -49,7 +49,7 @@ export default class IconPage extends wepy.page {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 
 .container {

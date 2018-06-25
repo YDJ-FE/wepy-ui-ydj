@@ -1,0 +1,85 @@
+<!-- Tab 页面 -->
+<template>
+  <view>
+    <view class="title">基本用法</view>
+    <Tab :dataList="dataList"></Tab>
+    <view class="title">可滚动 tab</view>
+    <TabScroll :dataList="dataListScroll" :scroll="isTrue"></TabScroll>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import Tab from '../components/Tab'
+
+export default class TabPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '选项卡'
+  }
+
+  components = {
+    Tab: Tab,
+    TabScroll: Tab
+  }
+
+  data = {
+    isTrue: true,
+    dataList: [
+      {
+        title: '选项1',
+        id: '选项1'
+      },
+      {
+        title: '选项2',
+        id: '选项2'
+      },
+      {
+        title: '选项3',
+        id: '选项3'
+      },
+      {
+        title: '选项4',
+        id: '选项4'
+      }
+    ],
+    dataListScroll: [
+      {
+        title: '选项1',
+        id: '选项1'
+      },
+      {
+        title: '选项2',
+        id: '选项2'
+      },
+      {
+        title: '选项3',
+        id: '选项3'
+      },
+      {
+        title: '选项4',
+        id: '选项4'
+      },
+      {
+        title: '选项5',
+        id: '选项5'
+      },
+      {
+        title: '选项6',
+        id: '选项6'
+      }
+    ]
+  }
+
+  onLoad() {}
+
+  methods = {}
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+
+.title {
+  @include ydj-title;
+}
+</style>
