@@ -2,21 +2,21 @@
 <template>
   <view class="ydj-tab ">
     <scroll-view wx:if="{{scroll}}" scroll-x class="ydj-tab__wrap {{fixed ? 'ydj-tab__fixed' : ''}}">
-      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__item" style="width: {{itemWidth}}" @tap="handleTabChange({{item}})">
-        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__title ydj-tab__selected" style="color: {{selectedColor}}">
+      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item" style="width: {{itemWidth}}" @tap="handleTabChange({{item}})">
+        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__wrap__item__title" style="color: {{selectedColor}}">
           {{item.title}}
-          <view class="ydj-tab__line" style="background: {{selectedColor}}"></view>
+          <view class="ydj-tab__wrap__item__title__line" style="background: {{selectedColor}}"></view>
         </view>
-        <view wx:else class="ydj-tab__title">{{item.title}}</view>
+        <view wx:else class="ydj-tab__wrap__item__title">{{item.title}}</view>
       </view>
     </scroll-view>
     <view wx:else class="ydj-tab__wrap {{fixed ? 'ydj-tab__fixed' : ''}}">
-      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__item" @tap="handleTabChange({{item}})">
-        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__title ydj-tab__selected" style="color: {{selectedColor}}">
+      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item" @tap="handleTabChange({{item}})">
+        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__wrap__item__title" style="color: {{selectedColor}}">
           {{item.title}}
-          <view class="ydj-tab__line" style="background: {{selectedColor}}"></view>
+          <view class="ydj-tab__wrap__item__title__line" style="background: {{selectedColor}}"></view>
         </view>
-        <view wx:else class="ydj-tab__title">{{item.title}}</view>
+        <view wx:else class="ydj-tab__wrap__item__title">{{item.title}}</view>
       </view>
     </view>
   </view>
@@ -78,30 +78,30 @@ export default class Tab extends wepy.component {
     white-space: nowrap;
     width: 100%;
     background: #fff;
-  }
 
-  &__item {
-    display: inline-block;
-    flex: 1;
-    font-size: 30rpx;
-    height: 86rpx;
-    line-height: 86rpx;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 0 10rpx;
-  }
+    &__item {
+      display: inline-block;
+      flex: 1;
+      font-size: 30rpx;
+      height: 86rpx;
+      line-height: 86rpx;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 0 10rpx;
 
-  &__title {
-    display: inline-block;
-    position: relative;
-  }
+      &__title {
+        display: inline-block;
+        position: relative;
 
-  &__line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4rpx;
+        &__line {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4rpx;
+        }
+      }
+    }
   }
 
   &__fixed {
