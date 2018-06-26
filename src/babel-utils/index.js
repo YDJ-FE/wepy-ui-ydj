@@ -10,18 +10,20 @@ Object.defineProperty(exports, "__esModule", {
  * @returns {() => void}
  */
 
-var todoFn = exports.todoFn = function todoFn(steps) {
+var todoFn = exports.todoFn = function () {
   var timer = 0;
-  var $steps = steps.slice();
-  var first = $steps.shift();
-  timer = setTimeout(function () {
-    first.cb && first.cb();
-    if ($steps.length) todoFn($steps);
-  }, first.delay);
+  return function (steps) {
+    var $steps = steps.slice();
+    var first = $steps.shift();
+    timer = setTimeout(function () {
+      first.cb && first.cb();
+      if ($steps.length) todoFn($steps);
+    }, first.delay);
 
-  var clearTime = function clearTime() {
-    clearTimeout(timer);
-    timer = 0;
+    var clearTime = function clearTime() {
+      clearTimeout(timer);
+      timer = 0;
+    };
+    return clearTime;
   };
-  return clearTime;
-};
+}();

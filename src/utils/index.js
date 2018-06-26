@@ -5,18 +5,20 @@
  * @returns {() => void}
  */
 
-export const todoFn = steps => {
+export const todoFn = (function() {
   let timer = 0
-  const $steps = steps.slice()
-  const first = $steps.shift()
-  timer = setTimeout(() => {
-    first.cb && first.cb()
-    if ($steps.length) todoFn($steps)
-  }, first.delay)
+  return steps => {
+    const $steps = steps.slice()
+    const first = $steps.shift()
+    timer = setTimeout(() => {
+      first.cb && first.cb()
+      if ($steps.length) todoFn($steps)
+    }, first.delay)
 
-  const clearTime = () => {
-    clearTimeout(timer)
-    timer = 0
+    const clearTime = () => {
+      clearTimeout(timer)
+      timer = 0
+    }
+    return clearTime
   }
-  return clearTime
-}
+})()

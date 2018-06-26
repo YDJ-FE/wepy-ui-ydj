@@ -1,0 +1,50 @@
+<!-- Swiper 页面 -->
+<template>
+  <view class="swiper">
+    <view class="title">基本用法</view>
+    <SwiperDefault :dataList="dataList" :autoplay="isTrue" :indicator="isTrue" @click.user="handleClick"/>
+    <view class="title">图片居中</view>
+    <SwiperCenter :dataList="dataList" :autoplay="isTrue" marginPrev="100rpx" marginNext="100rpx" itemPadding="0 20rpx;"/>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import Swiper from '../components/Swiper'
+
+export default class swiperPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '图片轮播'
+  }
+
+  components = {
+    SwiperDefault: Swiper,
+    SwiperCenter: Swiper
+  }
+
+  data = {
+    isTrue: true,
+    dataList: [
+      'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg',
+      'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg',
+      'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg'
+    ]
+  }
+
+  onLoad() {}
+
+  methods = {
+    handleClick(arg) {
+      // 获取点击目标数据
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+
+.title {
+  @include ydj-title;
+}
+</style>

@@ -1,0 +1,113 @@
+<!-- Tab 选项卡组件 -->
+<template>
+  <view class="ydj-tab ">
+    <scroll-view wx:if="{{scroll}}" scroll-x class="ydj-tab__wrap {{fixed ? 'ydj-tab__fixed' : ''}}">
+      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item" style="width: {{itemWidth}}" @tap="handleTabChange({{item}})">
+        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__wrap__item__title" style="color: {{selectedColor}}">
+          {{item.title}}
+          <view class="ydj-tab__wrap__item__title__line" style="background: {{selectedColor}}"></view>
+        </view>
+        <view wx:else class="ydj-tab__wrap__item__title">{{item.title}}</view>
+      </view>
+    </scroll-view>
+    <view wx:else class="ydj-tab__wrap {{fixed ? 'ydj-tab__fixed' : ''}}">
+      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item" @tap="handleTabChange({{item}})">
+        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__wrap__item__title" style="color: {{selectedColor}}">
+          {{item.title}}
+          <view class="ydj-tab__wrap__item__title__line" style="background: {{selectedColor}}"></view>
+        </view>
+        <view wx:else class="ydj-tab__wrap__item__title">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Tab extends wepy.component {
+  props = {
+    dataList: {
+      type: Array,
+      default: []
+    },
+    fixed: {
+      type: Boolean,
+      default: false
+    },
+    scroll: {
+      type: Boolean,
+      default: false
+    },
+    itemWidth: {
+      type: String,
+      default: '160rpx'
+    },
+    selectedColor: {
+      type: String,
+      default: '#FD7598'
+    }
+  }
+
+  data = {
+    selectedId: ''
+  }
+
+  onLoad() {
+    this.selectedId = this.dataList[0].id
+    this.$apply()
+  }
+
+  methods = {
+    handleTabChange(item) {
+      this.selectedId = item.id
+      this.$emit('tabChange', item)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+
+.ydj-tab {
+  &__wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    width: 100%;
+    background: #fff;
+
+    &__item {
+      display: inline-block;
+      flex: 1;
+      font-size: 30rpx;
+      height: 86rpx;
+      line-height: 86rpx;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 0 10rpx;
+
+      &__title {
+        display: inline-block;
+        position: relative;
+
+        &__line {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4rpx;
+        }
+      }
+    }
+  }
+
+  &__fixed {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+}
+</style>

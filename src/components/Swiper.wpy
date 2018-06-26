@@ -1,0 +1,107 @@
+<!-- Swiper 图片轮播组件 -->
+<template>
+  <swiper
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    circular="{{circular}}"
+    indicator-dots="{{indicator}}"
+    indicator-color="{{indicatorColor}}"
+    indicator-active-color="{{indicatorActiveColor}}"
+    previous-margin="{{marginPrev}}"
+    next-margin="{{marginNext}}"
+    style="width: {{width}}; height: {{height}};"
+    bindchange="handleChange"
+    bindanimationfinish="handleAnimationFinish"
+  >
+    <block wx:for="{{dataList}}" wx:key="{{index}}">
+      <swiper-item >
+        <view @tap="handleClick({{item}})" style="padding: {{itemPadding}}">
+          <image src="{{item}}" style="width: 100%; height: {{height}};"/>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Swiper extends wepy.component {
+  props = {
+    width: {
+      type: String,
+      default: '750rpx'
+    },
+    height: {
+      type: String,
+      default: '300rpx'
+    },
+    dataList: {
+      type: Array
+    },
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    interval: {
+      type: [Number, String],
+      default: 5000
+    },
+    duration: {
+      type: [Number, String],
+      default: 500
+    },
+    circular: {
+      type: Boolean,
+      default: true
+    },
+    indicator: {
+      type: Boolean,
+      default: false
+    },
+    indicatorColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, .3)'
+    },
+    indicatorActiveColor: {
+      type: String,
+      default: '#000'
+    },
+    marginPrev: {
+      type: String,
+      default: '0rpx'
+    },
+    marginNext: {
+      type: String,
+      default: '0rpx'
+    },
+    itemPadding: {
+      type: String,
+      default: '0rpx'
+    }
+  }
+
+  onLoad() {}
+
+  methods = {
+    handleClick(item) {
+      this.$emit('click', item)
+    },
+
+    handleChange(e) {
+      const detail = e.detail
+      this.$emit('change', detail)
+    },
+
+    handleAnimationFinish(e) {
+      const detail = e.detail
+      this.$emit('animationFinish', detail)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+</style>

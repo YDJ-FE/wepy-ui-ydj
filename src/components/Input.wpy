@@ -1,5 +1,6 @@
+<!-- Input 输入框 -->
 <template>
-  <view class="YDJ-input-wrap">
+  <view class="ydj-input">
     <textarea
       wx:if="{{type === 'textarea'}}"
       value="{{value}}"
@@ -11,11 +12,11 @@
       bindinput="handleInput"
       bindfocus="handleFocus"
       bindblur="handleBlur"
-      class="YDJ-textrea"
-      placeholder-class="YDJ-placeholder"
+      class="ydj-input__textrea"
+      placeholder-class="ydj-input__placeholder"
     />
-    <view wx:else class="YDJ-input-item {{borderBottom ? 'YDJ-border-bottom' : ''}} ">
-      <label class="YDJ-label {{disabled ? 'YDJ-color-fifth' : ''}}">{{title}}</label>
+    <view wx:else class="ydj-input__item {{borderBottom ? 'ydj-input__border-bottom' : ''}} ">
+      <label wx:if="{{title}}" class="ydj-input__label {{disabled ? 'ydj-input__color-fifth' : ''}}">{{title}}</label>
       <input
         type="{{type}}"
         password="{{password}}"
@@ -27,10 +28,11 @@
         bindinput="handleInput"
         bindfocus="handleFocus"
         bindblur="handleBlur"
-        class="YDJ-input"
-        placeholder-class="YDJ-placeholder"
+        class="ydj-input__input"
+        placeholder-class="ydj-input__placeholder"
       />
-      <button wx:if="{{sendCode}}" class="YDJ-button" @tap="handleSendCode">发送验证码</button>
+      <i wx:if="{{ isCancelBtnShow && value.length > 0}}" class="ydj-iconfont ydj-iconfont-cancel" @tap="handleCancel"></i>
+      <button wx:if="{{sendCode}}" class="ydj-input__button" @tap="handleSendCode">{{btnCodeTitle}}</button>
     </view>
   </view>
 </template>
@@ -50,14 +52,16 @@ export default class Input extends wepy.component {
     },
     title: {
       type: String,
-      default: '输入标题'
+      default: ''
     },
     value: {
-      type: String
+      type: String,
+      default: '',
+      twoWay: true
     },
     placeholder: {
       type: String,
-      default: '输入提示'
+      default: ''
     },
     maxlength: {
       type: [Number, String],
@@ -66,6 +70,10 @@ export default class Input extends wepy.component {
     disabled: {
       type: Boolean,
       default: false
+    },
+    isCancelBtnShow: {
+      type: Boolean,
+      deafult: false
     },
     focus: {
       type: Boolean,
@@ -79,10 +87,18 @@ export default class Input extends wepy.component {
       type: Boolean,
       default: false
     },
+    btnCodeTitle: {
+      type: String,
+      default: '发送验证码'
+    },
     borderBottom: {
       type: Boolean,
       default: false
     }
+  }
+
+  watch = {
+    value(o, n) {}
   }
 
   methods = {
@@ -92,6 +108,7 @@ export default class Input extends wepy.component {
 
     handleInput(e) {
       const detail = e.detail
+      this.value = detail.value
       this.$emit('input', detail)
     },
 
@@ -103,6 +120,10 @@ export default class Input extends wepy.component {
     handleBlur(e) {
       const detail = e.detail
       this.$emit('blur', detail)
+    },
+
+    handleCancel() {
+      this.value = ''
     }
   }
 }
@@ -110,69 +131,72 @@ export default class Input extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
-.#{$prefix}-input-wrap {
+.ydj-input {
   padding-left: 28rpx;
   background: #fff;
   color: $ydj-text-first;
-}
 
-.#{$prefix}-input-item {
-  font-size: 32rpx;
-  height: 93rpx;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.#{$prefix}-label {
-  min-width: 170rpx;
-  padding-right: 10rpx;
-}
-
-.#{$prefix}-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  height: 93rpx;
-  line-height: 93rpx;
-  padding-right: 25rpx;
-}
-
-.#{$prefix}-placeholder {
-  color: $ydj-text-fifth;
-}
-
-.#{$prefix}-button {
-  color: #4a90e2;
-  font-size: 34rpx;
-  width: 212rpx;
-  padding: 0;
-  border: 0;
-  height: 48rpx;
-  padding-left: 16rpx;
-  padding-right: 25rpx;
-  line-height: unset;
-  background: #fff;
-  border-left: 2rpx solid $ydj-line;
-
-  &::after {
-    border: 0;
+  &__item {
+    display: flex;
+    box-sizing: border-box;
+    height: 93rpx;
+    font-size: 32rpx;
+    align-items: center;
   }
-}
 
-.#{$prefix}-textrea {
-  width: 100%;
-  height: 151rpx;
-  padding: 20rpx 25rpx 20rpx 0;
-  font-size: 32rpx;
-  box-sizing: border-box;
-}
+  &__label {
+    min-width: 170rpx;
+    padding-right: 10rpx;
+  }
 
-.#{$prefix}-border-bottom {
-  border-bottom: 1rpx solid $ydj-line;
-}
+  &__input {
+    flex: 1;
+    height: 93rpx;
+    line-height: 93rpx;
+    border: none;
+    outline: none;
+    padding-right: 25rpx;
+  }
 
-.#{$prefix}-color-fifth {
-  color: $ydj-text-fifth;
+  &__placeholder {
+    color: $ydj-text-fifth;
+  }
+
+  &__button {
+    width: 212rpx;
+    height: 48rpx;
+    padding: 0 25rpx 0 16rpx;
+    border: 0;
+    background: #fff;
+    font-size: 32rpx;
+    color: #4a90e2;
+    line-height: unset;
+    border-left: 2rpx solid $ydj-line;
+    &::after {
+      border: 0;
+    }
+  }
+
+  &__textrea {
+    width: 100%;
+    height: 151rpx;
+    padding: 20rpx 25rpx 20rpx 0;
+    font-size: 32rpx;
+    box-sizing: border-box;
+  }
+
+  &__border-bottom {
+    border-bottom: 1rpx solid $ydj-line;
+  }
+
+  &__color-fifth {
+    color: $ydj-text-fifth;
+  }
+
+  .ydj-iconfont {
+    display: inline-block;
+    color: $ydj-text-fifth;
+    padding-right: 28rpx;
+  }
 }
 </style>

@@ -1,12 +1,18 @@
 {
   "name": "wepy-ui-ydj",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "wepy ui components",
   "main": "./src/packages/index",
   "wepy": {
     "./Button": "./src/components/Button.wpy",
     "./Message": "./src/components/Message.wpy",
-    "./Input": "./src/components/Input.wpy"
+    "./Card": "./src/components/Card.wpy",
+    "./Dialog": "./src/components/Dialog.wpy",
+    "./Icon": "./src/components/Icon.wpy",
+    "./Input": "./src/components/Input.wpy",
+    "./Select": "./src/components/Select.wpy",
+    "./Swiper": "./src/components/Swiper.wpy",
+    "./Toast": "./src/components/Toast.wpy"
   },
   "scripts": {
     "dev": "wepy build --watch",
@@ -17,7 +23,7 @@
   "author": "王世隆 <547463736@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "wepy": "^1.7.0"
+    "wepy": "1.7.2-alpha2"
   },
   "repository": {
     "type": "git",

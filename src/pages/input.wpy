@@ -1,17 +1,18 @@
-<!-- Input页面 -->
+<!-- Input 页面 -->
 <template>
   <view class="input">
-    <view class="YDJ-title">基础用法</view>
+    <view class="title">基础用法</view>
     <InputName title="姓名" placeholder="请输入姓名" focus="{{true}}" :borderBottom="isTrue" />
-    <InputProvince title="所在地区" value="广东番禺" placeholder="请输入所在地区" :borderBottom="isTrue"/>
+    <InputProvince title="所在地区" :value.sync="val" placeholder="请输入所在地区" :isCancelBtnShow="isTrue" :borderBottom="isTrue"/>
     <InputAdd title="详细地址" placeholder="请输入详细地址" :borderBottom="isTrue" />
-    <InputInfo title="用户信息更改" placeholder="不支持更改" :disabled="isTrue" />
-    <view class="YDJ-title">手机号码验证框</view>
+    <InputInfo title="用户信息更改" placeholder="不支持更改" :disabled="isTrue" :borderBottom="isTrue" />
+    <InputDefault placeholder="请输入备注" />
+    <view class="title">手机号码验证框</view>
     <InputPhone title="手机号码" type="number" placeholder="请输入手机号码"  maxlength="11" :borderBottom="isTrue" />
     <InputPassword title="密码" placeholder="请输入密码" :password="isTrue" :borderBottom="isTrue"/>
     <InputCode title="验证码" :sendCode="isTrue" placeholder="请输入验证码"  maxlength="6" @sendCode.user="handleSendCode" />
-    <view class="YDJ-title">文本域</view>
-    <Textarea type="textarea" placeholder="请输入内容" :autoFocus="isTrue" @input.user="handleInput" @focus.user="handleFocus" @blur.user="handleBlur" />
+    <view class="title">文本域</view>
+    <Textarea type="textarea" placeholder="请输入内容" @input.user="handleInput" @focus.user="handleFocus" @blur.user="handleBlur" />
   </view>
 </template>
 
@@ -25,6 +26,7 @@ export default class InputPage extends wepy.page {
   }
 
   components = {
+    InputDefault: Input,
     InputName: Input,
     InputProvince: Input,
     InputAdd: Input,
@@ -36,7 +38,8 @@ export default class InputPage extends wepy.page {
   }
 
   data = {
-    isTrue: true
+    isTrue: true,
+    val: '广东番禺'
   }
 
   onLoad() {}
@@ -53,11 +56,10 @@ export default class InputPage extends wepy.page {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/var';
 
-.#{$prefix}-title {
-  font-size: 34rpx;
-  padding: 40rpx 28rpx 20rpx;
+.title {
+  @include ydj-title;
 }
 </style>
