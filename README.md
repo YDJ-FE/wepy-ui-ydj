@@ -25,7 +25,7 @@
 
 ```
 // 自己选择包的地址源
-npm i wepy-cli@alpha -g
+npm i wepy-cli -g
 ```
 
 2.  app.wpy 引入组件公共样式
