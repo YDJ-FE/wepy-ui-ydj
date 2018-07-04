@@ -2,9 +2,9 @@
 <template>
   <view class="ydj-dialog" wx:if="{{show}}">
     <view class="ydj-dialog__wrap animated {{animated ? animated : ''}}">
-        <view class="ydj-dialog__title" wx:if="{{title !=''}}">{{title}}</view>
-        <view class="ydj-dialog__img">
-          <image src="{{image}}" wx:if="{{image != ''}}" />
+        <view class="ydj-dialog__title" wx:if="{{title !=''}}" style="color: {{titleColor}}">{{title}}</view>
+        <view class="ydj-dialog__img" wx:if="{{image != ''}}">
+          <image src="{{image}}"  />
         </view>
         <view class="ydj-dialog__input" wx:if="{{inputShow}}">
           <input
@@ -16,10 +16,10 @@
             @blur="handleInput"
           />
         </view>
-        <view class="ydj-dialog__content {{title != '' ? 'ydj-dialog__font' : 'ydj-dialog__sfont'}}" wx:if="{{content != ''}}">{{content}}</view>
+        <view class="ydj-dialog__content" style="color: {{contentColor}}" wx:if="{{content != ''}}" >{{content}}</view>
         <view class="ydj-dialog__btns">
-          <view class="ydj-dialog__btn ydj-dialog__cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
-          <view class="ydj-dialog__btn ydj-dialog__sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
+          <view class="ydj-dialog__btn ydj-dialog__cancel" @tap="handleClick('n')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
+          <view class="ydj-dialog__btn ydj-dialog__sure" @tap="handleClick('y')" style="color: {{successColor}}">{{successTxt}}</view>
         </view>
     </view>
   </view>
@@ -45,10 +45,20 @@ export default class dialog extends wepy.component {
       type: String,
       default: ''
     },
+    titleColor: {
+      // 标题颜色
+      type: String,
+      default: '#333333'
+    },
     content: {
       // 弹框内容
       type: String,
       default: ''
+    },
+    contentColor: {
+      // 内容颜色
+      type: String,
+      default: '#9a9a9a'
     },
     image: {
       // 图片
@@ -70,12 +80,6 @@ export default class dialog extends wepy.component {
       type: Boolean,
       default: true
     },
-    cancelCallback: {
-      // 取消按钮回调
-      type: Boolean,
-      default: true,
-      twoWay: true
-    },
     successColor: {
       // 确定按钮颜色
       type: Boolean,
@@ -85,12 +89,6 @@ export default class dialog extends wepy.component {
       // 确定按钮文本
       type: Boolean,
       default: '确定'
-    },
-    successCallback: {
-      // 成功回调
-      type: Boolean,
-      default: true,
-      twoWay: true
     },
     inputShow: {
       // 是否显示输入框
@@ -129,12 +127,9 @@ export default class dialog extends wepy.component {
   watch = {}
 
   methods = {
-    handleClick(callback) {
+    handleClick(flag) {
       this.show = false
-      this[callback] = true
-      setTimeout(() => {
-        this[callback] = false
-      }, 300)
+      this.$emit('dialogCallback', flag)
     },
     bindconfirm(e) {
       if (this.inputBindconfirm) {
@@ -179,7 +174,6 @@ export default class dialog extends wepy.component {
   &__title {
     font-family: PingFangSC-Regular;
     font-size: 36rpx;
-    color: #333333;
     text-align: center;
     margin-bottom: 20rpx;
     padding: 0 30rpx;
@@ -242,12 +236,6 @@ export default class dialog extends wepy.component {
     .ydj-dialog__sure {
       letter-spacing: 0;
     }
-  }
-  .ydj-dialog__font {
-    color: $ydj-text-third;
-  }
-  .ydj-dialog__sfont {
-    color: #333;
   }
 }
 </style>

@@ -8,9 +8,9 @@
        :image.sync="dialogImage"
        :cancelShow.sync="cancelShow"
        :inputShow.sync="inputShow"
-       :cancelCallback.sync="cancelCallback"
-       :successCallback.sync="successCallback"
        :animated="animated"
+       :titleColor="titleColor"
+       :contentColor="contentColor"
     ></Dialog>
     <DefaultButton1 class="btn" @tap.user="handleDefault" shape="plain">有标题</DefaultButton1>
     <DefaultButton2 class="btn" @tap.user="handleMain" shape="plain">没有标题提示</DefaultButton2>
@@ -44,23 +44,13 @@ export default class DialogPage extends wepy.page {
     dialogTitle: '测试信息弹框标题',
     dialogContent: '测试信息弹框内容',
     cancelShow: true,
-    // cancelBtn: {
-    //   show: true,
-    //   color: '',
-    //   text: '关闭',
-    //   callback: false
-    // },
-    // successBtn: {
-    //   text: '可以哦',
-    //   callback: false
-    // },
     dialogImage: '',
     cancel: false,
     success: false,
     animated: 'flipInX',
-    cancelCallback: false,
-    successCallback: false,
-    inputShow: false
+    inputShow: false,
+    titleColor: 'red',
+    contentColor: 'blue'
   }
   onLoad() {}
   methods = {
@@ -110,12 +100,10 @@ export default class DialogPage extends wepy.page {
       this.showDialog = true
     }
   }
-  watch = {
-    cancelCallback() {
-      console.log('cancelBtn', this.cancelCallback)
-    },
-    successCallback() {
-      console.log('successBtn', this.successCallback)
+  events = {
+    dialogCallback(value) {
+      // 返回n则取消操作，返回y则确定操作
+      console.log('value', value)
     }
   }
 }
