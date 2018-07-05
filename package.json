@@ -18,6 +18,7 @@
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
     "babel": "babel --presets env,stage-1 src/utils/index.js -o src/babel-utils/index.js",
+    "css": "node-sass ./src/styles/all.scss > ./libs/all.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "王世隆 <547463736@qq.com>",
