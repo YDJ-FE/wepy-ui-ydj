@@ -151,6 +151,7 @@ export default class dialog extends wepy.component {
 </script>
 
 <style lang="scss">
+@import '../styles/all';
 @import '../styles/var';
 .ydj-dialog {
   width: 100%;
