@@ -12,7 +12,9 @@
     "./Input": "./src/components/Input.wpy",
     "./Select": "./src/components/Select.wpy",
     "./Swiper": "./src/components/Swiper.wpy",
-    "./Toast": "./src/components/Toast.wpy"
+    "./Toast": "./src/components/Toast.wpy",
+    "./List": "./src/components/list.wpy",
+    "./Tab": "./src/components/tab.wpy"
   },
   "scripts": {
     "dev": "wepy build --watch",
