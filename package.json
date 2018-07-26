@@ -26,6 +26,7 @@
   "author": "王世隆 <547463736@qq.com>",
   "license": "MIT",
   "dependencies": {
+    "mini-program-utils": "^0.1.2",
     "wepy": "1.7.1"
   },
   "repository": {

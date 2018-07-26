@@ -2870,6 +2870,10 @@ lodash.mergewith@^4.6.0:
   version "4.6.1"
   resolved "https://registry.npmjs.org/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
 
+lodash.random@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/lodash.random/-/lodash.random-3.2.0.tgz#96e24e763333199130d2c9e2fd57f91703cc262d"
+
 lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.npmjs.org/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
@@ -3013,6 +3017,12 @@ mime-types@^2.1.12, mime-types@~2.1.7:
 mimic-response@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/mimic-response/-/mimic-response-1.0.0.tgz#df3d3652a73fded6b9b0b24146e6fd052353458e"
+
+mini-program-utils@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/mini-program-utils/-/mini-program-utils-0.1.2.tgz#076e954a5e135f0a66b0e061481f794e2b71b870"
+  dependencies:
+    lodash.random "^3.2.0"
 
 "minimatch@2 || 3", minimatch@^3.0.2, minimatch@^3.0.4, minimatch@~3.0.2:
   version "3.0.4"
