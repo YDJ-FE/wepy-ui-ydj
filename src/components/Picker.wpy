@@ -10,7 +10,10 @@
 </template>
 <script>
 import wepy from 'wepy'
-import { getOrderNumberAry, getMonthDay } from 'mini-program-utils/dist/utils'
+import {
+  getOrderNumberAry,
+  getMonthDaysAry
+} from 'mini-program-utils/dist/utils'
 
 const getNowDateObj = () => {
   const t = new Date()
@@ -36,7 +39,7 @@ const createRangeAry = length => {
   for (let i = 0; i < length; i++) {
     if (i === 0) dateRangeAry.push(getOrderNumberAry(year - 20, year + 30))
     else if (i === 1) dateRangeAry.push(getOrderNumberAry(1, 12))
-    else if (i === 2) dateRangeAry.push(getMonthDay(year, month))
+    else if (i === 2) dateRangeAry.push(getMonthDaysAry(year, month))
     else if (i === 3) dateRangeAry.push(getOrderNumberAry(0, 23))
     else dateRangeAry.push(getOrderNumberAry(0, 59))
   }
@@ -93,7 +96,7 @@ export default class Picker extends wepy.component {
       // const arr = this.dateTime
       // const dateArr = this.dateRangeAry
       // arr[e.detail.column] = e.detail.value
-      // dateArr[2] = getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]])
+      // dateArr[2] = getMonthDaysAry(dateArr[0][arr[0]], dateArr[1][arr[1]])
       // this.dateRangeAry = dateArr
       // this.dateTime = arr
     }
