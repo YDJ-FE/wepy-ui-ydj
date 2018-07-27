@@ -2,24 +2,29 @@
 <template>
   <view class="ydj-dialog" wx:if="{{show}}">
     <view class="ydj-dialog__wrap animated {{animated ? animated : ''}}">
-        <view class="ydj-dialog__title" wx:if="{{title !=''}}">{{title}}</view>
-        <view class="ydj-dialog__img">
-          <image src="{{image}}" wx:if="{{image != ''}}" />
+        <view class="ydj-dialog__title" wx:if="{{title !=''}}" style="color: {{titleColor}}">{{title}}</view>
+        <view class="ydj-dialog__img" wx:if="{{image != ''}}">
+          <image src="{{image}}"  />
         </view>
-        <view class="ydj-dialog__input" wx:if="{{inputShow}}">
+        <view class="ydj-dialog__input" wx:if="{{inputShow}}" style="border-radius: {{inputBorderR}}rpx">
           <input
             value="{{inputValue}}"
-            password="{{inputPassword}}" 
+            password="{{inputPassword}}"
             type="{{inputType}}"
             placeholder="{{inputPlaceholder}}"
             bindconfirm="bindconfirm"
             @blur="handleInput"
+            placeholder-style="color: {{placeholderFontColor}}"
+            style="font-size: {{inputFontSize}}rpx; color: {{inputColor}}"
           />
         </view>
-        <view class="ydj-dialog__content {{title != '' ? 'ydj-dialog__font' : 'ydj-dialog__sfont'}}" wx:if="{{content != ''}}">{{content}}</view>
-        <view class="ydj-dialog__btns">
-          <view class="ydj-dialog__btn ydj-dialog__cancel" @tap="handleClick('cancelCallback')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
-          <view class="ydj-dialog__btn ydj-dialog__sure" @tap="handleClick('successCallback')" style="color: {{successColor}}">{{successTxt}}</view>
+        <view class="ydj-dialog__content" style="color: {{contentColor}}" wx:if="{{content != ''}}" >{{content}}</view>
+        <view class="ydj-dialog__footer">
+          <view class="ydj-dialog__footer__btns">
+            <view class="ydj-dialog__btn ydj-dialog__cancel" @tap="handleClick('n')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
+            <view class="ydj-dialog__btn ydj-dialog__sure" @tap="handleClick('y')" wx:if="{{successShow}}" style="color: {{successColor}}">{{successTxt}}</view>
+          </view>
+          <slot name="dialog-btns"></slot>
         </view>
     </view>
   </view>
@@ -45,10 +50,20 @@ export default class dialog extends wepy.component {
       type: String,
       default: ''
     },
+    titleColor: {
+      // 标题颜色
+      type: String,
+      default: '#333333'
+    },
     content: {
       // 弹框内容
       type: String,
       default: ''
+    },
+    contentColor: {
+      // 内容颜色
+      type: String,
+      default: '#9a9a9a'
     },
     image: {
       // 图片
@@ -70,27 +85,20 @@ export default class dialog extends wepy.component {
       type: Boolean,
       default: true
     },
-    cancelCallback: {
-      // 取消按钮回调
+    successShow: {
+      // 确定按钮显隐
       type: Boolean,
-      default: true,
-      twoWay: true
+      default: true
     },
     successColor: {
       // 确定按钮颜色
-      type: Boolean,
+      type: String,
       default: '#fd7598'
     },
     successTxt: {
       // 确定按钮文本
-      type: Boolean,
+      type: String,
       default: '确定'
-    },
-    successCallback: {
-      // 成功回调
-      type: Boolean,
-      default: true,
-      twoWay: true
     },
     inputShow: {
       // 是否显示输入框
@@ -122,6 +130,26 @@ export default class dialog extends wepy.component {
       // 是否回车确定发送
       type: Boolean,
       default: false
+    },
+    inputBorderR: {
+      // 输入框圆角
+      type: Number,
+      default: 50
+    },
+    inputFontSize: {
+      // 输入框字体大小
+      type: Number,
+      default: 30
+    },
+    inputFontColor: {
+      // 输入框字体颜色
+      type: String,
+      default: '#222'
+    },
+    placeholderFontColor: {
+      // 提示语颜色
+      type: String,
+      default: '#bbbbbb'
     }
   }
   data = {}
@@ -129,12 +157,9 @@ export default class dialog extends wepy.component {
   watch = {}
 
   methods = {
-    handleClick(callback) {
+    handleClick(flag) {
       this.show = false
-      this[callback] = true
-      setTimeout(() => {
-        this[callback] = false
-      }, 300)
+      this.$emit('dialogCallback', flag)
     },
     bindconfirm(e) {
       if (this.inputBindconfirm) {
@@ -157,6 +182,7 @@ export default class dialog extends wepy.component {
 
 <style lang="scss">
 @import '../styles/var';
+
 .ydj-dialog {
   width: 100%;
   height: 100%;
@@ -179,7 +205,6 @@ export default class dialog extends wepy.component {
   &__title {
     font-family: PingFangSC-Regular;
     font-size: 36rpx;
-    color: #333333;
     text-align: center;
     margin-bottom: 20rpx;
     padding: 0 30rpx;
@@ -210,44 +235,38 @@ export default class dialog extends wepy.component {
   }
   &__input {
     border: 1px solid $ydj-text-fifth;
-    margin: 0 30rpx 20rpx 30rpx;
+    margin: 40rpx 30rpx 50rpx 30rpx;
     padding: 0 20rpx;
     height: 80rpx;
     line-height: 80rpx;
-    border-radius: 8rpx;
     input {
       width: 100%;
       height: 100%;
-      font-size: 30rpx;
       text-align: center;
     }
   }
-  &__btns {
+  &__footer {
     margin-top: 30rpx;
     border-top: 1px solid $ydj-line;
-    display: flex;
     font-family: PingFangSC-Regular;
-    letter-spacing: 0;
-    text-align: center;
-    .ydj-dialog__btn {
-      flex: 1;
-      font-size: 32rpx;
-      height: 100rpx;
-      line-height: 100rpx;
-    }
-    .ydj-dialog__cancel {
+    &__btns {
+      display: flex;
       letter-spacing: 0;
-      border-right: 1px solid $ydj-line;
+      text-align: center;
+      .ydj-dialog__btn {
+        flex: 1;
+        font-size: 32rpx;
+        height: 100rpx;
+        line-height: 100rpx;
+      }
+      .ydj-dialog__cancel {
+        letter-spacing: 0;
+        border-right: 1px solid $ydj-line;
+      }
+      .ydj-dialog__sure {
+        letter-spacing: 0;
+      }
     }
-    .ydj-dialog__sure {
-      letter-spacing: 0;
-    }
-  }
-  .ydj-dialog__font {
-    color: $ydj-text-third;
-  }
-  .ydj-dialog__sfont {
-    color: #333;
   }
 }
 </style>

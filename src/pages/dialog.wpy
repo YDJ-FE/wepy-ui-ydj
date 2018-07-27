@@ -3,21 +3,23 @@
   <view class="dialog-page">
     <Dialog
        :show.sync="showDialog"
-       :title.sync="dialogTitle"
        :content.sync="dialogContent"
+       :title.sync="dialogTitle"
        :image.sync="dialogImage"
        :cancelShow.sync="cancelShow"
        :inputShow.sync="inputShow"
-       :cancelCallback.sync="cancelCallback"
-       :successCallback.sync="successCallback"
        :animated="animated"
-    ></Dialog>
+       :successTxt="successTxt"
+    >
+      <view slot="dialog-btns" wx:if="{{isShowSlot}}">自定义按钮区域</view>
+    </Dialog>
     <DefaultButton1 class="btn" @tap.user="handleDefault" shape="plain">有标题</DefaultButton1>
     <DefaultButton2 class="btn" @tap.user="handleMain" shape="plain">没有标题提示</DefaultButton2>
     <DefaultButton3 class="btn" @tap.user="handleNoContent" shape="plain">没有内容</DefaultButton3>
     <DefaultButton4 class="btn" @tap.user="handleInput" shape="plain">有输入框</DefaultButton4>
     <DefaultButton5 class="btn" @tap.user="handleImage" shape="plain">有图片</DefaultButton5>
     <DefaultButton6 class="btn" @tap.user="handleNoCancel" shape="plain">没取消按钮</DefaultButton6>
+    <DefaultButton7 class="btn" @tap.user="handleSlot" shape="plain">自定义底部按钮</DefaultButton7>
   </view>
 </template>
 <script>
@@ -36,7 +38,8 @@ export default class DialogPage extends wepy.page {
     DefaultButton3: Button,
     DefaultButton4: Button,
     DefaultButton5: Button,
-    DefaultButton6: Button
+    DefaultButton6: Button,
+    DefaultButton7: Button
   }
   props = {}
   data = {
@@ -44,23 +47,13 @@ export default class DialogPage extends wepy.page {
     dialogTitle: '测试信息弹框标题',
     dialogContent: '测试信息弹框内容',
     cancelShow: true,
-    // cancelBtn: {
-    //   show: true,
-    //   color: '',
-    //   text: '关闭',
-    //   callback: false
-    // },
-    // successBtn: {
-    //   text: '可以哦',
-    //   callback: false
-    // },
     dialogImage: '',
     cancel: false,
     success: false,
     animated: 'flipInX',
-    cancelCallback: false,
-    successCallback: false,
-    inputShow: false
+    inputShow: false,
+    successTxt: '可自定义',
+    isShowSlot: false
   }
   onLoad() {}
   methods = {
@@ -71,12 +64,14 @@ export default class DialogPage extends wepy.page {
       this.inputShow = false
       this.cancelShow = true
       this.showDialog = true
+      this.isShowSlot = false
     },
     handleMain() {
       this.dialogTitle = ''
       this.dialogContent = '测试信息弹框内容'
       this.inputShow = false
       this.showDialog = true
+      this.isShowSlot = false
     },
     handleNoContent() {
       this.dialogTitle = '弹框测试'
@@ -85,6 +80,7 @@ export default class DialogPage extends wepy.page {
       this.dialogImage = ''
       this.inputShow = false
       this.showDialog = true
+      this.isShowSlot = false
     },
     handleInput() {
       this.dialogImage = ''
@@ -93,6 +89,7 @@ export default class DialogPage extends wepy.page {
       this.dialogContent = '测试信息弹框内容'
       this.inputShow = true
       this.showDialog = true
+      this.isShowSlot = false
     },
     handleImage() {
       this.dialogTitle = '弹框测试'
@@ -103,19 +100,23 @@ export default class DialogPage extends wepy.page {
       this.dialogImage =
         'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg'
       this.showDialog = true
+      this.isShowSlot = false
     },
     handleNoCancel() {
       this.dialogTitle = '弹框测试'
       this.cancelShow = false
       this.showDialog = true
+      this.isShowSlot = false
+    },
+    handleSlot() {
+      this.showDialog = true
+      this.isShowSlot = true
     }
   }
-  watch = {
-    cancelCallback() {
-      console.log('cancelBtn', this.cancelCallback)
-    },
-    successCallback() {
-      console.log('successBtn', this.successCallback)
+  events = {
+    dialogCallback(value) {
+      // 返回n则取消操作，返回y则确定操作
+      console.log('value', value)
     }
   }
 }
