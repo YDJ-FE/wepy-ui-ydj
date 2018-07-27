@@ -3,7 +3,7 @@
   <picker class="ydj-picker" mode="multiSelector" value="{{dateTime}}" bindchange="handleConfirm" bindcolumnchange="handleChangeColumn"
     range="{{dateRangeAry}}">
     <view class="ydj-picker__text" wx:if="{{haveChoose}}">
-      {{dateRangeAry[0][dateTime[0]]}}-{{dateRangeAry[1][dateTime[1]]}}-{{dateRangeAry[2][dateTime[2]]}} {{dateRangeAry[3][dateTime[3]]}}:{{dateRangeAry[4][dateTime[4]]}}
+      {{formatTime}}
     </view>
     <text class="ydj-picker__placeholder" wx:else>{{placeholder}}</text>
   </picker>
@@ -57,6 +57,17 @@ const getDateIndexAry = (dateRangeAry, dateAry) => {
   return dateIndexAry
 }
 
+const appendZero = dateAry => {
+  const exceptYearAry = dateAry.slice(1)
+  const newFormatAry = [
+    `${dateAry[0]}`,
+    ...exceptYearAry.map(v => `0${v}`.slice(-2))
+  ]
+  const YMDAry = newFormatAry.slice(0, 3)
+  const HMSAry = newFormatAry.slice(3, newFormatAry.length)
+  return `${YMDAry.join('-')} ${HMSAry.join(':')}`
+}
+
 export default class Picker extends wepy.component {
   props = {
     defaultValue: {
@@ -72,18 +83,38 @@ export default class Picker extends wepy.component {
   data = {
     dateTime: [0, 0, 0, 0, 0],
     dateRangeAry: [],
-    haveChoose: false
+    haveChoose: false,
+    formatTime: ''
+  }
+
+  updateDate() {
+    this.dateRangeAry = createRangeAry(this.defaultValue.length)
+    this.dateTime = getDateIndexAry(this.dateRangeAry, this.defaultValue)
+    this.formatTime = appendZero(
+      this.dateRangeAry.map((v, i) => v[this.dateTime[i]])
+    )
+  }
+
+  watch = {
+    defaultValue(n, o) {
+      if (n === o) return
+      this.updateDate()
+      if (!this.haveChoose) this.haveChoose = true
+      this.$apply()
+    }
   }
 
   onLoad() {
-    this.dateRangeAry = createRangeAry(this.defaultValue.length)
-    this.dateTime = getDateIndexAry(this.dateRangeAry, this.defaultValue)
+    this.updateDate()
   }
 
   methods = {
     handleConfirm(e) {
       if (!this.haveChoose) this.haveChoose = true
       this.dateTime = e.detail.value
+      this.formatTime = appendZero(
+        this.dateRangeAry.map((v, i) => v[this.dateTime[i]])
+      )
       const len = this.dateRangeAry.length
       let dateAry = []
       for (let i = 0; i < len; i++) {
