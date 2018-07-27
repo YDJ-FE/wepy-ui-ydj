@@ -13,8 +13,9 @@
     "./Select": "./src/components/Select.wpy",
     "./Swiper": "./src/components/Swiper.wpy",
     "./Toast": "./src/components/Toast.wpy",
-    "./List": "./src/components/list.wpy",
-    "./Tab": "./src/components/tab.wpy"
+    "./List": "./src/components/List.wpy",
+    "./Tab": "./src/components/Tab.wpy",
+    "./Picker": "./src/components/Picker.wpy"
   },
   "scripts": {
     "dev": "wepy build --watch",

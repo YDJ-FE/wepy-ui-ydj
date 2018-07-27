@@ -138,6 +138,7 @@ export default class Picker extends wepy.component {
 <style lang="scss">
 .ydj-picker {
   font-size: 28rpx;
+  width: 100%;
   &__placeholder {
     color: #9b9b9b;
   }
