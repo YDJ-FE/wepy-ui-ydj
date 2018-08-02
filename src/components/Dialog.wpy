@@ -11,6 +11,7 @@
             value="{{inputValue}}"
             password="{{inputPassword}}"
             type="{{inputType}}"
+            maxlength="{{inputLength}}"
             placeholder="{{inputPlaceholder}}"
             bindconfirm="bindconfirm"
             @blur="handleInput"
@@ -150,6 +151,11 @@ export default class dialog extends wepy.component {
       // 提示语颜色
       type: String,
       default: '#bbbbbb'
+    },
+    inputLength: {
+      // 输入框字数
+      type: Number,
+      default: 140
     }
   }
   data = {}
