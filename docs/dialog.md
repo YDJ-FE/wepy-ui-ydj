@@ -29,6 +29,7 @@ import Dialog from 'wepy-ui-ydj/Dialog';
 | inputBorderR         | 输入框的圆角           | number  | -                                  | 50 单位 rpx）  |
 | inputFontColor       | 输入框字体颜色         | string  | -                                  | #222222        |
 | inputFontSize        | 输入框字体大小         | number  | -                                  | 50（单位 rpx） |
+| inputLength          | 输入框最大输入长度     | number  | -                                  | 140            |
 
 ```
 <Dialog>
