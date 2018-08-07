@@ -17,7 +17,7 @@
     <block wx:for="{{dataList}}" wx:key="{{index}}">
       <swiper-item >
         <view @tap="handleClick({{item}})" style="padding: {{itemPadding}}">
-          <image src="{{item}}" style="width: 100%; height: {{height}};"/>
+          <image src="{{item.url}}" style="width: 100%; height: {{height}};"/>
         </view>
       </swiper-item>
     </block>
