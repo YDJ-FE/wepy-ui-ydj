@@ -1,22 +1,26 @@
-<!-- Tab 选项卡组件 -->
+<!-- 文章列表页面 tab 组件 -->
 <template>
-  <view class="ydj-tab ">
-    <scroll-view wx:if="{{scroll}}" scroll-x class="ydj-tab__wrap {{fixed ? 'ydj-tab__fixed' : ''}}">
-      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item" style="width: {{itemWidth}}" @tap="handleTabChange({{item}})">
-        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__wrap__item__title" style="color: {{selectedColor}}">
+  <view class="ydj-tab">
+    <!-- 可滚动 -->
+    <scroll-view wx:if="{{type === 'scroll'}}" scroll-x>
+      <view class="ydj-tab__wrap" style="width: {{width}}; color: {{defaultColor}};">
+        <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item {{item.isActive ? activeClass : ''}}"
+          style="height: {{height}};line-height: {{height}};" @tap="handleChangeTab({{index}})">
           {{item.title}}
-          <view class="ydj-tab__wrap__item__title__line" style="background: {{selectedColor}}"></view>
         </view>
-        <view wx:else class="ydj-tab__wrap__item__title">{{item.title}}</view>
+        <view class="ydj-tab__wrap__line-active {{lineClass}}" style="width: {{itemWidth}}%; left: {{left}}%;">
+          <view class="ydj-tab__wrap__line-active__inner {{lineClass}}" style="width: {{lineWidth}}; background: {{activeColor}};"></view>
+        </view>
       </view>
     </scroll-view>
-    <view wx:else class="ydj-tab__wrap {{fixed ? 'ydj-tab__fixed' : ''}}">
-      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item" @tap="handleTabChange({{item}})">
-        <view wx:if="{{selectedId === item.id}}" class="ydj-tab__wrap__item__title" style="color: {{selectedColor}}">
-          {{item.title}}
-          <view class="ydj-tab__wrap__item__title__line" style="background: {{selectedColor}}"></view>
-        </view>
-        <view wx:else class="ydj-tab__wrap__item__title">{{item.title}}</view>
+    <!-- 默认 -->
+    <view wx:else class="ydj-tab__wrap" style="color: {{defaultColor}};">
+      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item {{item.isActive ? activeClass : ''}}"
+        style="height: {{height}};line-height: {{height}};" @tap="handleChangeTab({{index}})">
+        {{item.title}}
+      </view>
+      <view class="ydj-tab__wrap__line-active {{lineClass}}" style="width: {{itemWidth}}%; left: {{left}}%;">
+        <view class="ydj-tab__wrap__line-active__inner {{lineClass}}" style="width: {{lineWidth}}; background: {{activeColor}};"></view>
       </view>
     </view>
   </view>
@@ -27,87 +31,119 @@ import wepy from 'wepy'
 
 export default class Tab extends wepy.component {
   props = {
-    dataList: {
-      type: Array,
-      default: []
-    },
-    fixed: {
-      type: Boolean,
-      default: false
-    },
-    scroll: {
-      type: Boolean,
-      default: false
-    },
-    itemWidth: {
+    dataList: Array,
+    type: String,
+    width: String,
+    height: {
       type: String,
-      default: '160rpx'
+      default: '92rpx'
     },
-    selectedColor: {
+    lineWidth: {
       type: String,
-      default: '#FD7598'
+      default: '32rpx;'
+    },
+    defaultColor: {
+      type: String,
+      default: '#9c9c9c'
+    },
+    activeColor: {
+      type: String,
+      default: '#fb3f7c'
+    },
+    activeClass: {
+      type: String,
+      default: 'ydj-tab-active'
+    },
+    lineClass: {
+      type: String,
+      default: 'ydj-tab-line'
     }
   }
 
   data = {
-    selectedId: ''
+    itemWidth: 0,
+    left: 0
+  }
+
+  watch = {
+    dataList(n, o) {
+      this.initLeft()
+    }
   }
 
   onLoad() {
-    this.selectedId = this.dataList[0].id
+    this.itemWidth = 1 / this.dataList.length * 100
+    this.initLeft()
+  }
+
+  initLeft() {
+    this.dataList.forEach((v, i) => {
+      if (v.isActive) {
+        this.left = i / this.dataList.length * 100
+      }
+    })
     this.$apply()
   }
 
   methods = {
-    handleTabChange(item) {
-      this.selectedId = item.id
-      this.$emit('tabChange', item)
+    handleChangeTab(index) {
+      this.dataList.forEach((v, i) => {
+        if (index === i) {
+          v.isActive = true
+          this.left = i / this.dataList.length * 100
+          this.$emit('change', index)
+        } else v.isActive = false
+      })
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../styles/var';
-
 .ydj-tab {
+  background: #fff;
+  z-index: 10;
+
   &__wrap {
+    position: relative;
     display: flex;
-    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
     align-items: center;
     white-space: nowrap;
-    width: 100%;
-    background: #fff;
+    flex-direction: row;
+    overflow: hidden;
 
     &__item {
-      display: inline-block;
       flex: 1;
-      font-size: 30rpx;
-      height: 86rpx;
-      line-height: 86rpx;
       text-align: center;
-      box-sizing: border-box;
-      padding: 0 10rpx;
+      font-size: 30rpx;
 
-      &__title {
-        display: inline-block;
-        position: relative;
+      // &--active {
+      //   font-weight: 600;
+      //   color: #fb3f7c;
+      // }
+    }
 
-        &__line {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 4rpx;
-        }
+    &__line-active {
+      position: absolute;
+      bottom: 0;  
+      transition: all 0.3s;
+
+      &__inner {
+        margin: 0 auto;
       }
     }
   }
+}
 
-  &__fixed {
-    position: fixed;
-    left: 0;
-    top: 0;
-  }
+.ydj-tab-active {
+  font-weight: 600;
+  color: #fb3f7c;
+}
+
+.ydj-tab-line {
+  height: 6rpx;
+  border-radius: 3rpx;
 }
 </style>
