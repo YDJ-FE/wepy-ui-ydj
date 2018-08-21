@@ -118,11 +118,6 @@ export default class Tab extends wepy.component {
       flex: 1;
       text-align: center;
       font-size: 30rpx;
-
-      // &--active {
-      //   font-weight: 600;
-      //   color: #fb3f7c;
-      // }
     }
 
     &__line-active {

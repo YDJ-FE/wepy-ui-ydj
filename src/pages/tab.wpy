@@ -2,7 +2,7 @@
 <template>
   <view>
     <view class="title">基本用法</view>
-    <Tab :dataList="dataList"></Tab>
+    <Tab :line="isFalse" :dataList="dataList"></Tab>
     <view class="title">可滚动 tab</view>
     <TabScroll :dataList="dataListScroll" width="1116rpx" type="scroll"></TabScroll>
   </view>
@@ -23,6 +23,7 @@ export default class TabPage extends wepy.page {
   }
 
   data = {
+    isFalse: false,
     dataList: [
       {
         title: '选项1',
