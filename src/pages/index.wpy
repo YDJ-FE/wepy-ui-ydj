@@ -3,9 +3,9 @@
 <template>
   <view class="container">
 
-    <navigator class="page-btn" url="/pages/button" hover-class="none">
+    <!-- <navigator class="page-btn" url="/pages/button" hover-class="none">
       <ButtonPlain shape="plain">Button</ButtonPlain>
-    </navigator>
+    </navigator> -->
 
     <navigator class="page-btn" url="/pages/message" hover-class="none">
       <ButtonPlain shape="plain">Message信息提示</ButtonPlain>
