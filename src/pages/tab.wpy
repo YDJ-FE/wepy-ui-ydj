@@ -2,9 +2,9 @@
 <template>
   <view>
     <view class="title">基本用法</view>
-    <Tab :dataList="dataList"></Tab>
+    <Tab :line="isFalse" :dataList="dataList"></Tab>
     <view class="title">可滚动 tab</view>
-    <TabScroll :dataList="dataListScroll" :scroll="isTrue"></TabScroll>
+    <TabScroll :dataList="dataListScroll" width="1116rpx" type="scroll"></TabScroll>
   </view>
 </template>
 
@@ -23,49 +23,49 @@ export default class TabPage extends wepy.page {
   }
 
   data = {
-    isTrue: true,
+    isFalse: false,
     dataList: [
       {
         title: '选项1',
-        id: '选项1'
+        isActive: true
       },
       {
         title: '选项2',
-        id: '选项2'
+        isActive: false
       },
       {
         title: '选项3',
-        id: '选项3'
+        isActive: false
       },
       {
         title: '选项4',
-        id: '选项4'
+        isActive: false
       }
     ],
     dataListScroll: [
       {
         title: '选项1',
-        id: '选项1'
+        isActive: true
       },
       {
         title: '选项2',
-        id: '选项2'
+        isActive: false
       },
       {
         title: '选项3',
-        id: '选项3'
+        isActive: false
       },
       {
         title: '选项4',
-        id: '选项4'
+        isActive: false
       },
       {
         title: '选项5',
-        id: '选项5'
+        isActive: false
       },
       {
         title: '选项6',
-        id: '选项6'
+        isActive: false
       }
     ]
   }
