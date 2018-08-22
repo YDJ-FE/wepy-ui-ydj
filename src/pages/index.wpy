@@ -47,6 +47,10 @@
       <ButtonPlain shape="plain">tab选项卡</ButtonPlain>
     </navigator>
 
+    <navigator class="page-btn" url="/pages/notification" hover-class="none">
+      <ButtonPlain shape="plain">notification通知</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 

@@ -1,0 +1,135 @@
+<!-- 即时活动 -->
+<template>
+    <block wx:for="{{notifitionList}}" wx:key="{{index}}">
+        <view class="notification {{item.tipClass}} {{item.position}}" 
+          style="top:{{item.direction=='top' ? (index + 1) * ( height + 12 ): 'auto' }}rpx; bottom: {{item.direction=='bottom'? (index + 1) * ( height + 12 ):'auto'}}rpx">
+          <view class="notification-item" style="background: {{backgroundColor}}; color: {{fontColor}}; font-size: {{fontSize}}rpx; height: {{height}}rpx; line-height: {{height}}rpx">
+            <i class="ydj-iconfont ydj-iconfont-{{icon}}"></i> {{item.nickName}}  {{item.content}}
+          </view>
+        </view>
+    </block>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class Notification extends wepy.component {
+  props = {
+    icon: {
+      type: String,
+      default: ''
+    },
+    length: {
+      type: Number,
+      default: 0
+    },
+    position: {
+      type: String,
+      default: 'left-top'
+    },
+    backgroundColor: {
+      type: String,
+      default: 'rgba(253, 105, 143, 0.9)'
+    },
+    height: {
+      type: Number,
+      default: 48
+    },
+    fontSize: {
+      type: Number,
+      default: 24
+    },
+    fontColor: {
+      type: String,
+      default: '#fff'
+    }
+  }
+  data = {
+    notifitionList: []
+  }
+  onLoad() {
+    this.$apply()
+  }
+  methods = {}
+  getNotification(data) {
+    const dir = this.position.split('-')
+    const direction = dir[dir.length - 1]
+    const direct = dir[0]
+    const notification = {
+      nickName: data.nickName,
+      content: data.content,
+      tipClass: '',
+      position: this.position,
+      direction
+    }
+    const num = this.notifitionList.length
+    if (num < parseInt(this.length, 10) || parseInt(this.length, 10) === 0) {
+      this.notifitionList.push(notification)
+      this.$apply()
+      setTimeout(() => {
+        if (this.notifitionList[this.notifitionList.length - 1]) {
+          const ind = this.notifitionList.length - 1
+          this.notifitionList[ind].tipClass = `${direct}-show`
+          this.$apply()
+        }
+      }, 100)
+      setTimeout(() => {
+        if (this.notifitionList[0]) {
+          this.notifitionList[0].tipClass = 'hide'
+          this.notifitionList.shift()
+          this.$apply()
+        }
+      }, 4000)
+    }
+  }
+}
+</script>
+<style lang="scss">
+.notification {
+  position: absolute;
+  z-index: 99;
+  margin-top: 10rpx;
+  transition: all 0.5s;
+  .notification-item {
+    display: inline-block;
+    padding: 4rpx 8rpx;
+  }
+}
+.left-top {
+  left: -100%;
+  .notification-item {
+    border-radius: 0rpx 8rpx 8rpx 0;
+  }
+}
+.right-top {
+  right: -100%;
+  .notification-item {
+    border-radius: 8rpx 0 0 8rpx;
+  }
+}
+.left-bottom {
+  left: -100%;
+  .notification-item {
+    border-radius: 0 8rpx 8rpx 0;
+  }
+}
+.right-bottom {
+  right: -100%;
+  .notification-item {
+    border-radius: 8rpx 0 0 8rpx;
+  }
+}
+.left-show {
+  transition: all 0.5s;
+  opacity: 1;
+  left: 0;
+}
+.right-show {
+  transition: all 0.5s;
+  opacity: 1;
+  right: 0;
+}
+.hide {
+  transition: all 0.5s;
+  opacity: 0;
+}
+</style>
