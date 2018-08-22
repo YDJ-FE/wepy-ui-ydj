@@ -1,12 +1,14 @@
-<!-- 即时活动 -->
+<!-- Notification 消息通知  -->
 <template>
-    <block wx:for="{{notifitionList}}" wx:key="{{index}}">
+    <block wx:for="{{notificationObj}}" wx:for-item="value" wx:for-index="objIndex" wx:key="{{objIndex}}">
+      <block wx:for="{{value}}" wx:key="{{index}}">
         <view class="notification {{item.tipClass}} {{item.position}}" 
-          style="top:{{item.direction=='top' ? (index + 1) * ( height + 12 ): 'auto' }}rpx; bottom: {{item.direction=='bottom'? (index + 1) * ( height + 12 ):'auto'}}rpx">
-          <view class="notification-item" style="background: {{backgroundColor}}; color: {{fontColor}}; font-size: {{fontSize}}rpx; height: {{height}}rpx; line-height: {{height}}rpx">
-            <i class="ydj-iconfont ydj-iconfont-{{icon}}"></i> {{item.nickName}}  {{item.content}}
+            style="top:{{item.direction=='top' ? (index + 1) * ( height + 12 ): 'auto' }}rpx; bottom: {{item.direction=='bottom'? (index + 1) * ( height + 12 ):'auto'}}rpx">
+            <view class="notification-item" style="background: {{backgroundColor}}; color: {{fontColor}}; font-size: {{fontSize}}rpx; height: {{height}}rpx; line-height: {{height}}rpx">
+              <i class="ydj-iconfont ydj-iconfont-{{icon}}"></i> {{item.content}}
+            </view>
           </view>
-        </view>
+      </block>
     </block>
 </template>
 <script>
@@ -44,7 +46,8 @@ export default class Notification extends wepy.component {
     }
   }
   data = {
-    notifitionList: []
+    notificationList: [],
+    notificationObj: {}
   }
   onLoad() {
     this.$apply()
@@ -55,28 +58,39 @@ export default class Notification extends wepy.component {
     const direction = dir[dir.length - 1]
     const direct = dir[0]
     const notification = {
-      nickName: data.nickName,
-      content: data.content,
+      content: data,
       tipClass: '',
       position: this.position,
       direction
     }
-    const num = this.notifitionList.length
+    if (!this.notificationObj[this.position]) {
+      this.notificationObj[this.position] = []
+    }
+    const num = this.notificationObj[this.position].length
     if (num < parseInt(this.length, 10) || parseInt(this.length, 10) === 0) {
-      this.notifitionList.push(notification)
+      for (let v in this.notificationObj) {
+        if (v === this.position) {
+          this.notificationObj[v].push(notification)
+        }
+      }
       this.$apply()
+      let data = this.notificationObj[this.position]
       setTimeout(() => {
-        if (this.notifitionList[this.notifitionList.length - 1]) {
-          const ind = this.notifitionList.length - 1
-          this.notifitionList[ind].tipClass = `${direct}-show`
+        if (data[data.length - 1]) {
+          const ind = data.length - 1
+          data[ind].tipClass = `${direct}-show`
           this.$apply()
         }
       }, 100)
       setTimeout(() => {
-        if (this.notifitionList[0]) {
-          this.notifitionList[0].tipClass = 'hide'
-          this.notifitionList.shift()
-          this.$apply()
+        for (let v in this.notificationObj) {
+          if (v === this.position) {
+            if (data[0]) {
+              data[0].tipClass = 'hide'
+              data.shift()
+              this.$apply()
+            }
+          }
         }
       }, 4000)
     }

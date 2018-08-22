@@ -34,10 +34,7 @@ export default class NotificationPage extends wepy.page {
     handleDefault(type) {
       this.position = type
       this.num = this.num + 1
-      const natification = {
-        nickName: `伊的家${this.num}号`,
-        content: '前来报道！'
-      }
+      const natification = `伊的家${this.num}号 前来报道！`
       this.$apply()
       this.$invoke('Notification', 'getNotification', natification)
     }
