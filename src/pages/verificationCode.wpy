@@ -50,7 +50,7 @@ export default class NotificationPage extends wepy.page {
         })
       } else {
         wepy.showToast({
-          title: '支付失败',
+          title: '验证码失败',
           image: '../image/warn.png',
           duration: 2000
         })
