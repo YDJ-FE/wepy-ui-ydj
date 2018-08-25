@@ -51,6 +51,10 @@
       <ButtonPlain shape="plain">notification通知</ButtonPlain>
     </navigator>
 
+     <navigator class="page-btn" url="/pages/verificationCode" hover-class="none">
+      <ButtonPlain shape="plain">图形验证码</ButtonPlain>
+    </navigator>
+
   </view>
 </template>
 

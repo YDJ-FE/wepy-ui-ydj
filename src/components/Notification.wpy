@@ -49,9 +49,7 @@ export default class Notification extends wepy.component {
     notificationList: [],
     notificationObj: {}
   }
-  onLoad() {
-    this.$apply()
-  }
+  onLoad() {}
   methods = {}
   getNotification(data) {
     const dir = this.position.split('-')

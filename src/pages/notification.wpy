@@ -6,26 +6,30 @@
       <button class="btn" @tap="handleDefault('right-top')">右上消息通知</button>
       <button class="btn" @tap="handleDefault('right-bottom')">右下消息通知</button>
       <Notification :position.sync="position"></Notification>
+      <VerificationCode ></VerificationCode>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 import Notification from '../components/Notification'
-
+import VerificationCode from '../components/VerificationCode'
 export default class NotificationPage extends wepy.page {
   config = {
     navigationBarTitleText: '消息通知'
   }
 
   components = {
-    Notification
+    Notification,
+    VerificationCode
   }
 
   data = {
     num: 0,
     position: 'left-top',
-    length: 3
+    length: 3,
+    width: 200,
+    height: 100
   }
 
   onLoad() {}
