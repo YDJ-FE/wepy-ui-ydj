@@ -1,0 +1,65 @@
+<!-- Notification 消息通知 -->
+<template>
+  <view class="notification-page">
+      <button class="btn" @tap="handleDefault('left-top')">左上消息通知</button>
+      <button class="btn" @tap="handleDefault('left-bottom')">左下消息通知</button>
+      <button class="btn" @tap="handleDefault('right-top')">右上消息通知</button>
+      <button class="btn" @tap="handleDefault('right-bottom')">右下消息通知</button>
+      <Notification :position.sync="position"></Notification>
+      <VerificationCode ></VerificationCode>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import Notification from '../components/Notification'
+import VerificationCode from '../components/VerificationCode'
+export default class NotificationPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '消息通知'
+  }
+
+  components = {
+    Notification,
+    VerificationCode
+  }
+
+  data = {
+    num: 0,
+    position: 'left-top',
+    length: 3,
+    width: 200,
+    height: 100
+  }
+
+  onLoad() {}
+
+  methods = {
+    handleDefault(type) {
+      this.position = type
+      this.num = this.num + 1
+      const natification = `伊的家${this.num}号 前来报道！`
+      this.$apply()
+      this.$invoke('Notification', 'getNotification', natification)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+.notification-page {
+  height: 500rpx;
+  background-color: #fff;
+  padding-top: 30rpx;
+  .btn {
+    width: 690rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    margin-top: 20rpx;
+  }
+}
+</style>

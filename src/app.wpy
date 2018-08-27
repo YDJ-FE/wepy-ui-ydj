@@ -21,7 +21,9 @@ export default class extends wepy.app {
       'pages/input',
       'pages/toast',
       'pages/swiper',
-      'pages/dialog'
+      'pages/dialog',
+      'pages/notification',
+      'pages/verificationCode'
     ],
     window: {
       backgroundTextStyle: 'light',

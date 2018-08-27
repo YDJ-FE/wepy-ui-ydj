@@ -1,0 +1,79 @@
+<!-- verificationCode 验证码 -->
+<template>
+    <view class="code-wrap">
+      <view class="title">基础用法</view>
+      <view class="code">
+        <InputDefault placeholder="输入验证码" :value.sync="cvalue" class="code-input" />
+        <VerificationCode :height="height"></VerificationCode>
+      </view>
+      <DefaultButton class="btn" @tap.user="handleDefault" shape="plain">确定</DefaultButton>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import VerificationCode from '../components/VerificationCode'
+import Input from '../components/Input'
+import Button from '../components/Button'
+
+export default class NotificationPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '消息通知'
+  }
+
+  components = {
+    InputDefault: Input,
+    VerificationCode,
+    DefaultButton: Button
+  }
+
+  data = {
+    height: 46,
+    code: '',
+    cvalue: ''
+  }
+  events = {
+    codeValue: val => {
+      this.code = val
+      this.$apply()
+    }
+  }
+  onLoad() {}
+
+  methods = {
+    handleDefault() {
+      if (this.cvalue === this.code) {
+        wepy.showToast({
+          title: '验证码正确',
+          image: '../image/success.png',
+          duration: 2000
+        })
+      } else {
+        wepy.showToast({
+          title: '验证码失败',
+          image: '../image/warn.png',
+          duration: 2000
+        })
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+.code-wrap {
+}
+.title {
+  @include ydj-title;
+}
+.code-input {
+  width: 86%;
+}
+.code {
+  display: flex;
+}
+.btn {
+  margin-top: 30rpx;
+}
+</style>
