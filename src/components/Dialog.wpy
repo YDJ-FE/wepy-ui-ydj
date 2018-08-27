@@ -157,7 +157,7 @@ export default class dialog extends wepy.component {
     },
     inputLength: {
       // 输入框字数
-      type: Number,
+      type: [Number, String],
       default: 140
     }
   }

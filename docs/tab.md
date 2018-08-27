@@ -10,6 +10,7 @@ import Tab from 'wepy-ui-ydj/Tab';
 | type         | 是否可滚动                    | string | 'scroll':可滚动      | -     | -              |
 | width        | 宽度                        | string | -      | -     | type为'scroll'生效              |
 | height     | 每个 item 的高度                  | string  | -      | '92rpx'  | - |
+| backgroundColor     | 背景颜色                  | string  | -      | '#ffffff'  | - |
 | lineWidth | 选中时下横线的宽度                  | string  | -      | '32rpx' | -              |
 | defaultColor | 字体默认颜色                  | string  | -      | '#9c9c9c' | -              |
 | activeColor | 选中时字体颜色                  | string  | -      | '#fb3f7c' | -              |
