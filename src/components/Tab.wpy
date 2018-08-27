@@ -1,6 +1,6 @@
 <!-- 文章列表页面 tab 组件 -->
 <template>
-  <view class="ydj-tab">
+  <view class="ydj-tab" style="background-color: {{backgroundColor}};">
     <!-- 可滚动 -->
     <scroll-view wx:if="{{type === 'scroll'}}" scroll-x>
       <view class="ydj-tab__wrap" style="width: {{width}}; color: {{defaultColor}};">
@@ -37,6 +37,10 @@ export default class Tab extends wepy.component {
     height: {
       type: String,
       default: '92rpx'
+    },
+    backgroundColor: {
+      tyle: String,
+      default: '#ffffff'
     },
     lineWidth: {
       type: String,
@@ -101,7 +105,6 @@ export default class Tab extends wepy.component {
 
 <style lang="scss">
 .ydj-tab {
-  background: #fff;
   z-index: 10;
 
   &__wrap {
