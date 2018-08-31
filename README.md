@@ -11,6 +11,8 @@
 - [x] ~~[_Card 组件_](./docs/card.md)~~ [2018-06-22]
 - [x] ~~[Icon 组件\_](./docs/icon.md)~~ [2018-06-22]
 - [x] ~~[Tab 组件\_](./docs/tab.md)~~ [2018-06-25]
+- [x] ~~[Notification 组件\_](./docs/notification.md)~~ [2018-08-10]
+- [x] ~~[VerificationCode 组件\_](./docs/verificationCode.md)~~ [2018-08-24]
 
 #### 线上二维码
 
