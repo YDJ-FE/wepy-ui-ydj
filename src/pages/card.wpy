@@ -1,0 +1,61 @@
+<!-- Card 页面 -->
+<template>
+  <view>
+    <view class="title">基本用法</view>
+    <view class="wrap">
+      <repeat for="{{dataList}}" key="index" index="index" item="item">
+        <Card imgWidth="330rpx" imgHeight="330rpx" :imgUrl="item.url" :title="item.title" :price="item.price" :desc="item.desc"></Card>
+      </repeat>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import Card from '../components/Card'
+
+export default class CardPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '卡片'
+  }
+
+  components = {
+    Card: Card
+  }
+
+  data = {
+    dataList: [
+      {
+        url: 'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg',
+        title: '标题标题标题标题标题标题标题标题标题标题标题标题',
+        price: '600.00',
+        desc: '文字描述'
+      },
+      {
+        url: 'http://onx3fp6gi.bkt.clouddn.com/background-2076334_960_720.jpg',
+        title: '标题标题标题标题标题标题标题标题标题标题标题标题',
+        price: '600.00',
+        desc: '文字描述'
+      }
+    ]
+  }
+
+  onLoad() {}
+
+  methods = {}
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+
+.title {
+  @include ydj-title;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 28rpx;
+}
+</style>

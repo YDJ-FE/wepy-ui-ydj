@@ -1,0 +1,147 @@
+<!-- 文章列表页面 tab 组件 -->
+<template>
+  <view class="ydj-tab" style="background-color: {{backgroundColor}};">
+    <!-- 可滚动 -->
+    <scroll-view wx:if="{{type === 'scroll'}}" scroll-x>
+      <view class="ydj-tab__wrap" style="width: {{width}}; color: {{defaultColor}};">
+        <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item {{item.isActive ? activeClass : ''}}"
+          style="height: {{height}};line-height: {{height}};" @tap="handleChangeTab({{index}})">
+          {{item.title}}
+        </view>
+        <view class="ydj-tab__wrap__line-active {{lineClass}}" style="width: {{itemWidth}}%; left: {{left}}%;">
+          <view class="ydj-tab__wrap__line-active__inner {{lineClass}}" style="width: {{lineWidth}}; background: {{activeColor}};"></view>
+        </view>
+      </view>
+    </scroll-view>
+    <!-- 默认 -->
+    <view wx:else class="ydj-tab__wrap" style="color: {{defaultColor}};">
+      <view wx:for="{{dataList}}" wx:key="index" class="ydj-tab__wrap__item {{item.isActive ? activeClass : ''}}"
+        style="height: {{height}};line-height: {{height}};" @tap="handleChangeTab({{index}})">
+        {{item.title}}
+      </view>
+      <view class="ydj-tab__wrap__line-active {{lineClass}}" style="width: {{itemWidth}}%; left: {{left}}%;">
+        <view class="ydj-tab__wrap__line-active__inner {{lineClass}}" style="width: {{lineWidth}}; background: {{activeColor}};"></view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Tab extends wepy.component {
+  props = {
+    dataList: Array,
+    type: String,
+    width: String,
+    height: {
+      type: String,
+      default: '92rpx'
+    },
+    backgroundColor: {
+      tyle: String,
+      default: '#ffffff'
+    },
+    lineWidth: {
+      type: String,
+      default: '32rpx;'
+    },
+    defaultColor: {
+      type: String,
+      default: '#9c9c9c'
+    },
+    activeColor: {
+      type: String,
+      default: '#fb3f7c'
+    },
+    activeClass: {
+      type: String,
+      default: 'ydj-tab-active'
+    },
+    lineClass: {
+      type: String,
+      default: 'ydj-tab-line'
+    }
+  }
+
+  data = {
+    itemWidth: 0,
+    left: 0
+  }
+
+  watch = {
+    dataList(n, o) {
+      this.initLeft()
+    }
+  }
+
+  onLoad() {
+    this.itemWidth = 1 / this.dataList.length * 100
+    this.initLeft()
+  }
+
+  initLeft() {
+    this.dataList.forEach((v, i) => {
+      if (v.isActive) {
+        this.left = i / this.dataList.length * 100
+      }
+    })
+    this.$apply()
+  }
+
+  methods = {
+    handleChangeTab(index) {
+      this.dataList.forEach((v, i) => {
+        if (index === i) {
+          v.isActive = true
+          this.left = i / this.dataList.length * 100
+          this.$emit('change', index)
+        } else v.isActive = false
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.ydj-tab {
+  z-index: 10;
+
+  &__wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: nowrap;
+    flex-direction: row;
+    overflow: hidden;
+
+    &__item {
+      flex: 1;
+      text-align: center;
+      font-size: 30rpx;
+    }
+
+    &__line-active {
+      position: absolute;
+      bottom: 0;  
+      transition: all 0.3s;
+
+      &__inner {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.ydj-tab-active {
+  font-weight: 600;
+  color: #fb3f7c;
+}
+
+.ydj-tab-line {
+  height: 6rpx;
+  border-radius: 3rpx;
+}
+</style>

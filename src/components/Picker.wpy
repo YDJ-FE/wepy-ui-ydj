@@ -1,0 +1,149 @@
+<!-- Picker  -->
+<template>
+  <picker class="ydj-picker" mode="multiSelector" value="{{dateTime}}" bindchange="handleConfirm" bindcolumnchange="handleChangeColumn"
+    range="{{dateRangeAry}}">
+    <view class="ydj-picker__text" wx:if="{{haveChoose}}">
+      {{formatTime}}
+    </view>
+    <text class="ydj-picker__placeholder" wx:else>{{placeholder}}</text>
+  </picker>
+</template>
+<script>
+import wepy from 'wepy'
+import {
+  getOrderNumberAry,
+  getMonthDaysAry
+} from 'mini-program-utils/dist/utils'
+
+const getNowDateObj = () => {
+  const t = new Date()
+  return {
+    year: t.getFullYear(),
+    month: t.getMonth() + 1,
+    date: t.getDate(),
+    hours: t.getHours(),
+    mins: t.getMinutes(),
+    seconds: t.getSeconds()
+  }
+}
+
+const getNowDateAry = () => {
+  const { year, month, date, hours, mins, seconds } = getNowDateObj()
+  return [year, month, date, hours, mins, seconds]
+}
+
+const createRangeAry = length => {
+  const dateRangeAry = []
+  const { year, month } = getNowDateObj()
+
+  for (let i = 0; i < length; i++) {
+    if (i === 0) dateRangeAry.push(getOrderNumberAry(year - 20, year + 30))
+    else if (i === 1) dateRangeAry.push(getOrderNumberAry(1, 12))
+    else if (i === 2) dateRangeAry.push(getMonthDaysAry(year, month))
+    else if (i === 3) dateRangeAry.push(getOrderNumberAry(0, 23))
+    else dateRangeAry.push(getOrderNumberAry(0, 59))
+  }
+  return dateRangeAry
+}
+
+const getDateIndexAry = (dateRangeAry, dateAry) => {
+  const dateIndexAry = []
+  const len = dateRangeAry.length
+  for (let i = 0; i < len; i++) {
+    const itemAry = dateRangeAry[i]
+    const value = dateAry[i]
+    dateIndexAry.push(itemAry.indexOf(value))
+  }
+  return dateIndexAry
+}
+
+const appendZero = dateAry => {
+  const exceptYearAry = dateAry.slice(1)
+  const newFormatAry = [
+    `${dateAry[0]}`,
+    ...exceptYearAry.map(v => `0${v}`.slice(-2))
+  ]
+  const YMDAry = newFormatAry.slice(0, 3)
+  const HMSAry = newFormatAry.slice(3, newFormatAry.length)
+  return `${YMDAry.join('-')} ${HMSAry.join(':')}`
+}
+
+export default class Picker extends wepy.component {
+  props = {
+    defaultValue: {
+      type: Array,
+      default: getNowDateAry()
+    },
+    placeholder: {
+      type: String,
+      default: '请选择时间'
+    }
+  }
+
+  data = {
+    dateTime: [0, 0, 0, 0, 0],
+    dateRangeAry: [],
+    haveChoose: false,
+    formatTime: ''
+  }
+
+  updateDate() {
+    this.dateRangeAry = createRangeAry(this.defaultValue.length)
+    this.dateTime = getDateIndexAry(this.dateRangeAry, this.defaultValue)
+    this.formatTime = appendZero(
+      this.dateRangeAry.map((v, i) => v[this.dateTime[i]])
+    )
+  }
+
+  watch = {
+    defaultValue(n, o) {
+      if (n === o) return
+      this.updateDate()
+      if (!this.haveChoose) this.haveChoose = true
+      this.$apply()
+    }
+  }
+
+  onLoad() {
+    this.updateDate()
+  }
+
+  methods = {
+    handleConfirm(e) {
+      if (!this.haveChoose) this.haveChoose = true
+      this.dateTime = e.detail.value
+      this.formatTime = appendZero(
+        this.dateRangeAry.map((v, i) => v[this.dateTime[i]])
+      )
+      const len = this.dateRangeAry.length
+      let dateAry = []
+      for (let i = 0; i < len; i++) {
+        dateAry.push(this.dateRangeAry[i][e.detail.value[i]])
+      }
+      this.$emit('change', dateAry)
+    },
+    handleChangeColumn(e) {
+      this.$emit('columnChange', e.detail)
+      // const arr = this.dateTime
+      // const dateArr = this.dateRangeAry
+      // arr[e.detail.column] = e.detail.value
+      // dateArr[2] = getMonthDaysAry(dateArr[0][arr[0]], dateArr[1][arr[1]])
+      // this.dateRangeAry = dateArr
+      // this.dateTime = arr
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.ydj-picker {
+  font-size: 28rpx;
+  width: 100%;
+  &__placeholder {
+    color: #9b9b9b;
+  }
+  &__text {
+    color: #333;
+  }
+}
+</style>

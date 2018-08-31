@@ -1,23 +1,34 @@
 {
   "name": "wepy-ui-ydj",
-  "version": "0.1.5",
+  "version": "0.1.21",
   "description": "wepy ui components",
   "main": "./src/packages/index",
   "wepy": {
     "./Button": "./src/components/Button.wpy",
     "./Message": "./src/components/Message.wpy",
-    "./Input": "./src/components/Input.wpy"
+    "./Card": "./src/components/Card.wpy",
+    "./Dialog": "./src/components/Dialog.wpy",
+    "./Icon": "./src/components/Icon.wpy",
+    "./Input": "./src/components/Input.wpy",
+    "./Select": "./src/components/Select.wpy",
+    "./Swiper": "./src/components/Swiper.wpy",
+    "./Toast": "./src/components/Toast.wpy",
+    "./List": "./src/components/List.wpy",
+    "./Tab": "./src/components/Tab.wpy",
+    "./Picker": "./src/components/Picker.wpy"
   },
   "scripts": {
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
     "babel": "babel --presets env,stage-1 src/utils/index.js -o src/babel-utils/index.js",
+    "css": "node-sass ./src/styles/all.scss > ./libs/all.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "王世隆 <547463736@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "wepy": "^1.7.0"
+    "mini-program-utils": "^0.1.3",
+    "wepy": "1.7.1"
   },
   "repository": {
     "type": "git",

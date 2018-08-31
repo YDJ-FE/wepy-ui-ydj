@@ -10,7 +10,21 @@ import wepy from 'wepy'
 
 export default class extends wepy.app {
   config = {
-    pages: ['pages/index', 'pages/message', 'pages/input', 'pages/toast'],
+    pages: [
+      'pages/index',
+      'pages/tab',
+      'pages/icon',
+      'pages/card',
+      'pages/select',
+      'pages/lists',
+      'pages/message',
+      'pages/input',
+      'pages/toast',
+      'pages/swiper',
+      'pages/dialog',
+      'pages/notification',
+      'pages/verificationCode'
+    ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

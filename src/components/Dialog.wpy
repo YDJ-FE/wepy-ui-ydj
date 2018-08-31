@@ -1,0 +1,292 @@
+<!-- 消息弹出框 -->
+<template>
+  <block>
+    <view class="ydj-dialog-shadow" wx:if="{{show}}"></view>
+    <view class="ydj-dialog" wx:if="{{show}}">
+      <view class="ydj-dialog__wrap animated {{animated ? animated : ''}}">
+          <view class="ydj-dialog__title" wx:if="{{title !=''}}" style="color: {{titleColor}}">{{title}}</view>
+          <view class="ydj-dialog__img" wx:if="{{image != ''}}">
+            <image src="{{image}}"  />
+          </view>
+          <view class="ydj-dialog__input" wx:if="{{inputShow}}" style="border-radius: {{inputBorderR}}rpx">
+            <input
+              value="{{inputValue}}"
+              password="{{inputPassword}}"
+              type="{{inputType}}"
+              maxlength="{{inputLength}}"
+              placeholder="{{inputPlaceholder}}"
+              bindconfirm="bindconfirm"
+              @blur="handleInput"
+              placeholder-style="color: {{placeholderFontColor}}"
+              style="font-size: {{inputFontSize}}rpx; color: {{inputColor}}"
+            />
+          </view>
+          <view class="ydj-dialog__content" style="color: {{contentColor}}" wx:if="{{content != ''}}" >{{content}}</view>
+          <view class="ydj-dialog__footer">
+            <view class="ydj-dialog__footer__btns">
+              <view class="ydj-dialog__btn ydj-dialog__cancel" @tap="handleClick('n')" wx:if="{{cancelShow}}" style="color: {{cancelColor}}">{{cancelTxt}}</view>
+              <view class="ydj-dialog__btn ydj-dialog__sure" @tap="handleClick('y')" wx:if="{{successShow}}" style="color: {{successColor}}">{{successTxt}}</view>
+            </view>
+            <slot name="dialog-btns"></slot>
+          </view>
+        </view>
+    </view>
+  </block>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class dialog extends wepy.component {
+  config = {}
+  props = {
+    show: {
+      // 是否显示弹框
+      type: Boolean,
+      default: false,
+      twoWay: true
+    },
+    animated: {
+      type: String,
+      defualt: ''
+    },
+    title: {
+      // 弹框标题
+      type: String,
+      default: ''
+    },
+    titleColor: {
+      // 标题颜色
+      type: String,
+      default: '#333333'
+    },
+    content: {
+      // 弹框内容
+      type: String,
+      default: ''
+    },
+    contentColor: {
+      // 内容颜色
+      type: String,
+      default: '#9a9a9a'
+    },
+    image: {
+      // 图片
+      type: String,
+      default: ''
+    },
+    cancelColor: {
+      // 取消按钮颜色
+      type: String,
+      default: '#666666'
+    },
+    cancelTxt: {
+      // 取消按钮文本
+      type: String,
+      default: '取消'
+    },
+    cancelShow: {
+      // 取消按钮显隐
+      type: Boolean,
+      default: true
+    },
+    successShow: {
+      // 确定按钮显隐
+      type: Boolean,
+      default: true
+    },
+    successColor: {
+      // 确定按钮颜色
+      type: String,
+      default: '#fd7598'
+    },
+    successTxt: {
+      // 确定按钮文本
+      type: String,
+      default: '确定'
+    },
+    inputShow: {
+      // 是否显示输入框
+      type: Boolean,
+      default: false
+    },
+    inputValue: {
+      // 输入框的值
+      type: [Number, String],
+      default: '',
+      twoWay: true
+    },
+    inputType: {
+      // 输入框类型
+      type: String,
+      default: 'text'
+    },
+    inputPassword: {
+      // 是否密码格式
+      type: Boolean,
+      default: false
+    },
+    inputPlaceholder: {
+      // 输入框提示
+      type: String,
+      default: '请输入内容'
+    },
+    inputBindconfirm: {
+      // 是否回车确定发送
+      type: Boolean,
+      default: false
+    },
+    inputBorderR: {
+      // 输入框圆角
+      type: Number,
+      default: 50
+    },
+    inputFontSize: {
+      // 输入框字体大小
+      type: Number,
+      default: 30
+    },
+    inputFontColor: {
+      // 输入框字体颜色
+      type: String,
+      default: '#222'
+    },
+    placeholderFontColor: {
+      // 提示语颜色
+      type: String,
+      default: '#bbbbbb'
+    },
+    inputLength: {
+      // 输入框字数
+      type: [Number, String],
+      default: 140
+    }
+  }
+  data = {}
+
+  watch = {}
+
+  methods = {
+    handleClick(flag) {
+      this.show = false
+      this.$emit('dialogCallback', flag)
+    },
+    bindconfirm(e) {
+      if (this.inputBindconfirm) {
+        const detail = e.detail.value
+        this.inputValue = detail
+      }
+    },
+    handleInput(e) {
+      const detail = e.detail.value
+      this.inputValue = detail
+    }
+  }
+  onLoad() {
+    if (this.animated) {
+      this.fadeIn = this.animatedName
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../styles/var';
+.ydj-dialog-shadow {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.ydj-dialog {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  &__wrap {
+    width: 70%;
+    padding-top: 30rpx;
+    background-color: #fff;
+    border-radius: 12rpx;
+    overflow: hidden;
+    position: relative;
+    z-index: 10000;
+  }
+  &__title {
+    font-family: PingFangSC-Regular;
+    font-size: 36rpx;
+    text-align: center;
+    margin-bottom: 20rpx;
+    padding: 0 30rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  &__content {
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    color: $ydj-text-third;
+    letter-spacing: 0;
+    text-align: center;
+    padding: 0 30rpx;
+  }
+  &__img {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20rpx;
+    image {
+      width: 200rpx;
+      height: 200rpx;
+      border-radius: 8rpx;
+    }
+  }
+  &__input {
+    border: 1px solid $ydj-text-fifth;
+    margin: 40rpx 30rpx 50rpx 30rpx;
+    padding: 0 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    input {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+  }
+  &__footer {
+    margin-top: 30rpx;
+    border-top: 1px solid $ydj-line;
+    font-family: PingFangSC-Regular;
+    &__btns {
+      display: flex;
+      letter-spacing: 0;
+      text-align: center;
+      .ydj-dialog__btn {
+        flex: 1;
+        font-size: 32rpx;
+        height: 100rpx;
+        line-height: 100rpx;
+      }
+      .ydj-dialog__cancel {
+        letter-spacing: 0;
+        border-right: 1px solid $ydj-line;
+      }
+      .ydj-dialog__sure {
+        letter-spacing: 0;
+      }
+    }
+  }
+}
+</style>
